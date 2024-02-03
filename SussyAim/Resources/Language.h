@@ -167,15 +167,6 @@ namespace Lang
 		inline static const char* ConfigName;
 	} ConfigText;
 
-	inline struct ReadMeText
-	{
-		inline static const char* FeatureName;
-		inline static const char* LastUpdate;
-		inline static const char* SourceButton;
-		inline static const char* DiscordButton;
-		inline static const char* OffsetsTitle;
-	} ReadMeText;
-
 	void ChangeLang(int LangIndex);
 
 	inline void English()
@@ -313,12 +304,5 @@ namespace Lang
 		ConfigText.SeparateLine = u8"New Config";
 		ConfigText.AuthorName = u8"Author Name";
 		ConfigText.ConfigName = u8"Config Name";
-
-		// Readme Menu
-		ReadMeText.FeatureName = u8" README";
-		ReadMeText.LastUpdate = u8"Last update: ";
-		ReadMeText.SourceButton = u8"Source Code";
-		ReadMeText.DiscordButton = u8"Join Discord";
-		ReadMeText.OffsetsTitle = u8"Offsets:";
 	}
 }

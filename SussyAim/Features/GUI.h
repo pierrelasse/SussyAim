@@ -12,7 +12,6 @@
 #include "..\Resources\Images.h"
 
 ID3D11ShaderResourceView* AS_Logo = NULL;
-ID3D11ShaderResourceView* NL_Logo = NULL;
 ID3D11ShaderResourceView* MenuButton1 = NULL;
 ID3D11ShaderResourceView* MenuButton2 = NULL;
 ID3D11ShaderResourceView* MenuButton3 = NULL;
@@ -28,12 +27,11 @@ namespace GUI
 	{
 		if (AS_Logo == NULL)
 		{
-			Gui.LoadTextureFromMemory(Images::AS_Logo, sizeof Images::AS_Logo, &AS_Logo, &LogoW, &LogoH);
-			Gui.LoadTextureFromMemory(Images::NL_Logo, sizeof Images::NL_Logo, &NL_Logo, &LogoW2, &LogoH2);
-			Gui.LoadTextureFromMemory(Images::VisualButton, sizeof Images::VisualButton, &MenuButton1, &buttonW, &buttonH);
-			Gui.LoadTextureFromMemory(Images::AimbotButton, sizeof Images::AimbotButton, &MenuButton2, &buttonW, &buttonH);
-			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
-			Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
+			Gui.LoadTextureFromMemory(Images::Logo, sizeof Images::Logo, &AS_Logo, &LogoW, &LogoH);
+			Gui.LoadTextureFromMemory(Images::TabVisual, sizeof Images::TabVisual, &MenuButton1, &buttonW, &buttonH);
+			Gui.LoadTextureFromMemory(Images::TabAimbot, sizeof Images::TabAimbot, &MenuButton2, &buttonW, &buttonH);
+			Gui.LoadTextureFromMemory(Images::TabMisc, sizeof Images::TabMisc, &MenuButton3, &buttonW, &buttonH);
+			Gui.LoadTextureFromMemory(Images::TabConfig, sizeof Images::TabConfig, &MenuButton4, &buttonW, &buttonH);
 		}
 	}
 
@@ -113,35 +111,14 @@ namespace GUI
 	void NewGui()
 	{
 		LoadImages();
+
 		ImTextureID ImageID;
 		ImVec2 LogoSize, LogoPos;
-		switch (MenuConfig::Theme)
-		{
-		case 0:
-			ImageID = (void*)AS_Logo;
-			LogoSize = ImVec2(LogoW, LogoH);
-			LogoPos = MenuConfig::WCS.LogoPos;
-			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Yellow;
-			break;
-		case 1:
-			ImageID = (void*)NL_Logo;
-			LogoSize = ImVec2(LogoW2, LogoH2);
-			LogoPos = MenuConfig::WCS.Logo2Pos;
-			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Purple;
-			break;
-		case 2:
-			ImageID = (void*)AS_Logo;
-			LogoSize = ImVec2(LogoW, LogoH);
-			LogoPos = MenuConfig::WCS.LogoPos;
-			MenuConfig::ButtonBorderColor = MenuConfig::ButtonBorderColor;
-			break;
-		default:
-			ImageID = (void*)AS_Logo;
-			LogoSize = ImVec2(LogoW, LogoH);
-			LogoPos = MenuConfig::WCS.LogoPos;
-			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Yellow;
-			break;
-		}
+		ImageID = (void*)AS_Logo;
+		LogoSize = ImVec2(LogoW, LogoH);
+		LogoPos = MenuConfig::WCS.LogoPos;
+		MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Yellow;
+
 		ImColor BorderColor = MenuConfig::ButtonBorderColor;
 
 		char TempText[256];
@@ -433,17 +410,11 @@ namespace GUI
 					ImGui::SeparatorText(ICON_FA_HEART" Menu Settings");
 					PutSwitch(Lang::MiscText.AntiRecord, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::StreamProof);
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
-					ImGui::TextDisabled(Lang::MiscText.LanguageList);
-					ImGui::SameLine();
-					if (ImGui::Combo("###Language", &MenuConfig::Language,
-						"English\0Danish\0German\0Polish\0Portuguese\0Russian\0Simplified Chinese\0Slovak\0French\0Turkish\0Hungarian\0Dutch\0Cezch\0Spanish\0Romanian\0"))
-						Lang::ChangeLang(MenuConfig::Language);
-					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
 					ImGui::SameLine();
-					if (ImGui::Combo("###Theme", &MenuConfig::Theme, "AimStar\0NeverLose\0Custom\0"))
+					if (ImGui::Combo("###Theme", &MenuConfig::Theme, "Standard\0Custom\0"))
 						StyleChanger::UpdateSkin(MenuConfig::Theme);
-					if (MenuConfig::Theme == 2)
+					if (MenuConfig::Theme == 1)
 					{	
 						ImColor windowBgColor = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
 						ImColor borderColor = ImGui::GetStyleColorVec4(ImGuiCol_Border);
@@ -490,10 +461,6 @@ namespace GUI
 						ImGui::GetStyle().Colors[ImGuiCol_HeaderHovered] = HeaderHovered;
 						ImGui::GetStyle().Colors[ImGuiCol_ScrollbarBg] = ScrollBg;
 					}
-
-					ImGui::NewLine();
-					PutSwitch(Lang::ReadMeText.DiscordButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
-					PutSwitch(Lang::ReadMeText.SourceButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
 
 					ImGui::Columns(1);
 				}

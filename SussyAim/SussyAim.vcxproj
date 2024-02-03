@@ -246,6 +246,10 @@
     <ClInclude Include="View.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="Utils\curl\lib\libcurl_imp.lib" />
+    <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Cheats.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -275,21 +279,13 @@
     <ClCompile Include="Utils\MemorySearch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SussyAim.rc" />
+    <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SussyAim.aps" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Font\fa-regular.ttf" />
-    <Font Include="Font\stratum2.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="Utils\curl\lib\libcurl_imp.lib" />
-    <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="icon.ico" />
+    <ResourceCompile Include="SussyAim.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
