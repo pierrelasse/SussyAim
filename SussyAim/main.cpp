@@ -8,38 +8,13 @@
 #include <KnownFolders.h>
 #include <ShlObj.h>
 
-/*
-Contributors:
-	Shinyaluvs,
-	Nx0Ri,
-	Skarbor,
-	PedroGoncalves,
-	KeysIsCool,
-	Kenny,
-	Cr1ppl3,
-	Tairitsu,
-	sh1pi,
-	toepas,
-	djsacred,
-	tokinaa,
-	faster_bbc,
-	vsantos1,
-	5mmod,
-	gScream,
-	Hazetick,
-	styx,
-	user1232,
-	TaKaStuKi.sen
-*/
-
 namespace fs = std::filesystem;
 
 int main()
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-	std::cout << R"(
-   _____                              _           
+	std::cout << R"(   _____                              _           
   / ____|                       /\   (_)          
  | (___  _   _ ___ ___ _   _   /  \   _ _ __ ___  
   \___ \| | | / __/ __| | | | / /\ \ | | '_ ` _ \ 
@@ -47,10 +22,12 @@ int main()
  |_____/ \__,_|___/___/\__, /_/    \_\_|_| |_| |_|
                         __/ |                     
                        |___/
-	)" << std::endl; 
+	)" << std::endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
+	std::cout << "Attaching to cs2.exe";
 	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
+	std::cout << " OK" << std::endl;
 
 	char documentsPath[MAX_PATH];
 	if (SHGetFolderPathA(NULL, CSIDL_PERSONAL, NULL, 0, documentsPath) != S_OK) {
@@ -66,15 +43,15 @@ int main()
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		std::cout << "[ERROR] Please launch the game first!" << std::endl;
 		goto END;
-	case 2: 
+	case 2:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		std::cout << "[ERROR] Failed to hook process, please run the cheat as Administrator (Right click the executable > Run as Adminstrator)." << std::endl; 
-		goto END; 
+		std::cout << "[ERROR] Failed to hook process, please run the cheat as Administrator (Right click the executable > Run as Adminstrator)." << std::endl;
+		goto END;
 	case 3:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		std::cout << "[ERROR] Failed to get module address." << std::endl; 
-		goto END; 
-	default: 
+		std::cout << "[ERROR] Failed to get module address." << std::endl;
+		goto END;
+	default:
 		break;
 	}
 
@@ -88,7 +65,7 @@ int main()
 	if (!gGame.InitAddress())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		std::cout << "[ERROR] Failed to call InitAddress()."<< std::endl;
+		std::cout << "[ERROR] Failed to call InitAddress()." << std::endl;
 		goto END;
 	}
 
@@ -127,10 +104,10 @@ int main()
 
 	std::cout << std::endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-	std::cout << "Utility running successfully!" << std::endl;
-	std::cout << "Press [INS] to show or hide Menu." << std::endl;
-	std::cout << "Have fun..." << std::endl << std::endl;
-	
+	std::cout << "Initialized successfully!" << std::endl;
+	std::cout << "Menu bind: INSERT" << std::endl;
+	std::cout << std::endl;
+
 	if (false) {
 		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
 		std::cout << "=======[ Offset List ]=======" << std::endl;
@@ -149,14 +126,15 @@ int main()
 
 	try
 	{
-		Gui.AttachAnotherWindow("Counter-Strike 2", "SDL_app", Menu::Init);
+		std::cout << "Attaching" << std::endl;
+		Gui.AttachAnotherWindow("Counter-Strike 2", "SDL_app", Menu::Tick);
 	}
 	catch (OSImGui::OSException& e)
 	{
 		try
 		{
-			// Perfect World version
-			Gui.AttachAnotherWindow("反恐精英：全球攻势", "SDL_app", Menu::Init);
+			std::cout << "Attaching china edition" << std::endl;
+			Gui.AttachAnotherWindow("反恐精英：全球攻势", "SDL_app", Menu::Tick);
 		}
 		catch (OSImGui::OSException& e)
 		{
@@ -165,7 +143,7 @@ int main()
 	}
 
 END:
-	std::cout << std::endl;
+	std::cout << "End" << std::endl;
 	system("pause");
 	return 0;
 }

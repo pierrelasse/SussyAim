@@ -14,16 +14,16 @@ namespace MenuConfig
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config
 		int MenuPage = 0;
-		ImVec2 LogoPos				= ImVec2(30.f, 30.f);
-		ImVec2 Logo2Pos				= ImVec2(25.f, 25.f);
-		ImVec2 Button1Pos			= ImVec2(30.f, 142.f);
-		ImVec2 Button2Pos			= ImVec2(30.f, 142.f + 90.f);
-		ImVec2 Button3Pos			= ImVec2(30.f, 142.f + 180.f);
-		ImVec2 Button4Pos			= ImVec2(30.f, 142.f + 270.f);
-		ImVec2 ChildPos				= ImVec2(257.f, 20.f);
-		ImVec2 ChildSize			= ImVec2(574.f, 474.f);
-		ImColor BorderColor_Yellow	= ImColor(127, 18, 39, 200);
-		ImColor BorderColor_Purple	= ImColor(255, 0, 238, 255);
+		ImVec2 LogoPos = ImVec2(30.f, 30.f);
+		ImVec2 Logo2Pos = ImVec2(25.f, 25.f);
+		ImVec2 Button1Pos = ImVec2(30.f, 142.f);
+		ImVec2 Button2Pos = ImVec2(30.f, 142.f + 90.f);
+		ImVec2 Button3Pos = ImVec2(30.f, 142.f + 180.f);
+		ImVec2 Button4Pos = ImVec2(30.f, 142.f + 270.f);
+		ImVec2 ChildPos = ImVec2(257.f, 20.f);
+		ImVec2 ChildSize = ImVec2(574.f, 474.f);
+		ImColor BorderColor_Yellow = ImColor(127, 18, 39, 200);
+		ImColor BorderColor_Purple = ImColor(255, 0, 238, 255);
 	} WCS;	// Window Component Settings
 
 	inline int Language = 0;
@@ -116,8 +116,8 @@ namespace ESPConfig
 	inline bool FilledVisBox = false;
 	inline bool MultiColor = false;
 	// 0: normal 1: Flat
-	
-	
+
+
 	inline ImColor VisibleColor = ImColor(255, 10, 20, 200);
 	inline ImColor FilledColor = ImColor(255, 255, 255, 128);
 	inline ImColor BoxFilledVisColor = ImColor(0, 0, 255, 255);

@@ -68,7 +68,7 @@ void Base_Radar::AddPoint(const Vec3& LocalPos, const float& LocalYaw, const Vec
 
 	PointPos.x = this->Pos.x + Distance * sin(Angle);
 	PointPos.y = this->Pos.y - Distance * cos(Angle);
-	
+
 	// Circle range
 	//Distance = sqrt(pow(this->Pos.x - PointPos.x, 2) + pow(this->Pos.y - PointPos.y, 2));
 	//if (Distance > this->RenderRange)

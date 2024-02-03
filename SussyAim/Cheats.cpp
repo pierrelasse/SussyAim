@@ -37,7 +37,7 @@ void Menu::RadarSetting(Base_Radar& Radar)
 	ImGui::SetNextWindowBgAlpha(RadarCFG::RadarBgAlpha);
 	ImGui::Begin("Radar", 0, ImGuiWindowFlags_NoResize);
 	ImGui::SetWindowSize({ RadarCFG::RadarRange * 2,RadarCFG::RadarRange * 2 });
-	
+
 	if (!RadarCFG::customRadar)
 	{
 		ImGui::SetWindowPos(ImVec2(0, 0));
@@ -47,7 +47,7 @@ void Menu::RadarSetting(Base_Radar& Radar)
 		RadarCFG::RadarRange = 150.f;
 		RadarCFG::RadarBgAlpha = 0.1f;
 	}
-		
+
 
 	// Radar.SetPos({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
 	Radar.SetDrawList(ImGui::GetWindowDrawList());
@@ -70,31 +70,30 @@ void Menu::RenderCrossHair(ImDrawList* drawList) noexcept
 	if (!CrosshairsCFG::ShowCrossHair)
 		return;
 
-	if(CrosshairsCFG::isAim && MenuConfig::TargetingCrosshairs)
+	if (CrosshairsCFG::isAim && MenuConfig::TargetingCrosshairs)
 		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(CrosshairsCFG::TargetedColor));
 	else
 		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(CrosshairsCFG::CrossHairColor));
 }
 
-void Menu::Init()
-{	
+void Menu::Tick()
+{
 	// Show menu
-	static DWORD lastTick = 0; 
-	DWORD currentTick = GetTickCount(); 
+	static DWORD lastTick = 0;
+	DWORD currentTick = GetTickCount();
 	if ((GetAsyncKeyState(VK_INSERT) & 0x8000) && currentTick - lastTick >= 150) {
 		MenuConfig::ShowMenu = !MenuConfig::ShowMenu;
 		lastTick = currentTick;
 	}
-//	std::thread keyCheckThread(KeyCheckThread);
-//  std::future<void> Thread_PlayerESP = std::async(ESP::RenderPlayerESP, std::ref(Entity), std::ref(Rect));
+
+	//	std::thread keyCheckThread(KeyCheckThread);
+	//  std::future<void> Thread_PlayerESP = std::async(ESP::RenderPlayerESP, std::ref(Entity), std::ref(Rect));
+
 	if (MenuConfig::ShowMenu)
-	{
-		GUI::NewGui();
-	}
-		
+		ViewMenu::Render();
 
 	// Update matrix
-	if(!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix,64))
+	if (!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix, 64))
 		return;
 
 	// Update EntityList Entry
@@ -180,14 +179,14 @@ void Menu::Init()
 
 		if (!Entity.IsAlive())
 			continue;
-//		if (MenuConfig::VisibleCheck && (!Entity.Pawn.bSpottedByMask > 0))
-//			continue;
+		//		if (MenuConfig::VisibleCheck && (!Entity.Pawn.bSpottedByMask > 0))
+		//			continue;
 
 
-		// Add entity to radar
+				// Add entity to radar
 		if (RadarCFG::ShowRadar)
 			Radar.AddPoint(LocalEntity.Pawn.Pos, LocalEntity.Pawn.ViewAngle.y, Entity.Pawn.Pos, ImColor(237, 85, 106, 200), RadarCFG::RadarType, Entity.Pawn.ViewAngle.y);
-		
+
 		Misc::RadarHack(Entity);
 
 		if (!Entity.IsInScreen())
@@ -223,8 +222,8 @@ void Menu::Init()
 		{
 			ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
 			ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
-			
-				
+
+
 			// Draw HealthBar
 			if (ESPConfig::drawHealthBar)
 			{
@@ -250,9 +249,9 @@ void Menu::Init()
 		Glow::Run(Entity);
 		// SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);
 	}
-	
+
 	// Radar render
-	if(RadarCFG::ShowRadar)
+	if (RadarCFG::ShowRadar)
 	{
 		Radar.Render();
 		ImGui::End();
@@ -260,7 +259,7 @@ void Menu::Init()
 
 	// TriggerBot
 	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways))
-		TriggerBot::Run(LocalEntity);	
+		TriggerBot::Run(LocalEntity);
 
 	Misc::HitSound(LocalEntity, PreviousTotalHits);
 	Misc::NoFlash(LocalEntity);
@@ -268,7 +267,7 @@ void Menu::Init()
 	Misc::NadeManager(gGame);
 	Misc::FovChanger(LocalEntity);
 	Misc::Watermark();
-	Misc::CheatList();	
+	Misc::CheatList();
 	Misc::FakeDuck(LocalEntity);
 	Misc::BunnyHop(LocalEntity);
 
@@ -277,13 +276,13 @@ void Menu::Init()
 
 	// HeadShoot Line
 	Render::HeadShootLine(LocalEntity, MenuConfig::HeadShootLineColor);
-	
+
 	// CrossHair
 	TriggerBot::TargetCheck(LocalEntity);
 	Misc::AirCheck(LocalEntity);
 	RenderCrossHair(ImGui::GetBackgroundDrawList());
 
-	bmb::RenderWindow();
+	BombTimer::RenderWindow();
 
 	// Aimbot
 	if (MenuConfig::AimBot)
@@ -313,5 +312,5 @@ void Menu::Init()
 			AimControl::switchToggle();
 			lastTick = currentTick;
 		}
-	}		
+	}
 }

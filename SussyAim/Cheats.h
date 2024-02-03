@@ -15,7 +15,8 @@ namespace Menu
 	void RenderCrossHair(ImDrawList* drawList) noexcept;
 
 	void RadarSetting(Base_Radar& Radar);
-	void Init();
+
+	void Tick();
 }
 
 struct {

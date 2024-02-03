@@ -86,14 +86,10 @@ public:
 	PlayerController Controller;
 	PlayerPawn Pawn;
 public:
-	// 更新数据
 	bool UpdateController(const DWORD64& PlayerControllerAddress);
 	bool UpdatePawn(const DWORD64& PlayerPawnAddress);
 	bool UpdateServerPawn(const DWORD64& PlayerPawnAddress);
-	// 是否存活
 	bool IsAlive();
-	// 是否在屏幕内
 	bool IsInScreen();
-	// 获取骨骼数据
 	CBone GetBone() const;
 };

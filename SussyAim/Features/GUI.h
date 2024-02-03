@@ -21,12 +21,13 @@ int LogoW2 = 0, LogoH2 = 0;
 int buttonW = 0;
 int buttonH = 0;
 
-namespace GUI
+namespace ViewMenu
 {
 	void LoadImages()
 	{
 		if (AS_Logo == NULL)
 		{
+			std::cout << "Loading images" << std::endl;
 			Gui.LoadTextureFromMemory(Images::Logo, sizeof Images::Logo, &AS_Logo, &LogoW, &LogoH);
 			Gui.LoadTextureFromMemory(Images::TabVisual, sizeof Images::TabVisual, &MenuButton1, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::TabAimbot, sizeof Images::TabAimbot, &MenuButton2, &buttonW, &buttonH);
@@ -108,7 +109,7 @@ namespace GUI
 	}
 	// ########################################
 
-	void NewGui()
+	void Render()
 	{
 		LoadImages();
 
@@ -127,6 +128,13 @@ namespace GUI
 		ImGui::SetNextWindowSize({ 851,514 });
 		ImGui::Begin("main", nullptr, Flags);
 		{
+			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+			if (ImGui::Button("Quit")) {
+				std::cout << "Quitting..." << std::endl;
+				Gui.Quit();
+			}
+			ImGui::PopStyleColor();
+
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);
 
@@ -174,6 +182,7 @@ namespace GUI
 			
 			ImGui::BeginChild("Page", MenuConfig::WCS.ChildSize);
 			{
+				// Visual
 				if (MenuConfig::WCS.MenuPage == 0)
 				{
 					ImGui::Columns(2, nullptr, false);
@@ -279,7 +288,8 @@ namespace GUI
 					ImGui::Columns(1);
 				}
 				
-				if (MenuConfig::WCS.MenuPage == 1)
+				// Aimbot
+				else if (MenuConfig::WCS.MenuPage == 1)
 				{
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
@@ -363,7 +373,8 @@ namespace GUI
 					ImGui::Columns(1);
 				}
 
-				if (MenuConfig::WCS.MenuPage == 2)
+				// Misc
+				else if (MenuConfig::WCS.MenuPage == 2)
 				{
 					int FovMin = 58, FovMax = 140;
 					ImGui::Columns(2, nullptr, false);
@@ -465,7 +476,8 @@ namespace GUI
 					ImGui::Columns(1);
 				}
 
-				if (MenuConfig::WCS.MenuPage == 3)
+				// Config
+				else if (MenuConfig::WCS.MenuPage == 3)
 				{
 					ImGui::Columns(2, nullptr, false);
 					ConfigMenu::RenderCFGmenu();

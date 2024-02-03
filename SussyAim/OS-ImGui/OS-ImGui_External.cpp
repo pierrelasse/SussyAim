@@ -145,6 +145,7 @@ namespace OSImGui
             throw e;
         }
 
+        std::cout << "Running mainloop" << std::endl;
         MainLoop();
     }
 
@@ -163,7 +164,7 @@ namespace OSImGui
 
     void OSImGui_External::MainLoop()
     {
-        while (!EndFlag)
+        while (!IsRunning)
         {
             if (PeekEndMessage())
                 break;

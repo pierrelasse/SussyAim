@@ -111,7 +111,7 @@ namespace Offset
 	} InGameMoneyServices;
 
 	struct // C_BaseCSGrenadeProjectile
-	{ 
+	{
 		DWORD nSmokeEffectTickBegin = 0x1108; // int32_t
 		DWORD bDidSmokeEffect = 0x110C; // bool
 		DWORD nRandomSeed = 0x1110; // int32_t
@@ -120,7 +120,7 @@ namespace Offset
 		DWORD VoxelFrameData = 0x1130; // CUtlVector<uint8_t>
 		DWORD bSmokeVolumeDataReceived = 0x1148; // bool
 		uintptr_t bSmokeEffectSpawned = 0x1149; // bool
-	} SmokeGrenadeProjectile; 
+	} SmokeGrenadeProjectile;
 
 	namespace Signatures
 	{

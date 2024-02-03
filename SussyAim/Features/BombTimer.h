@@ -8,7 +8,7 @@
 #include "..\Entity.h"
 #include "..\MenuConfig.hpp"
 
-namespace bmb
+namespace BombTimer
 {
 	bool isPlanted = false;
 	std::time_t plantTime;

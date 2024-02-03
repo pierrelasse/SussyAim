@@ -26,7 +26,7 @@ private:
 public:
 	CView View;
 
-public:	
+public:
 
 	bool InitAddress();
 

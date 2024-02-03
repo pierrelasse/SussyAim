@@ -4,7 +4,7 @@ bool CGame::InitAddress()
 {
 	this->Address.ClientDLL = reinterpret_cast<DWORD64>(ProcessMgr.GetProcessModuleHandle("client.dll"));
 	this->Address.ServerDLL = reinterpret_cast<DWORD64>(ProcessMgr.GetProcessModuleHandle("server.dll"));
-	
+
 	this->Address.EntityList = GetClientDLLAddress() + Offset::EntityList;
 	this->Address.Matrix = GetClientDLLAddress() + Offset::Matrix;
 	this->Address.ViewAngle = GetClientDLLAddress() + Offset::ViewAngle;
@@ -38,7 +38,7 @@ DWORD64 CGame::GetMatrixAddress()
 	return this->Address.Matrix;
 }
 
-DWORD64 CGame::GetViewAngleAddress() 
+DWORD64 CGame::GetViewAngleAddress()
 {
 	return this->Address.ViewAngle;
 }
