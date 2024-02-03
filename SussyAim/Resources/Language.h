@@ -32,9 +32,6 @@ namespace Lang
 		inline static const char* VisCheck;
 		inline static const char* Preview;
 		inline static const char* CollapseHead;
-		inline static const char* Penis;
-		inline static const char* PenisLength;
-		inline static const char* PenisSize;
 		inline static const char* MultiColor;
 		inline static const char* MultiColTip;
 		inline static const char* Outline;
@@ -208,9 +205,6 @@ namespace Lang
 		ESPtext.VisCheck = u8"Visible Check";
 		ESPtext.Preview = u8"Preview Window";
 		ESPtext.CollapseHead = u8"SexyESP";
-		ESPtext.Penis = u8"Show Penis";
-		ESPtext.PenisLength = u8"Length";
-		ESPtext.PenisSize = u8"Size";
 		ESPtext.MultiColor = u8"Multi-Color";
 		ESPtext.MultiColTip = u8"Only work when the box has non-rounded corners.";
 		ESPtext.Outline = u8"Outline";
