@@ -78,47 +78,52 @@ namespace MenuConfig
 
 namespace ESPConfig
 {
-	inline bool ESPenabled = true;
-	inline bool AmmoBar = true;
-	inline bool ShowBoneESP = true;
-	inline bool ShowBoxESP = true;
-	inline bool ShowHealthBar = true;
-	inline bool ShowWeaponESP = true;
-	inline bool ShowEyeRay = false;
-	inline bool ShowPlayerName = true;
-	inline bool DrawFov = true;
-	inline bool ShowDistance = false;
-	inline bool ShowHealthNum = false;
-	inline bool ShowHeadBox = true;
-	inline bool ShowPreview = true;
-	inline bool VisibleCheck = true;
+	inline bool enabled = true;
+
+	inline bool drawName = true;
+
+	inline bool drawBox = true;
+	inline bool drawBoxOutline = true;
+	inline float boxRounding = RandomPara<float>(0.0f, 0.0f);;
+	inline float boxAlpha = 0.35f;
+	inline ImColor FrameColor = ImColor(10, 10, 10, 80);
+
+	inline bool drawBones = true;
+	inline ImColor BoneColor = ImColor(0, 255, 255, 255);
+
+	inline bool drawEyeRay = false;
+	inline ImColor EyeRayColor = ImColor(255, 0, 0, 255);
+
+	inline bool drawHeadBox = true;
+	inline int HeadBoxStyle = 0;
+	inline ImColor HeadBoxColor = ImColor(0, 255, 255, 255);
+
+	inline bool drawDistance = false;
+
+	inline bool drawWeapon = true;
+	inline bool ammoBar = true;
+
+	inline bool drawHealthBar = true;
+	inline bool drawHealth = false;
+
+	inline bool drawTracers = false;
+	inline ImColor tracerColor = ImColor(255, 255, 255, 220);
+	inline int tracerPos = 0; // 0: Top 1: Center 2: Bottom
+
+	inline bool displayPreview = true;
+	inline bool visibleCheck = true;
 	inline bool FilledBox = false;
 	inline bool FilledVisBox = false;
 	inline bool MultiColor = false;
-	inline bool OutLine = true;
 	// 0: normal 1: Flat
-	inline int HeadBoxStyle = 0;
-	inline float BoxRounding = RandomPara<float>(0.0f, 0.0f);;
-	inline float BoxAlpha = 0.35f;
-	inline bool ShowLineToEnemy = false;
-	inline ImColor LineToEnemyColor = ImColor(255, 255, 255, 220);
-	// 0: Top 1: Center 2: Bottom
-	inline int LinePos = 0;
-
-	inline ImColor BoneColor = ImColor(0, 255, 255, 255);
-	inline ImColor FrameColor = ImColor(10, 10, 10, 80);
-	inline ImColor EyeRayColor = ImColor(255, 0, 0, 255);
-	inline ImColor HeadBoxColor = ImColor(255, 255, 255, 255);
+	
+	
 	inline ImColor VisibleColor = ImColor(255, 10, 20, 200);
 	inline ImColor FilledColor = ImColor(255, 255, 255, 128);
 	inline ImColor BoxFilledVisColor = ImColor(0, 0, 255, 255);
 	inline ImColor FilledColor2 = ImColor(0, 255, 102, 255);
 
-	// Penis Config
-	inline bool ShowPenis = false;
-	inline float PenisLength = RandomPara<float>(3.0f, 15.0f);
-	inline float PenisSize = RandomPara<float>(1.3f, 3.0f);
-	inline ImColor PenisColor = ImColor(255, 0, 0, 200);
+	inline bool DrawFov = true; // aimbot?
 }
 
 namespace DebuggerConfig

@@ -155,7 +155,6 @@
   <ItemGroup>
     <ClInclude Include="AimBot.hpp" />
     <ClInclude Include="Bone.h" />
-    <ClInclude Include="Bunnyhop.hpp" />
     <ClInclude Include="Cheats.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Features\BombTimer.h" />
@@ -194,21 +193,6 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Resources\Images.h" />
     <ClInclude Include="Resources\Language.h" />
-    <ClInclude Include="Resources\Languages\Czech.h" />
-    <ClInclude Include="Resources\Languages\Danish.h" />
-    <ClInclude Include="Resources\Languages\Dutch.h" />
-    <ClInclude Include="Resources\Languages\Francais.h" />
-    <ClInclude Include="Resources\Languages\German.h" />
-    <ClInclude Include="Resources\Languages\Hungarian.h" />
-    <ClInclude Include="Resources\Languages\Korean.h" />
-    <ClInclude Include="Resources\Languages\Polish.h" />
-    <ClInclude Include="Resources\Languages\Portuguese.h" />
-    <ClInclude Include="Resources\Languages\Romanian.h" />
-    <ClInclude Include="Resources\Languages\Ruassian.h" />
-    <ClInclude Include="Resources\Languages\SimplifiedChinese.h" />
-    <ClInclude Include="Resources\Languages\Slovak.h" />
-    <ClInclude Include="Resources\Languages\Spanish.h" />
-    <ClInclude Include="Resources\Languages\Turkish.h" />
     <ClInclude Include="Resources\WeaponIcon.h" />
     <ClInclude Include="TriggerBot.h" />
     <ClInclude Include="Utils\ConfigMenu.hpp" />

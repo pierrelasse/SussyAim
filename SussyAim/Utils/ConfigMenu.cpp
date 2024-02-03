@@ -126,9 +126,9 @@ namespace ConfigMenu {
 		MiscCFG::SmokeColor = ImColor(255, 0, 0, 255);
 		MiscCFG::NoSmoke = false;
 		MiscCFG::Jitter = false;
-		ESPConfig::AmmoBar = true;
-		ESPConfig::OutLine = true;
-		ESPConfig::ShowHealthNum = false;
+		ESPConfig::ammoBar = true;
+		ESPConfig::drawBoxOutline = true;
+		ESPConfig::drawHealth = false;
 		ESPConfig::FilledColor = ImColor(255, 255, 255, 255);
 		ESPConfig::FilledColor2 = ImColor(255, 255, 255, 255);
 		ESPConfig::MultiColor = false;
@@ -142,24 +142,24 @@ namespace ConfigMenu {
 		MiscCFG::BombTimerCol = ImColor(255, 120, 0, 255);
 		MiscCFG::bombTimer = false;
 		ESPConfig::VisibleColor = ImColor(255, 196, 0, 255);
-		ESPConfig::VisibleCheck = false;
+		ESPConfig::visibleCheck = false;
 		MiscCFG::EnemySensor = false;
 		MenuConfig::AirJump = false;
 		MenuConfig::Theme = 0;
 		MenuConfig::WindowStyle = 0;
-		ESPConfig::BoxAlpha = 0.0f;
-		ESPConfig::ShowPreview = true;
-		ESPConfig::ShowHeadBox = true;
+		ESPConfig::boxAlpha = 0.0f;
+		ESPConfig::displayPreview = true;
+		ESPConfig::drawHeadBox = true;
 		ESPConfig::HeadBoxStyle = 0;
 		ESPConfig::HeadBoxColor = ImColor(255, 255, 255, 255);
-		ESPConfig::ShowDistance = false;
-		ESPConfig::ShowBoneESP = true;
-		ESPConfig::ShowBoxESP = true;
-		ESPConfig::ShowHealthBar = true;
-		ESPConfig::ShowWeaponESP = true;
-		ESPConfig::ShowEyeRay = false;
-		ESPConfig::ShowPlayerName = true;
-		ESPConfig::BoxRounding = 0.0f;
+		ESPConfig::drawDistance = false;
+		ESPConfig::drawBones = true;
+		ESPConfig::drawBox = true;
+		ESPConfig::drawHealthBar = true;
+		ESPConfig::drawWeapon = true;
+		ESPConfig::drawEyeRay = false;
+		ESPConfig::drawName = true;
+		ESPConfig::boxRounding = 0.0f;
 		MenuConfig::AimBot = false;
 		MenuConfig::AimAlways = false;
 		MenuConfig::AimToggleMode = false;
@@ -188,7 +188,7 @@ namespace ConfigMenu {
 		MenuConfig::HeadShootLineColor = ImColor(255, 255, 255, 200);
 		MenuConfig::AimBotHotKey = 0;
 		AimControl::SetHotKey(MenuConfig::AimBotHotKey);
-		ESPConfig::ShowLineToEnemy = false;
+		ESPConfig::drawTracers = false;
 		MenuConfig::FovLineSize = 60.0f;
 		TriggerBot::TriggerDelay = 90;
 		TriggerBot::FakeShotDelay = 500;
@@ -198,7 +198,7 @@ namespace ConfigMenu {
 		AimControl::RCSScale = ImVec2(1.2f, 1.4f);
 		AimControl::ScopeOnly = false;
 		MenuConfig::FovLineColor = ImVec4(55, 55, 55, 220);
-		ESPConfig::LineToEnemyColor = ImVec4(255, 255, 255, 220);
+		ESPConfig::tracerColor = ImVec4(255, 255, 255, 220);
 		CrosshairsCFG::ShowCrossHair = true;
 		CrosshairsCFG::CrossHairColor = ImColor(0, 255, 0, 255);
 		CrosshairsCFG::CrossHairSize = 75;
@@ -225,13 +225,7 @@ namespace ConfigMenu {
 		MiscCFG::HitSound = false;
 		MiscCFG::FastStop = false;
 
-		ESPConfig::ESPenabled = false;
-
-		ESPConfig::ShowPenis = false;
-		ESPConfig::PenisLength = 15.f;
-		ESPConfig::PenisSize = 1.3f;
-		ESPConfig::PenisColor = ImColor(255, 0, 0, 200);
-
+		ESPConfig::enabled = false;
 		ESPConfig::DrawFov = true;
 		MenuConfig::FovCircleColor = ImColor(255, 255, 255, 255);
 	}

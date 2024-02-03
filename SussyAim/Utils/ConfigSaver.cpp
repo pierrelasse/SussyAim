@@ -20,34 +20,34 @@ namespace MyConfigSaver {
 
         YAML::Emitter emitter;
 
-        emitter << YAML::Comment("AimStar Config File\nVersion: 3.8\nAuthor: " + author);
+        emitter << YAML::Comment("A SussyAim Config File\nVersion: 3.8\nAuthor: " + author);
         emitter << YAML::BeginMap;
 
         emitter << YAML::Key << "ESP";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
-        emitter << YAML::Key << "Enable" << YAML::Value << ESPConfig::ESPenabled;
-        emitter << YAML::Key << "BoneESP" << YAML::Value << ESPConfig::ShowBoneESP;
-        emitter << YAML::Key << "BoxESP" << YAML::Value << ESPConfig::ShowBoxESP;
+        emitter << YAML::Key << "Enable" << YAML::Value << ESPConfig::enabled;
+        emitter << YAML::Key << "BoneESP" << YAML::Value << ESPConfig::drawBones;
+        emitter << YAML::Key << "BoxESP" << YAML::Value << ESPConfig::drawBox;
         emitter << YAML::Key << "BoxType" << YAML::Value << MenuConfig::BoxType;
-        emitter << YAML::Key << "SnapLine" << YAML::Value << ESPConfig::ShowLineToEnemy;
-        emitter << YAML::Key << "LinePos" << YAML::Value << ESPConfig::LinePos;
-        emitter << YAML::Key << "HealthBar" << YAML::Value << ESPConfig::ShowHealthBar;
-        emitter << YAML::Key << "AmmoBar" << YAML::Value << ESPConfig::AmmoBar;
-        emitter << YAML::Key << "WeaponESP" << YAML::Value << ESPConfig::ShowWeaponESP;
-        emitter << YAML::Key << "EyeRay" << YAML::Value << ESPConfig::ShowEyeRay;
-        emitter << YAML::Key << "PlayerName" << YAML::Value << ESPConfig::ShowPlayerName;
-        emitter << YAML::Key << "DistanceESP" << YAML::Value << ESPConfig::ShowDistance;
-        emitter << YAML::Key << "HealthNum" << YAML::Value << ESPConfig::ShowHealthNum;
-        emitter << YAML::Key << "HeadBox" << YAML::Value << ESPConfig::ShowHeadBox;
-        emitter << YAML::Key << "Preview" << YAML::Value << ESPConfig::ShowPreview;
-        emitter << YAML::Key << "VisCheck" << YAML::Value << ESPConfig::VisibleCheck;
+        emitter << YAML::Key << "SnapLine" << YAML::Value << ESPConfig::drawTracers;
+        emitter << YAML::Key << "LinePos" << YAML::Value << ESPConfig::tracerPos;
+        emitter << YAML::Key << "HealthBar" << YAML::Value << ESPConfig::drawHealthBar;
+        emitter << YAML::Key << "AmmoBar" << YAML::Value << ESPConfig::ammoBar;
+        emitter << YAML::Key << "WeaponESP" << YAML::Value << ESPConfig::drawWeapon;
+        emitter << YAML::Key << "EyeRay" << YAML::Value << ESPConfig::drawEyeRay;
+        emitter << YAML::Key << "PlayerName" << YAML::Value << ESPConfig::drawName;
+        emitter << YAML::Key << "DistanceESP" << YAML::Value << ESPConfig::drawDistance;
+        emitter << YAML::Key << "HealthNum" << YAML::Value << ESPConfig::drawHealth;
+        emitter << YAML::Key << "HeadBox" << YAML::Value << ESPConfig::drawHeadBox;
+        emitter << YAML::Key << "Preview" << YAML::Value << ESPConfig::displayPreview;
+        emitter << YAML::Key << "VisCheck" << YAML::Value << ESPConfig::visibleCheck;
         emitter << YAML::Key << "FilledBox" << YAML::Value << ESPConfig::FilledBox;
         emitter << YAML::Key << "FilledVisBox" << YAML::Value << ESPConfig::FilledVisBox;
         emitter << YAML::Key << "MultiColor" << YAML::Value << ESPConfig::MultiColor;
-        emitter << YAML::Key << "OutLine" << YAML::Value << ESPConfig::OutLine;
+        emitter << YAML::Key << "OutLine" << YAML::Value << ESPConfig::drawBoxOutline;
         emitter << YAML::Key << "HeadBoxStyle" << YAML::Value << ESPConfig::HeadBoxStyle;
-        emitter << YAML::Key << "BoxRounding" << YAML::Value << ESPConfig::BoxRounding;
+        emitter << YAML::Key << "BoxRounding" << YAML::Value << ESPConfig::boxRounding;
         emitter << YAML::Key << "BoneColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -67,10 +67,10 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "SnapLineColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
-        emitter << YAML::Key << "r" << YAML::Value << ESPConfig::LineToEnemyColor.Value.x;
-        emitter << YAML::Key << "g" << YAML::Value << ESPConfig::LineToEnemyColor.Value.y;
-        emitter << YAML::Key << "b" << YAML::Value << ESPConfig::LineToEnemyColor.Value.z;
-        emitter << YAML::Key << "a" << YAML::Value << ESPConfig::LineToEnemyColor.Value.w;
+        emitter << YAML::Key << "r" << YAML::Value << ESPConfig::tracerColor.Value.x;
+        emitter << YAML::Key << "g" << YAML::Value << ESPConfig::tracerColor.Value.y;
+        emitter << YAML::Key << "b" << YAML::Value << ESPConfig::tracerColor.Value.z;
+        emitter << YAML::Key << "a" << YAML::Value << ESPConfig::tracerColor.Value.w;
         emitter << YAML::EndMap;
         emitter << YAML::Key << "EyeRayColor";
         emitter << YAML::Value;
@@ -119,18 +119,6 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "g" << YAML::Value << ESPConfig::BoxFilledVisColor.Value.y;
         emitter << YAML::Key << "b" << YAML::Value << ESPConfig::BoxFilledVisColor.Value.z;
         emitter << YAML::Key << "a" << YAML::Value << ESPConfig::BoxFilledVisColor.Value.w;
-        emitter << YAML::EndMap;
-        emitter << YAML::Key << "PenisColor";
-        emitter << YAML::Value;
-        emitter << YAML::BeginMap;
-        emitter << YAML::Key << "r" << YAML::Value << ESPConfig::PenisColor.Value.x;
-        emitter << YAML::Key << "g" << YAML::Value << ESPConfig::PenisColor.Value.y;
-        emitter << YAML::Key << "b" << YAML::Value << ESPConfig::PenisColor.Value.z;
-        emitter << YAML::Key << "a" << YAML::Value << ESPConfig::PenisColor.Value.w;
-        emitter << YAML::EndMap;
-        emitter << YAML::Key << "PenisESP" << YAML::Value << ESPConfig::ShowPenis;
-        emitter << YAML::Key << "PenisLength" << YAML::Value << ESPConfig::PenisLength;
-        emitter << YAML::Key << "PenisSize" << YAML::Value << ESPConfig::PenisSize;
         emitter << YAML::EndMap;
 
         emitter << YAML::Key << "Crosshairs";
@@ -296,27 +284,27 @@ namespace MyConfigSaver {
             YAML::Node config = YAML::LoadFile(MenuConfig::path + '\\' + filename);
             if (config["ESP"]) {
                 // If you want to make the new version compatible with the old configuration, you can add IsDefine(), like line 284.
-                ESPConfig::ESPenabled = config["ESP"]["Enable"].as<bool>();
-                ESPConfig::ShowBoneESP = config["ESP"]["BoneESP"].as<bool>();
-                ESPConfig::ShowBoxESP = config["ESP"]["BoxESP"].as<bool>();
+                ESPConfig::enabled = config["ESP"]["Enable"].as<bool>();
+                ESPConfig::drawBones = config["ESP"]["BoneESP"].as<bool>();
+                ESPConfig::drawBox = config["ESP"]["BoxESP"].as<bool>();
                 MenuConfig::BoxType = config["ESP"]["BoxType"].as<int>();
-                ESPConfig::ShowLineToEnemy = config["ESP"]["SnapLine"].as<bool>();
-                ESPConfig::LinePos = config["ESP"]["LinePos"].as<int>();
-                ESPConfig::ShowHealthBar = config["ESP"]["HealthBar"].as<bool>();
-                ESPConfig::AmmoBar = config["ESP"]["AmmoBar"].IsDefined() ? config["ESP"]["AmmoBar"].as<bool>() : false;
-                ESPConfig::ShowWeaponESP = config["ESP"]["WeaponESP"].as<bool>();
-                ESPConfig::ShowEyeRay = config["ESP"]["EyeRay"].as<bool>();
-                ESPConfig::ShowPlayerName = config["ESP"]["PlayerName"].as<bool>();
-                ESPConfig::ShowDistance = config["ESP"]["DistanceESP"].as<bool>();
-                ESPConfig::ShowHealthNum = config["ESP"]["HealthNum"].as<bool>();
-                ESPConfig::ShowHeadBox = config["ESP"]["HeadBox"].as<bool>();
-                ESPConfig::ShowPreview = config["ESP"]["Preview"].as<bool>();
-                ESPConfig::VisibleCheck = config["ESP"]["VisCheck"].as<bool>();
+                ESPConfig::drawTracers = config["ESP"]["SnapLine"].as<bool>();
+                ESPConfig::tracerPos = config["ESP"]["LinePos"].as<int>();
+                ESPConfig::drawHealthBar = config["ESP"]["HealthBar"].as<bool>();
+                ESPConfig::ammoBar = config["ESP"]["AmmoBar"].IsDefined() ? config["ESP"]["AmmoBar"].as<bool>() : false;
+                ESPConfig::drawWeapon = config["ESP"]["WeaponESP"].as<bool>();
+                ESPConfig::drawEyeRay = config["ESP"]["EyeRay"].as<bool>();
+                ESPConfig::drawName = config["ESP"]["PlayerName"].as<bool>();
+                ESPConfig::drawDistance = config["ESP"]["DistanceESP"].as<bool>();
+                ESPConfig::drawHealth = config["ESP"]["HealthNum"].as<bool>();
+                ESPConfig::drawHeadBox = config["ESP"]["HeadBox"].as<bool>();
+                ESPConfig::displayPreview = config["ESP"]["Preview"].as<bool>();
+                ESPConfig::visibleCheck = config["ESP"]["VisCheck"].as<bool>();
                 ESPConfig::FilledBox = config["ESP"]["FilledBox"].as<bool>();
                 ESPConfig::FilledVisBox = config["ESP"]["FilledVisBox"].as<bool>();
                 ESPConfig::MultiColor = config["ESP"]["MultiColor"].as<bool>();
-                ESPConfig::OutLine = config["ESP"]["OutLine"].as<bool>();
-                ESPConfig::BoxRounding = config["ESP"]["BoxRounding"].as<float>();
+                ESPConfig::drawBoxOutline = config["ESP"]["OutLine"].as<bool>();
+                ESPConfig::boxRounding = config["ESP"]["BoxRounding"].as<float>();
                 ESPConfig::BoneColor.Value.x = config["ESP"]["BoneColor"]["r"].as<float>();
                 ESPConfig::BoneColor.Value.y = config["ESP"]["BoneColor"]["g"].as<float>();
                 ESPConfig::BoneColor.Value.z = config["ESP"]["BoneColor"]["b"].as<float>();
@@ -325,10 +313,10 @@ namespace MyConfigSaver {
                 ESPConfig::FrameColor.Value.y = config["ESP"]["BoxColor"]["g"].as<float>();
                 ESPConfig::FrameColor.Value.z = config["ESP"]["BoxColor"]["b"].as<float>();
                 ESPConfig::FrameColor.Value.w = config["ESP"]["BoxColor"]["a"].as<float>();
-                ESPConfig::LineToEnemyColor.Value.x = config["ESP"]["SnapLineColor"]["r"].as<float>();
-                ESPConfig::LineToEnemyColor.Value.y = config["ESP"]["SnapLineColor"]["g"].as<float>();
-                ESPConfig::LineToEnemyColor.Value.z = config["ESP"]["SnapLineColor"]["b"].as<float>();
-                ESPConfig::LineToEnemyColor.Value.w = config["ESP"]["SnapLineColor"]["a"].as<float>();
+                ESPConfig::tracerColor.Value.x = config["ESP"]["SnapLineColor"]["r"].as<float>();
+                ESPConfig::tracerColor.Value.y = config["ESP"]["SnapLineColor"]["g"].as<float>();
+                ESPConfig::tracerColor.Value.z = config["ESP"]["SnapLineColor"]["b"].as<float>();
+                ESPConfig::tracerColor.Value.w = config["ESP"]["SnapLineColor"]["a"].as<float>();
                 ESPConfig::HeadBoxColor.Value.x = config["ESP"]["HeadBoxColor"]["r"].as<float>();
                 ESPConfig::HeadBoxColor.Value.y = config["ESP"]["HeadBoxColor"]["g"].as<float>();
                 ESPConfig::HeadBoxColor.Value.z = config["ESP"]["HeadBoxColor"]["b"].as<float>();
@@ -353,13 +341,6 @@ namespace MyConfigSaver {
                 ESPConfig::BoxFilledVisColor.Value.y = config["ESP"]["FilledVisColor"]["g"].as<float>();
                 ESPConfig::BoxFilledVisColor.Value.z = config["ESP"]["FilledVisColor"]["b"].as<float>();
                 ESPConfig::BoxFilledVisColor.Value.w = config["ESP"]["FilledVisColor"]["a"].as<float>();
-                ESPConfig::PenisColor.Value.x = config["ESP"]["PenisColor"]["r"].as<float>();
-                ESPConfig::PenisColor.Value.y = config["ESP"]["PenisColor"]["g"].as<float>();
-                ESPConfig::PenisColor.Value.z = config["ESP"]["PenisColor"]["b"].as<float>();
-                ESPConfig::PenisColor.Value.w = config["ESP"]["PenisColor"]["a"].as<float>();
-                ESPConfig::ShowPenis = config["ESP"]["PenisESP"].as<bool>();
-                ESPConfig::PenisLength = config["ESP"]["PenisLength"].as<float>();
-                ESPConfig::PenisSize = config["ESP"]["PenisSize"].as<float>();
             }
             if (config["Crosshairs"]) {
                 CrosshairsCFG::ShowCrossHair = config["Crosshairs"]["Enable"].as<bool>();
@@ -404,8 +385,6 @@ namespace MyConfigSaver {
             }
             if (config["Misc"])
             {
-                float fov = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<float>() : 0;
-
                 MiscCFG::BunnyHop = config["Misc"]["Bhop"].as<bool>();
                 MenuConfig::ShowHeadShootLine = config["Misc"]["HeadShootLine"].as<bool>();
                 MenuConfig::HeadShootLineColor.Value.x = config["Misc"]["HeadShootLineColor"]["r"].as<float>();
@@ -413,8 +392,7 @@ namespace MyConfigSaver {
                 MenuConfig::HeadShootLineColor.Value.z = config["Misc"]["HeadShootLineColor"]["b"].as<float>();
                 MenuConfig::HeadShootLineColor.Value.w = config["Misc"]["HeadShootLineColor"]["a"].as<float>();
                 MiscCFG::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
-                if (fov)
-                    MiscCFG::Fov = true;
+                MiscCFG::FovHacker = config["Misc"]["FovHacker"].IsDefined() ? config["Misc"]["FovHacker"].as<bool>() : false;
                 MiscCFG::NoFlash = config["Misc"]["NoFlash"].as<bool>();
                 MiscCFG::WaterMark = config["Misc"]["Watermark"].as<bool>();
                 MiscCFG::CheatList = config["Misc"]["CheatList"].as<bool>();

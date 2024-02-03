@@ -219,14 +219,14 @@ void Menu::Init()
 			}
 		}
 
-		if (ESPConfig::ESPenabled)
+		if (ESPConfig::enabled)
 		{
 			ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
 			ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
 			
 				
 			// Draw HealthBar
-			if (ESPConfig::ShowHealthBar)
+			if (ESPConfig::drawHealthBar)
 			{
 				ImVec2 HealthBarPos = { Rect.x - 6.f,Rect.y };
 				ImVec2 HealthBarSize = { 4 ,Rect.w };
@@ -235,7 +235,7 @@ void Menu::Init()
 
 			// Draw Ammo
 			// When player is using knife, Ammo = -1.
-			if (ESPConfig::AmmoBar && Entity.Pawn.Ammo != -1)
+			if (ESPConfig::ammoBar && Entity.Pawn.Ammo != -1)
 			{
 				ImVec2 AmmoBarPos = { Rect.x, Rect.y + Rect.w + 2 };
 				ImVec2 AmmoBarSize = { Rect.z,4 };

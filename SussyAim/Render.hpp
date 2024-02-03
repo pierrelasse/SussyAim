@@ -16,7 +16,7 @@ namespace Render
 
 	void DrawHeadCircle(const CEntity& Entity, ImColor Color)
 	{
-		if (!ESPConfig::ShowHeadBox)
+		if (!ESPConfig::drawHeadBox)
 			return;
 
 		Vec2 CenterPos;
@@ -41,7 +41,7 @@ namespace Render
 
 	void DrawHealth(const CEntity& Entity, ImVec4 Rect)
 	{
-		if (!ESPConfig::ShowHealthNum)
+		if (!ESPConfig::drawHealth)
 			return;
 
 		int health = Entity.Pawn.Health;
@@ -51,7 +51,7 @@ namespace Render
 
 	void DrawDistance(const CEntity& LocalEntity, CEntity& Entity, ImVec4 Rect)
 	{
-		if (!ESPConfig::ShowDistance)
+		if (!ESPConfig::drawDistance)
 			return;
 
 		int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
@@ -142,10 +142,10 @@ namespace Render
 
 	void LineToEnemy(ImVec4 Rect, ImColor Color, float Thickness)
 	{
-		if (!ESPConfig::ShowLineToEnemy)
+		if (!ESPConfig::drawTracers)
 			return;
 
-		switch (ESPConfig::LinePos)
+		switch (ESPConfig::tracerPos)
 		{
 		case 0:
 			Gui.Line({ Rect.x + Rect.z / 2,Rect.y }, { Gui.Window.Size.x / 2,0 }, Color, Thickness);
@@ -221,7 +221,7 @@ namespace Render
 	// ��������
 	void DrawBone(const CEntity& Entity, ImColor Color, float Thickness)
 	{
-		if (!ESPConfig::ShowBoneESP)
+		if (!ESPConfig::drawBones)
 			return;
 
 		BoneJointPos Previous, Current;
@@ -250,7 +250,7 @@ namespace Render
 	// �������
 	void ShowLosLine(const CEntity& Entity, const float Length, ImColor Color, float Thickness)
 	{
-		if (!ESPConfig::ShowEyeRay)
+		if (!ESPConfig::drawEyeRay)
 			return;
 
 		Vec2 StartPoint, EndPoint;
@@ -271,31 +271,6 @@ namespace Render
 		Gui.Line(StartPoint, EndPoint, Color, Thickness);
 	}
 
-	//ţţ����
-	void ShowPenis(const CEntity& Entity, const float Length, ImColor Color, float Thickness)
-	{
-		if (!ESPConfig::ShowPenis)
-			return;
-
-		Vec2 StartPoint, EndPoint;
-		Vec3 Temp;
-		BoneJointPos Dick = Entity.GetBone().BonePosList[BONEINDEX::pelvis];
-
-		StartPoint = Dick.ScreenPos;
-
-		float LineLength = cos(Entity.Pawn.ViewAngle.x * M_PI / 180) * Length;
-
-		Temp.x = Dick.Pos.x + cos(Entity.Pawn.ViewAngle.y * M_PI / 180) * LineLength;
-		Temp.y = Dick.Pos.y + sin(Entity.Pawn.ViewAngle.y * M_PI / 180) * LineLength;
-		Temp.z = Dick.Pos.z - sin(Entity.Pawn.ViewAngle.x * M_PI / 180) * Length;
-
-		if (!gGame.View.WorldToScreen(Temp, EndPoint))
-			return;
-
-		Gui.Line(StartPoint, EndPoint, Color, Thickness);
-	}
-
-	// 2D���������
 	ImVec4 Get2DBoneRect(const CEntity& Entity)
 	{
 		Vec2 Min, Max, Size;

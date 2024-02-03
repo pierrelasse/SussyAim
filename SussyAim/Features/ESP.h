@@ -110,13 +110,12 @@ namespace ESP
 		std::string weaponIcon = GunIcon(Entity.Pawn.WeaponName);
 
 		Render::DrawBone(Entity, ESPConfig::BoneColor, 1.3f);
-		Render::ShowPenis(Entity, ESPConfig::PenisLength, ESPConfig::PenisColor, ESPConfig::PenisSize);
 		Render::ShowLosLine(Entity, 50.0f, ESPConfig::EyeRayColor, 1.3f);
 		Render::DrawHeadCircle(Entity, ESPConfig::HeadBoxColor);
 
 		// box
 		if (ESPConfig::FilledBox) {
-			float Rounding = ESPConfig::BoxRounding;
+			float Rounding = ESPConfig::boxRounding;
 			if (MenuConfig::BoxType == 2 || MenuConfig::BoxType == 3)
 				Rounding = 0.f;
 			ImColor FlatBoxCol = ESPConfig::FilledColor;
@@ -145,19 +144,19 @@ namespace ESP
 				
 			}
 		}
-		if (ESPConfig::ShowBoxESP)
+		if (ESPConfig::drawBox)
 		{	
 			if (MenuConfig::BoxType == 0 || MenuConfig::BoxType == 1)
 			{
-				if (ESPConfig::OutLine)
-					Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::FrameColor & IM_COL32_A_MASK, 3, ESPConfig::BoxRounding);
+				if (ESPConfig::drawBoxOutline)
+					Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::FrameColor & IM_COL32_A_MASK, 3, ESPConfig::boxRounding);
 
-				if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && ESPConfig::VisibleCheck)
+				if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && ESPConfig::visibleCheck)
 				{
-					Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::VisibleColor, 1.3, ESPConfig::BoxRounding);
+					Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::VisibleColor, 1.3, ESPConfig::boxRounding);
 				}
 				else {
-					Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::FrameColor, 1.3, ESPConfig::BoxRounding);
+					Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::FrameColor, 1.3, ESPConfig::boxRounding);
 				}
 			}
 			else if (MenuConfig::BoxType == 2 || MenuConfig::BoxType == 3)
@@ -173,7 +172,7 @@ namespace ESP
 				Gui.Line({ Rect.x + Rect.z, Rect.y }, { Rect.x + Rect.z, Rect.y + Rect.w * 0.25f }, ESPConfig::FrameColor & IM_COL32_A_MASK, 3);
 
 				// Main Box Lines
-				if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && ESPConfig::VisibleCheck)
+				if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && ESPConfig::visibleCheck)
 				{
 					Gui.Line({ Rect.x, Rect.y }, { Rect.x + Rect.z * 0.25f, Rect.y }, ESPConfig::VisibleColor, 1.3f);
 					Gui.Line({ Rect.x, Rect.y }, { Rect.x, Rect.y + Rect.w * 0.25f }, ESPConfig::VisibleColor, 1.3f);
@@ -198,15 +197,15 @@ namespace ESP
 		}
 
 
-		Render::LineToEnemy(Rect, ESPConfig::LineToEnemyColor, 1.2);
+		Render::LineToEnemy(Rect, ESPConfig::tracerColor, 1.2);
 
-		if (ESPConfig::ShowWeaponESP)
+		if (ESPConfig::drawWeapon)
 		{
 			if (MenuConfig::HealthBarType == 0 || MenuConfig::HealthBarType == 1)
 			{
 				WeaponIconSize iconSize = weaponIconSizes[Entity.Pawn.WeaponName];
 				ImVec2 textPosition = { Rect.x + (Rect.z - iconSize.width) / 2 + iconSize.offsetX, Rect.y + Rect.w + 1 + iconSize.offsetY};
-				if (ESPConfig::AmmoBar)
+				if (ESPConfig::ammoBar)
 					textPosition.y += 5;
 				// Gui.StrokeText(Entity.Pawn.WeaponName, { Rect.x + Rect.z / 2,Rect.y + Rect.w + 10}, ImColor(255, 255, 255, 255), 14, true);
 				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{ textPosition.x - 1, textPosition.y - 1 }, ImColor(0, 0, 0, 255), weaponIcon.c_str());
@@ -219,7 +218,7 @@ namespace ESP
 			
 
 
-		if (ESPConfig::ShowPlayerName)
+		if (ESPConfig::drawName)
 		{
 			if (MenuConfig::HealthBarType == 0)
 				Gui.StrokeText(Entity.Controller.PlayerName, { Rect.x + Rect.z / 2,Rect.y - 14 }, ImColor(255, 255, 255, 255), 14, true);
@@ -239,7 +238,7 @@ namespace ESP
 
 	void RenderPreview(ImVec2 windowSize)
 	{
-		if (!ESPConfig::ShowPreview)
+		if (!ESPConfig::displayPreview)
 			return;
 
 		ImVec2 rectSize(100, 150);
@@ -248,13 +247,14 @@ namespace ESP
 		centerPos.x += rectPos.x;
 		centerPos.y += rectPos.y * -1.20f;
 
-		if (ESPConfig::ShowEyeRay) {
+		if (ESPConfig::drawEyeRay) {
 			ImU32 EyeC = ESPConfig::EyeRayColor;
 			ImVec2 lineStart(centerPos.x + 44, centerPos.y + 15);
 			ImVec2 lineEnd(centerPos.x - 10, centerPos.y + 20);
 			ImGui::GetWindowDrawList()->AddLine(lineStart, lineEnd, EyeC, 2.0f);
 		}
-		if (ESPConfig::ShowBoneESP) {
+
+		if (ESPConfig::drawBones) {
 			ImU32 boneColor = ESPConfig::BoneColor;
 			ImVec2 SpineStart(centerPos.x + 50, centerPos.y + 25);
 			ImVec2 SpineEnd(centerPos.x + 60, centerPos.y + 55);
@@ -296,14 +296,8 @@ namespace ESP
 			ImVec2 DR_ArmEnd(centerPos.x + 20, centerPos.y + 45);
 			ImGui::GetWindowDrawList()->AddLine(DR_ArmStart, DR_ArmEnd, boneColor, 1.8f); // Right Arm_Down
 		}
-		if (ESPConfig::ShowPenis)
-		{
-			ImU32 PenisCol = ESPConfig::PenisColor;
-			ImVec2 BoneStart(centerPos.x + 62, centerPos.y + 65);
-			ImVec2 BoneEnd(BoneStart.x - 30, BoneStart.y + 5);
-			ImGui::GetWindowDrawList()->AddLine(BoneStart, BoneEnd, PenisCol, 2.0f);
-		}
-		if (ESPConfig::ShowHeadBox) {
+
+		if (ESPConfig::drawHeadBox) {
 			switch (ESPConfig::HeadBoxStyle)
 			{
 			case 0:
@@ -329,19 +323,19 @@ namespace ESP
 			if (MenuConfig::BoxType == 0 || MenuConfig::BoxType == 2)
 			{
 				if (ESPConfig::MultiColor)
-					ImGui::GetWindowDrawList()->AddRectFilledMultiColorRounded(rectStartPos, rectEndPos, ImGui::GetColorU32(ImGuiCol_ChildBg), filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2, ESPConfig::BoxRounding, ImDrawCornerFlags_All);
+					ImGui::GetWindowDrawList()->AddRectFilledMultiColorRounded(rectStartPos, rectEndPos, ImGui::GetColorU32(ImGuiCol_ChildBg), filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2, ESPConfig::boxRounding, ImDrawCornerFlags_All);
 			}
 			else if (MenuConfig::BoxType == 1)
 			{
 				rectStartPos = { centerPos.x + 20, centerPos.y + 15 };
 				rectEndPos = { rectStartPos.x + 50, rectStartPos.y + 132 };
 				if (ESPConfig::MultiColor)
-					ImGui::GetWindowDrawList()->AddRectFilledMultiColorRounded(rectStartPos, rectEndPos, ImGui::GetColorU32(ImGuiCol_ChildBg), filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2, ESPConfig::BoxRounding, ImDrawCornerFlags_All);
+					ImGui::GetWindowDrawList()->AddRectFilledMultiColorRounded(rectStartPos, rectEndPos, ImGui::GetColorU32(ImGuiCol_ChildBg), filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2, ESPConfig::boxRounding, ImDrawCornerFlags_All);
 
 			}
 		}
 
-		if (ESPConfig::ShowBoxESP) {
+		if (ESPConfig::drawBox) {
 			ImVec2 rectStartPos;
 			ImVec2 rectEndPos;
 			ImColor boxColor = ESPConfig::FrameColor;
@@ -352,13 +346,13 @@ namespace ESP
 			switch (MenuConfig::BoxType)
 			{
 			case 0:
-				DrawPreviewBox(rectStartPos, rectEndPos, boxColor, ESPConfig::BoxRounding, 1.3f, false);
+				DrawPreviewBox(rectStartPos, rectEndPos, boxColor, ESPConfig::boxRounding, 1.3f, false);
 				break;
 			case 1:
 				//DrawPreviewBox(rectStartPos, rectEndPos, boxColor, ESPConfig::BoxRounding, 1.3f, false);
 				rectStartPos = { centerPos.x + 20, centerPos.y + 15 };
 				rectEndPos = { rectStartPos.x + 50, rectStartPos.y + 132 };
-				DrawPreviewBox(rectStartPos, rectEndPos, boxColor, ESPConfig::BoxRounding, 1.0f, false);
+				DrawPreviewBox(rectStartPos, rectEndPos, boxColor, ESPConfig::boxRounding, 1.0f, false);
 				break;
 			case 2:
 				ImGui::GetWindowDrawList()->AddLine(rectStartPos, { rectStartPos.x + rectSize.x * 0.25f, rectStartPos.y }, boxColor, 1.3f);
@@ -382,7 +376,8 @@ namespace ESP
 				break;
 			}
 		}
-		if (ESPConfig::ShowHealthBar) {
+
+		if (ESPConfig::drawHealthBar) {
 			ImU32 greenColor = IM_COL32(0, 255, 0, 255);
 			ImVec2 HBPos = centerPos;
 			ImVec2 HBSize = rectSize;
@@ -396,7 +391,8 @@ namespace ESP
 				ImGui::GetWindowDrawList()->AddRectFilled(HBS, HBE, greenColor, 0.0f, ImDrawCornerFlags_All);
 			}
 		}
-		if (ESPConfig::AmmoBar) {
+
+		if (ESPConfig::ammoBar) {
 			ImU32 yellowColor = IM_COL32(255, 255, 0, 255);
 			if (MenuConfig::BoxType == 0 || MenuConfig::BoxType == 2) {
 				ImVec2 ABS(centerPos.x, centerPos.y + rectSize.y + 2);
@@ -410,10 +406,10 @@ namespace ESP
 			}
 		}
 
-		if (ESPConfig::ShowLineToEnemy) {
+		if (ESPConfig::drawTracers) {
 			ImVec2 LineStart, LineEnd;
 			LineStart = { centerPos.x + rectSize.x / 2 , centerPos.y };
-			switch (ESPConfig::LinePos)
+			switch (ESPConfig::tracerPos)
 			{
 			case 0:
 				LineEnd = { LineStart.x, LineStart.y - 50 };
@@ -425,9 +421,10 @@ namespace ESP
 				LineEnd = { LineStart.x, LineStart.y + 200 };
 				break;
 			}
-			ImGui::GetWindowDrawList()->AddLine(LineStart, LineEnd, ESPConfig::LineToEnemyColor, 1.8f);
+			ImGui::GetWindowDrawList()->AddLine(LineStart, LineEnd, ESPConfig::tracerColor, 1.8f);
 		}
-		if (ESPConfig::ShowPlayerName) {
+
+		if (ESPConfig::drawName) {
 			if (MenuConfig::BoxType == 1 || MenuConfig::BoxType == 3) {
 				centerPos.x -= 3;
 				centerPos.y += 15;
@@ -441,7 +438,8 @@ namespace ESP
 				ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 255, 255, 255), "Player");
 			}
 		}
-		if (ESPConfig::ShowDistance) {
+
+		if (ESPConfig::drawDistance) {
 			ImVec2 textPos(centerPos.x + 105, centerPos.y);
 			if (MenuConfig::BoxType == 1 || MenuConfig::BoxType == 3)
 			{
@@ -449,9 +447,10 @@ namespace ESP
 			}
 			ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 204, 0, 255), "20m");
 		}
-		if (ESPConfig::ShowWeaponESP) {
+
+		if (ESPConfig::drawWeapon) {
 			ImVec2 textPos(0, 0);
-			if (ESPConfig::AmmoBar)
+			if (ESPConfig::ammoBar)
 				centerPos.y += 5;
 			if (MenuConfig::BoxType == 1 || MenuConfig::BoxType == 3) {
 				centerPos.y -= 17;
