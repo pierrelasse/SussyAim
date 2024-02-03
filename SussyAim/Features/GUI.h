@@ -6,7 +6,6 @@
 #include "..\TriggerBot.h"
 #include "..\Utils\ConfigMenu.hpp"
 #include "..\Utils\ConfigSaver.hpp"
-#include "..\Utils\Updater.h"
 
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
@@ -29,7 +28,6 @@ namespace GUI
 	{
 		if (AS_Logo == NULL)
 		{
-			// Updater::CheckForUpdates();
 			Gui.LoadTextureFromMemory(Images::AS_Logo, sizeof Images::AS_Logo, &AS_Logo, &LogoW, &LogoH);
 			Gui.LoadTextureFromMemory(Images::NL_Logo, sizeof Images::NL_Logo, &NL_Logo, &LogoW2, &LogoH2);
 			Gui.LoadTextureFromMemory(Images::VisualButton, sizeof Images::VisualButton, &MenuButton1, &buttonW, &buttonH);
