@@ -145,7 +145,7 @@ namespace OSImGui
             throw e;
         }
 
-        std::cout << "Running mainloop" << std::endl;
+        std::cout << "[GUI] Running mainloop" << std::endl;
         MainLoop();
     }
 

@@ -5,11 +5,10 @@
 
 namespace MenuConfig
 {
-	inline std::string path = "";
-	inline std::string SoundPath = "";
-	inline std::string LocalVersion = "3.9";
-	// Don't change this
-	inline std::string Key = "N5ZF3KG8H6BVQ71T";
+	inline std::string dir;
+	inline std::string dirSounds;
+	//inline std::string LocalVersion = "3.9";
+	//inline std::string Key = "N5ZF3KG8H6BVQ71T";
 
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config
@@ -44,7 +43,7 @@ namespace MenuConfig
 	inline DWORD  AimPositionIndex = BONEINDEX::head;
 	inline bool VisibleCheck = true;
 
-	inline bool RCS = false;
+	inline bool RCS = true;
 	inline bool Bhop = false;
 
 	// 0: normal 1: dynamic 2: Flat
@@ -116,7 +115,6 @@ namespace ESPConfig
 	inline bool FilledVisBox = false;
 	inline bool MultiColor = false;
 	// 0: normal 1: Flat
-
 
 	inline ImColor VisibleColor = ImColor(255, 10, 20, 200);
 	inline ImColor FilledColor = ImColor(255, 255, 255, 128);

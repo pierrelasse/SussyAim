@@ -68,7 +68,7 @@ namespace Misc
 		if (!MiscCFG::HitSound)
 			return;
 
-		std::string soundDir = MenuConfig::SoundPath + "\\Hit.wav";
+		std::string soundDir = MenuConfig::dirSounds + "\\Hit.wav";
 		std::wstring sound = Misc::STR2LPCWSTR(soundDir);
 
 		uintptr_t pBulletServices;
@@ -79,12 +79,11 @@ namespace Misc
 		if (totalHits != PreviousTotalHits) {
 			if (totalHits == 0 && PreviousTotalHits != 0)
 			{
-				// `totalHits` changed from non-zero to zero, do not play hitsound
 			}
 			else
 			{
-				// Play the HitSound
 				PlaySoundW(sound.c_str(), NULL, SND_FILENAME | SND_ASYNC);
+				std::cout << "[HitSound] Played hitsound" << std::endl;
 			}
 		}
 		PreviousTotalHits = totalHits;
@@ -159,7 +158,7 @@ namespace Misc
 				ProcessMgr.ReadMemory<char[32]>(addr, toread);
 				classname = toread;
 
-				/* 
+				/*
 				* Filter id to find id
 				if (std::find(EntityNames.begin(), EntityNames.end(), classname) == EntityNames.end())
 					std::cout << classname << std::endl;
@@ -176,7 +175,7 @@ namespace Misc
 					Vector3 FireColor = { 0,0,0 };
 					ProcessMgr.ReadMemory<Vector3>(ent_base + 0x112C, FireColor);
 					std::cout << FireColor.x << ", " << FireColor.y << ", " << FireColor.z << std::endl;
-						
+
 				}*/
 			}
 		}
@@ -234,7 +233,7 @@ namespace Misc
 					sss << "ThisRound/Total: " << EntityList.Controller.CashSpent << "/" << EntityList.Controller.CashSpentTotal;
 					ImGui::TextColored(ImColor(255, 0, 0, 255), sss.str().c_str());
 				}
-				
+
 				ImGui::TreePop();
 			}
 		}

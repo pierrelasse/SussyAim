@@ -1,42 +1,47 @@
-﻿#include "Offsets.h"
-#include "Cheats.h"
-#include <iostream>
-#include <stdio.h>
-#include <iomanip>
+﻿
+// SETTINGS
+
+#define G_VERSION_MAJOR 1
+#define G_VERSION_MINOR 4
+#define G_VERSION_PATCH 3
+
+// SETTINGS END
+
 #include <filesystem>
+#include <iostream>
 #include <cstdlib>
-#include <KnownFolders.h>
-#include <ShlObj.h>
+
+#include "Offsets.h"
+#include "Cheats.h"
 
 namespace fs = std::filesystem;
+
+void pause() {
+	getchar();
+}
 
 int main()
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-	std::cout << R"(   _____                              _           
+	printf(R"(   _____                              _           
   / ____|                       /\   (_)          
  | (___  _   _ ___ ___ _   _   /  \   _ _ __ ___  
   \___ \| | | / __/ __| | | | / /\ \ | | '_ ` _ \ 
   ____) | |_| \__ \__ \ |_| |/ ____ \| | | | | | |
  |_____/ \__,_|___/___/\__, /_/    \_\_|_| |_| |_|
-                        __/ |                     
-                       |___/
-	)" << std::endl;
+   By pierrelasse       __/ |  v%d.%d.%d
+    and AimStar ppl    |___/%s)", G_VERSION_MAJOR, G_VERSION_MINOR, G_VERSION_PATCH, "\n\n");
+
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
-	std::cout << "Attaching to cs2.exe";
+	std::cout << "[ProcessMgr] Attaching to cs2.exe";
 	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
 	std::cout << " OK" << std::endl;
 
-	char documentsPath[MAX_PATH];
-	if (SHGetFolderPathA(NULL, CSIDL_PERSONAL, NULL, 0, documentsPath) != S_OK) {
-		std::cerr << "[Info] Error: Failed to get the Documents folder path." << std::endl;
-		goto END;
-	}
-	MenuConfig::path = documentsPath;
-	MenuConfig::path += "\\SussyAim";
-	MenuConfig::SoundPath = MenuConfig::path + "\\Sounds";
+	MenuConfig::dir = fs::current_path().string() + "\\SussyAim";
+	MenuConfig::dirSounds = MenuConfig::dir + "\\Sounds";
 
 	switch (ProcessStatus) {
 	case 1:
@@ -72,16 +77,12 @@ int main()
 	std::cout << "[Game] Process ID: " << ProcessMgr.ProcessID << std::endl;
 	std::cout << "[Game] Client DLL Address: " << gGame.GetClientDLLAddress() << std::endl;
 
-	if (fs::exists(MenuConfig::path))
-	{
-		std::cout << "[Info] Config folder connected: " << MenuConfig::path << std::endl;
-	}
+	if (fs::exists(MenuConfig::dir))
+		std::cout << "[Info] Config folder found: " << MenuConfig::dir << std::endl;
 	else
 	{
-		if (fs::create_directory(MenuConfig::path))
-		{
-			std::cout << "[Info] Config folder created: " << MenuConfig::path << std::endl;
-		}
+		if (fs::create_directory(MenuConfig::dir))
+			std::cout << "[Info] Config folder created: " << MenuConfig::dir << std::endl;
 		else
 		{
 			std::cerr << "[Info] Error: Failed to create the config directory." << std::endl;
@@ -89,12 +90,12 @@ int main()
 		}
 	}
 
-	if (fs::exists(MenuConfig::SoundPath))
-		std::cout << "[Info] Hitsound folder connected: " << MenuConfig::SoundPath << std::endl;
+	if (fs::exists(MenuConfig::dirSounds))
+		std::cout << "[Info] Hitsound folder found: " << MenuConfig::dirSounds << std::endl;
 	else
 	{
-		if (fs::create_directory(MenuConfig::SoundPath))
-			std::cout << "[Info] Hitsound folder created: " << MenuConfig::SoundPath << std::endl;
+		if (fs::create_directory(MenuConfig::dirSounds))
+			std::cout << "[Info] Hitsound folder created: " << MenuConfig::dirSounds << std::endl;
 		else
 		{
 			std::cerr << "[Info] Error: Failed to create the file directory." << std::endl;
@@ -104,8 +105,8 @@ int main()
 
 	std::cout << std::endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-	std::cout << "Initialized successfully!" << std::endl;
-	std::cout << "Menu bind: INSERT" << std::endl;
+	std::cout << "[Init] Initialized successfully!" << std::endl;
+	std::cout << "[Init] Menu bind: INSERT" << std::endl;
 	std::cout << std::endl;
 
 	if (false) {
@@ -126,14 +127,14 @@ int main()
 
 	try
 	{
-		std::cout << "Attaching" << std::endl;
+		std::cout << "[GUI] Attaching" << std::endl;
 		Gui.AttachAnotherWindow("Counter-Strike 2", "SDL_app", Menu::Tick);
 	}
 	catch (OSImGui::OSException& e)
 	{
 		try
 		{
-			std::cout << "Attaching china edition" << std::endl;
+			std::cout << "[GUI] Attaching china edition" << std::endl;
 			Gui.AttachAnotherWindow("反恐精英：全球攻势", "SDL_app", Menu::Tick);
 		}
 		catch (OSImGui::OSException& e)
@@ -143,7 +144,8 @@ int main()
 	}
 
 END:
-	std::cout << "End" << std::endl;
-	system("pause");
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+	std::cout << "Press any key to exit..." << std::endl;
+	pause();
 	return 0;
 }

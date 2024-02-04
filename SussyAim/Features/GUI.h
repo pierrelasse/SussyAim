@@ -27,7 +27,7 @@ namespace ViewMenu
 	{
 		if (AS_Logo == NULL)
 		{
-			std::cout << "Loading images" << std::endl;
+			std::cout << "[GUI] Loading images" << std::endl;
 			Gui.LoadTextureFromMemory(Images::Logo, sizeof Images::Logo, &AS_Logo, &LogoW, &LogoH);
 			Gui.LoadTextureFromMemory(Images::TabVisual, sizeof Images::TabVisual, &MenuButton1, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::TabAimbot, sizeof Images::TabAimbot, &MenuButton2, &buttonW, &buttonH);
@@ -128,12 +128,18 @@ namespace ViewMenu
 		ImGui::SetNextWindowSize({ 851,514 });
 		ImGui::Begin("main", nullptr, Flags);
 		{
-			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-			if (ImGui::Button("Quit")) {
-				std::cout << "Quitting..." << std::endl;
-				Gui.Quit();
+			{
+				static const ImVec4 nothingColor = ImVec4(0, 0, 0, 0);
+				ImGui::PushStyleColor(ImGuiCol_Button, nothingColor);
+				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, nothingColor);
+				ImGui::PushStyleColor(ImGuiCol_ButtonActive, nothingColor);
+				ImGui::PushStyleColor(ImGuiCol_Border, nothingColor);
+				if (ImGui::Button("[Quit]")) {
+					std::cout << "[YourMom] Quitting..." << std::endl;
+					Gui.Quit();
+				}
+				ImGui::PopStyleColor(4);
 			}
-			ImGui::PopStyleColor();
 
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);

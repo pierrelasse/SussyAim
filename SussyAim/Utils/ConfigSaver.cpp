@@ -12,7 +12,7 @@
 namespace MyConfigSaver {
 
     void SaveConfig(const std::string& filename, const std::string& author) {
-        std::ofstream configFile(MenuConfig::path + '\\' + filename);
+        std::ofstream configFile(MenuConfig::dir + '\\' + filename);
         if (!configFile.is_open()) {
             std::cerr << "[Info] Error: Could not open the configuration file." << std::endl;
             return;
@@ -275,13 +275,13 @@ namespace MyConfigSaver {
 
         configFile << emitter.c_str();
         configFile.close();
-        std::cout << "[Info] Configuration saved to " << MenuConfig::path + '\\' + filename << std::endl;
+        std::cout << "[Info] Configuration saved to " << MenuConfig::dir + '\\' + filename << std::endl;
     }
 
     // Function to load the configuration from a file
     void LoadConfig(const std::string& filename) {
         try {
-            YAML::Node config = YAML::LoadFile(MenuConfig::path + '\\' + filename);
+            YAML::Node config = YAML::LoadFile(MenuConfig::dir + '\\' + filename);
             if (config["ESP"]) {
                 // If you want to make the new version compatible with the old configuration, you can add IsDefine(), like line 284.
                 ESPConfig::enabled = config["ESP"]["Enable"].as<bool>();
@@ -451,7 +451,7 @@ namespace MyConfigSaver {
             StyleChanger::UpdateSkin(MenuConfig::Theme);
             Lang::ChangeLang(MenuConfig::Language);
 
-            std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;
+            std::cout << "[Info] Configuration loaded from " << MenuConfig::dir + '\\' + filename << std::endl;
         }
         catch (const std::exception& ex) {
             std::cerr << "Error loading config: " << ex.what() << std::endl;

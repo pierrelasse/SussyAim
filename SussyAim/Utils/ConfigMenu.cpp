@@ -16,7 +16,7 @@ namespace ConfigMenu {
 		static char configAuthorBuffer[128] = "Author";
 		static int selectedConfig = -1;
 
-		const std::string configDir = MenuConfig::path;
+		const std::string configDir = MenuConfig::dir;
 		static std::vector<std::string> configFiles;
 		std::vector<const char*> configFilesCStr;
 
