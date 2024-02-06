@@ -172,20 +172,7 @@
     <ClInclude Include="Utils\yaml-cpp\stlemitter.h" />
     <ClInclude Include="Utils\yaml-cpp\traits.h" />
     <ClInclude Include="Utils\yaml-cpp\yaml.h" />
-    <ClInclude Include="Utils\curl\curl.h" />
-    <ClInclude Include="Utils\curl\curlver.h" />
-    <ClInclude Include="Utils\curl\easy.h" />
-    <ClInclude Include="Utils\curl\header.h" />
-    <ClInclude Include="Utils\curl\mprintf.h" />
-    <ClInclude Include="Utils\curl\multi.h" />
-    <ClInclude Include="Utils\curl\options.h" />
-    <ClInclude Include="Utils\curl\stdcheaders.h" />
-    <ClInclude Include="Utils\curl\system.h" />
-    <ClInclude Include="Utils\curl\typecheck-gcc.h" />
-    <ClInclude Include="Utils\curl\urlapi.h" />
-    <ClInclude Include="Utils\curl\websockets.h" />
     <ClInclude Include="Utils\Helpers.h" />
-    <ClInclude Include="Utils\Updater.h" />
     <ClInclude Include="Resources\Images.h" />
     <ClInclude Include="Resources\Language.h" />
     <ClInclude Include="Resources\WeaponIcon.h" />
@@ -221,9 +208,6 @@
     <ClCompile Include="OS-ImGui\OS-ImGui_External.cpp">
       <Filter>OS-ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Entry</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Cheats\Data</Filter>
     </ClCompile>
@@ -256,17 +240,13 @@
     <ClCompile Include="Features\Misc.cpp" />
     <ClCompile Include="Features\StyleChanger.cpp" />
     <ClCompile Include="Resources\Language.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SussyAim.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SussyAim.aps" />
-    <None Include="Utils\curl\lib\libcurl_imp.exp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="Font\stratum2.ttf" />
-    <Font Include="Font\fa-regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />

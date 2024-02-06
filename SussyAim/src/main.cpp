@@ -11,8 +11,8 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "Offsets.h"
-#include "Cheats.h"
+#include "../Offsets.h"
+#include "../Cheats.h"
 
 namespace fs = std::filesystem;
 
