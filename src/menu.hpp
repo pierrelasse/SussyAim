@@ -176,7 +176,6 @@ namespace SussyAim
                 }
 
                 Render::DrawDistance(LocalEntity, Entity, Rect);
-                Render::DrawHealth(Entity, Rect);
             }
             // SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);
         }

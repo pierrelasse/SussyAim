@@ -295,6 +295,21 @@ namespace SussyAim
 					}
 				}
 
+				if (SussyAim::Cfg::ESP::showScoped)
+				{
+					bool isScoped;
+					ImVec2 IconPos = {Rect.x, Rect.y};
+					ProcessMgr.ReadMemory<bool>(Entity.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+					if (isScoped)
+					{
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{IconPos.x - 1, IconPos.y - 1}, ImColor(0, 0, 0, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{IconPos.x - 1, IconPos.y + 1}, ImColor(0, 0, 0, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{IconPos.x + 1, IconPos.y + 1}, ImColor(0, 0, 0, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{IconPos.x + 1, IconPos.y - 1}, ImColor(0, 0, 0, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, IconPos, ImColor(0, 200, 255, 255), "s");
+					}
+				}
+
 				if (SussyAim::Cfg::ESP::drawName)
 				{
 					if (SussyAim::Cfg::Menu::HealthBarType == 0)
@@ -561,6 +576,16 @@ namespace SussyAim
 					{
 						textPos = {centerPos.x + 27, centerPos.y + 150};
 						ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, textPos, IM_COL32(255, 255, 255, 255), "W");
+					}
+
+					if (SussyAim::Cfg::ESP::showScoped)
+					{
+						if (SussyAim::Cfg::ESP::boxType == 1)
+						{
+							centerPos.y += 2;
+							centerPos.x += 25;
+						}
+						ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, centerPos, IM_COL32(200, 255, 255, 255), "s");
 					}
 				}
 			}

@@ -27,6 +27,7 @@ namespace Lang
 		inline static const char* Weapon;
 		inline static const char* Distance;
 		inline static const char* PlayerName;
+		inline static const char* ShowScoped = "Show Scoped";
 		inline static const char* SnapLine;
 		inline static const char* LinePosList;
 		inline static const char* VisCheck;

@@ -98,6 +98,8 @@ namespace SussyAim
 
 			inline bool drawName = true;
 
+			inline bool showScoped = false;
+
 			inline bool drawBox = true;
 			inline bool drawBoxOutline = true;
 			inline float boxRounding = RandomPara<float>(0.0f, 0.0f);

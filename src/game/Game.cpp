@@ -13,6 +13,9 @@ bool CGame::InitAddress()
 	this->Address.ServerPawn = GetServerDLLAddress() + Offset::LocalPlayerPawn;
 	this->Address.ForceJump = GetClientDLLAddress() + Offset::ForceJump;
 	this->Address.ForceCrouch = GetClientDLLAddress() + Offset::ForceCrouch;
+	this->Address.ForceForward = GetClientDLLAddress() + Offset::ForceForward;
+	this->Address.ForceLeft = GetClientDLLAddress() + Offset::ForceLeft;
+	this->Address.ForceRight = GetClientDLLAddress() + Offset::ForceRight;
 	this->Address.GlobalVars = GetClientDLLAddress() + Offset::GlobalVars;
 
 	return this->Address.ClientDLL != 0;
@@ -68,7 +71,6 @@ DWORD64 CGame::GetGlobalVarsAddress()
 	return this->Address.GlobalVars;
 }
 
-
 bool CGame::UpdateEntityListEntry()
 {
 	DWORD64 EntityListEntry = 0;
@@ -84,7 +86,7 @@ bool CGame::UpdateEntityListEntry()
 
 bool CGame::SetViewAngle(float Yaw, float Pitch)
 {
-	Vec2 Angle{ Pitch,Yaw };
+	Vec2 Angle{Pitch, Yaw};
 
 	if (!ProcessMgr.WriteMemory<Vec2>(this->Address.ViewAngle, Angle))
 		return false;
@@ -99,7 +101,7 @@ bool CGame::SetForceJump(int value)
 
 	return true;
 }
-bool CGame::GetForceJump(int& value)
+bool CGame::GetForceJump(int &value)
 {
 	if (!ProcessMgr.ReadMemory<int>(this->Address.ForceJump, value))
 		return false;
@@ -113,10 +115,57 @@ bool CGame::SetForceCrouch(int value)
 
 	return true;
 }
-bool CGame::GetForceCrouch(int& value)
+bool CGame::GetForceCrouch(int &value)
 {
 	if (!ProcessMgr.ReadMemory<int>(this->Address.ForceCrouch, value))
 		return false;
 
+	return true;
+}
+
+// MovingType: 0 = Forward, 1 = Left, 2 = Right
+bool CGame::SetForceMove(int MovingType, int Value)
+{
+	switch (MovingType)
+	{
+	case 0:
+		if (!ProcessMgr.WriteMemory<int>(this->Address.ForceForward, Value))
+			return false;
+		break;
+	case 1:
+		if (!ProcessMgr.WriteMemory<int>(this->Address.ForceLeft, Value))
+			return false;
+		break;
+	case 2:
+		if (!ProcessMgr.WriteMemory<int>(this->Address.ForceRight, Value))
+			return false;
+		break;
+	default:
+		return false;
+		break;
+	}
+	return true;
+}
+
+bool CGame::GetForceMove(int MovingType, int &Value)
+{
+	switch (MovingType)
+	{
+	case 0:
+		if (!ProcessMgr.ReadMemory<int>(this->Address.ForceForward, Value))
+			return false;
+		break;
+	case 1:
+		if (!ProcessMgr.ReadMemory<int>(this->Address.ForceLeft, Value))
+			return false;
+		break;
+	case 2:
+		if (!ProcessMgr.ReadMemory<int>(this->Address.ForceRight, Value))
+			return false;
+		break;
+	default:
+		return false;
+		break;
+	}
 	return true;
 }

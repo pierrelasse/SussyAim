@@ -26,7 +26,7 @@ namespace MyConfigSaver
 
         YAML::Emitter emitter;
 
-        emitter << YAML::Comment("A SussyAim Config File\nVersion: 3.8");
+        emitter << YAML::Comment("A SussyAim Config File\nVersion: 4.0");
         emitter << YAML::BeginMap;
 
         emitter << YAML::Key << "ESP";
@@ -54,6 +54,7 @@ namespace MyConfigSaver
         emitter << YAML::Key << "OutLine" << YAML::Value << SussyAim::Cfg::ESP::drawBoxOutline;
         emitter << YAML::Key << "HeadBoxStyle" << YAML::Value << SussyAim::Cfg::ESP::HeadBoxStyle;
         emitter << YAML::Key << "BoxRounding" << YAML::Value << SussyAim::Cfg::ESP::boxRounding;
+        emitter << YAML::Key << "ShowScoped" << YAML::Value << SussyAim::Cfg::ESP::showScoped;
         emitter << YAML::Key << "BoneColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -291,6 +292,7 @@ namespace MyConfigSaver
                 SussyAim::Cfg::ESP::MultiColor = config["ESP"]["MultiColor"].as<bool>();
                 SussyAim::Cfg::ESP::drawBoxOutline = config["ESP"]["OutLine"].as<bool>();
                 SussyAim::Cfg::ESP::boxRounding = config["ESP"]["BoxRounding"].as<float>();
+                SussyAim::Cfg::ESP::showScoped = config["ESP"]["ShowScoped"].as<bool>();
                 SussyAim::Cfg::ESP::BoneColor.Value.x = config["ESP"]["BoneColor"]["r"].as<float>();
                 SussyAim::Cfg::ESP::BoneColor.Value.y = config["ESP"]["BoneColor"]["g"].as<float>();
                 SussyAim::Cfg::ESP::BoneColor.Value.z = config["ESP"]["BoneColor"]["b"].as<float>();
