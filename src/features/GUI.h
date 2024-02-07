@@ -10,11 +10,11 @@
 #include "StyleChanger.h"
 #include "../rendering/Resources/Images.h"
 
-ID3D11ShaderResourceView* AS_Logo = NULL;
-ID3D11ShaderResourceView* MenuButton1 = NULL;
-ID3D11ShaderResourceView* MenuButton2 = NULL;
-ID3D11ShaderResourceView* MenuButton3 = NULL;
-ID3D11ShaderResourceView* MenuButton4 = NULL;
+ID3D11ShaderResourceView *AS_Logo = NULL;
+ID3D11ShaderResourceView *MenuButton1 = NULL;
+ID3D11ShaderResourceView *MenuButton2 = NULL;
+ID3D11ShaderResourceView *MenuButton3 = NULL;
+ID3D11ShaderResourceView *MenuButton4 = NULL;
 int LogoW = 0, LogoH = 0;
 int LogoW2 = 0, LogoH2 = 0;
 int buttonW = 0;
@@ -43,7 +43,7 @@ namespace ViewMenu
 		float checkboxPosX = ImGui::GetColumnOffset() + ColumnContentWidth - ContentWidth;
 		ImGui::SetCursorPosX(checkboxPosX);
 	}
-	void PutSwitch(const char* string, float CursorX, float ContentWidth, bool* v, bool ColorEditor = false, const char* lable = NULL, float col[4] = NULL, const char* Tip = NULL)
+	void PutSwitch(const char *string, float CursorX, float ContentWidth, bool *v, bool ColorEditor = false, const char *lable = NULL, float col[4] = NULL, const char *Tip = NULL)
 	{
 		ImGui::PushID(string);
 		float CurrentCursorX = ImGui::GetCursorPosX();
@@ -52,19 +52,21 @@ namespace ViewMenu
 		if (Tip && ImGui::IsItemHovered())
 			ImGui::SetTooltip(Tip);
 		ImGui::SameLine();
-		if (ColorEditor) {
+		if (ColorEditor)
+		{
 			AlignRight(ContentWidth + ImGui::GetFrameHeight() + 8);
 			ImGui::ColorEdit4(lable, col, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_AlphaPreview);
 			ImGui::SameLine();
 		}
-		else {
+		else
+		{
 			AlignRight(ContentWidth);
 		}
-		
+
 		Gui.SwitchButton(string, v);
 		ImGui::PopID();
 	}
-	void PutColorEditor(const char* text, const char* lable, float CursorX, float ContentWidth, float col[4], const char* Tip = NULL)
+	void PutColorEditor(const char *text, const char *lable, float CursorX, float ContentWidth, float col[4], const char *Tip = NULL)
 	{
 		ImGui::PushID(text);
 		float CurrentCursorX = ImGui::GetCursorPosX();
@@ -77,7 +79,7 @@ namespace ViewMenu
 		ImGui::ColorEdit4(lable, col, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_AlphaPreview);
 		ImGui::PopID();
 	}
-	void PutSliderFloat(const char* string, float CursorX, float* v, const void* p_min, const void* p_max, const char* format)
+	void PutSliderFloat(const char *string, float CursorX, float *v, const void *p_min, const void *p_max, const char *format)
 	{
 		// if there is no fucking ID, all the sliders would be fucking forced to sync when you click on one of them ;3
 		ImGui::PushID(string);
@@ -92,7 +94,7 @@ namespace ViewMenu
 		Gui.SliderScalarEx2("", ImGuiDataType_Float, v, p_min, p_max, "", ImGuiSliderFlags_None);
 		ImGui::PopID();
 	}
-	void PutSliderInt(const char* string, float CursorX, int* v, const void* p_min, const void* p_max, const char* format)
+	void PutSliderInt(const char *string, float CursorX, int *v, const void *p_min, const void *p_max, const char *format)
 	{
 		ImGui::PushID(string);
 		float CurrentCursorX = ImGui::GetCursorPosX();
@@ -113,7 +115,7 @@ namespace ViewMenu
 
 		ImTextureID ImageID;
 		ImVec2 LogoSize, LogoPos;
-		ImageID = (void*)AS_Logo;
+		ImageID = (void *)AS_Logo;
 		LogoSize = ImVec2(LogoW, LogoH);
 		LogoPos = SussyAim::Cfg::WCS.LogoPos;
 		SussyAim::Cfg::Menu::ButtonBorderColor = SussyAim::Cfg::WCS.BorderColor_Yellow;
@@ -122,8 +124,8 @@ namespace ViewMenu
 
 		char TempText[256];
 		ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar;
-		ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 851.0f) / 2.0f, (ImGui::GetIO().DisplaySize.y - 514.0f) / 2.0f }, ImGuiCond_Once);
-		ImGui::SetNextWindowSize({ 851,514 });
+		ImGui::SetNextWindowPos({(ImGui::GetIO().DisplaySize.x - 851.0f) / 2.0f, (ImGui::GetIO().DisplaySize.y - 514.0f) / 2.0f}, ImGuiCond_Once);
+		ImGui::SetNextWindowSize({851, 514});
 		ImGui::Begin("main", nullptr, Flags);
 		{
 			{
@@ -132,7 +134,8 @@ namespace ViewMenu
 				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, nothingColor);
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, nothingColor);
 				ImGui::PushStyleColor(ImGuiCol_Border, nothingColor);
-				if (ImGui::Button("[Quit]")) {
+				if (ImGui::Button("[Quit]"))
+				{
 					std::cout << "[YourMom] Quitting..." << std::endl;
 					Gui.Quit();
 				}
@@ -143,18 +146,20 @@ namespace ViewMenu
 			ImGui::Image(ImageID, LogoSize);
 
 			ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button1Pos);
-			ImGui::Image((void*)MenuButton1, ImVec2(buttonW, buttonH));
-			if (ImGui::IsItemClicked()) {
+			ImGui::Image((void *)MenuButton1, ImVec2(buttonW, buttonH));
+			if (ImGui::IsItemClicked())
+			{
 				SussyAim::Cfg::page = 0;
 			}
 			ImGui::GetWindowDrawList()->AddRect(
-				ImVec2(SussyAim::Cfg::WCS.Button1Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button1Pos.y + ImGui::GetWindowPos().y), 
-				ImVec2(SussyAim::Cfg::WCS.Button1Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button1Pos.y + buttonH + ImGui::GetWindowPos().y), 
+				ImVec2(SussyAim::Cfg::WCS.Button1Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button1Pos.y + ImGui::GetWindowPos().y),
+				ImVec2(SussyAim::Cfg::WCS.Button1Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button1Pos.y + buttonH + ImGui::GetWindowPos().y),
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
-			
+
 			ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button2Pos);
-			ImGui::Image((void*)MenuButton2, ImVec2(buttonW, buttonH));
-			if (ImGui::IsItemClicked()) {
+			ImGui::Image((void *)MenuButton2, ImVec2(buttonW, buttonH));
+			if (ImGui::IsItemClicked())
+			{
 				SussyAim::Cfg::page = 1;
 			}
 			ImGui::GetWindowDrawList()->AddRect(
@@ -163,8 +168,9 @@ namespace ViewMenu
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button3Pos);
-			ImGui::Image((void*)MenuButton3, ImVec2(buttonW, buttonH));
-			if (ImGui::IsItemClicked()) {
+			ImGui::Image((void *)MenuButton3, ImVec2(buttonW, buttonH));
+			if (ImGui::IsItemClicked())
+			{
 				SussyAim::Cfg::page = 2;
 			}
 			ImGui::GetWindowDrawList()->AddRect(
@@ -173,8 +179,9 @@ namespace ViewMenu
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button4Pos);
-			ImGui::Image((void*)MenuButton4, ImVec2(buttonW, buttonH));
-			if (ImGui::IsItemClicked()) {
+			ImGui::Image((void *)MenuButton4, ImVec2(buttonW, buttonH));
+			if (ImGui::IsItemClicked())
+			{
 				SussyAim::Cfg::page = 3;
 			}
 			ImGui::GetWindowDrawList()->AddRect(
@@ -183,7 +190,7 @@ namespace ViewMenu
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(SussyAim::Cfg::WCS.ChildPos);
-			
+
 			ImGui::BeginChild("Page", SussyAim::Cfg::WCS.ChildSize);
 			{
 				// Visual
@@ -191,30 +198,30 @@ namespace ViewMenu
 				{
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-					ImGui::SeparatorText(ICON_FA_EYE" ESP");
+					ImGui::SeparatorText(ICON_FA_EYE " ESP");
 					float MinRounding = 0.f, MaxRouding = 5.f;
 					int MinCombo = 0, MaxCombo = 2;
 					PutSwitch(Lang::ESPtext.Toggle, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::enabled);
 					if (SussyAim::Cfg::ESP::enabled)
 					{
-						const char* BoxTypes[] = { Lang::ESPtext.BoxType_Normal, Lang::ESPtext.BoxType_Edge, Lang::ESPtext.BoxType_Corner };
-						const char* LinePos[] = { Lang::ESPtext.LinePos_1, Lang::ESPtext.LinePos_2, Lang::ESPtext.LinePos_3 };
-						PutSwitch(Lang::ESPtext.Box, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawBox, true, "###BoxCol", reinterpret_cast<float*>(&SussyAim::Cfg::ESP::FrameColor));
+						const char *BoxTypes[] = {Lang::ESPtext.BoxType_Normal, Lang::ESPtext.BoxType_Edge, Lang::ESPtext.BoxType_Corner};
+						const char *LinePos[] = {Lang::ESPtext.LinePos_1, Lang::ESPtext.LinePos_2, Lang::ESPtext.LinePos_3};
+						PutSwitch(Lang::ESPtext.Box, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawBox, true, "###BoxCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::FrameColor));
 						if (SussyAim::Cfg::ESP::drawBox)
 						{
 							PutSwitch(Lang::ESPtext.Outline, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawBoxOutline);
 							PutSliderInt(Lang::ESPtext.BoxType, 10.f, &SussyAim::Cfg::ESP::boxType, &MinCombo, &MaxCombo, BoxTypes[SussyAim::Cfg::ESP::boxType]);
 							PutSliderFloat(Lang::ESPtext.BoxRounding, 10.f, &SussyAim::Cfg::ESP::boxRounding, &MinRounding, &MaxRouding, "%.1f");
 						}
-						PutSwitch(Lang::ESPtext.FilledBox, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::FilledBox, true, "###FilledBoxCol", reinterpret_cast<float*>(&SussyAim::Cfg::ESP::FilledColor));
+						PutSwitch(Lang::ESPtext.FilledBox, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::FilledBox, true, "###FilledBoxCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::FilledColor));
 						if (SussyAim::Cfg::ESP::FilledBox)
-							PutSwitch(Lang::ESPtext.MultiColor, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::MultiColor, true, "###MultiCol", reinterpret_cast<float*>(&SussyAim::Cfg::ESP::FilledColor2));
-						PutSwitch(Lang::ESPtext.HeadBox, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawHeadBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&SussyAim::Cfg::ESP::HeadBoxColor));
-						PutSwitch(Lang::ESPtext.Skeleton, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawBones, true, "###BoneCol", reinterpret_cast<float*>(&SussyAim::Cfg::ESP::BoneColor));
-						PutSwitch(Lang::ESPtext.SnapLine, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawTracers, true, "###LineCol", reinterpret_cast<float*>(&SussyAim::Cfg::ESP::tracerColor));
+							PutSwitch(Lang::ESPtext.MultiColor, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::MultiColor, true, "###MultiCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::FilledColor2));
+						PutSwitch(Lang::ESPtext.HeadBox, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawHeadBox, true, "###HeadBoxCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::HeadBoxColor));
+						PutSwitch(Lang::ESPtext.Skeleton, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawBones, true, "###BoneCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::BoneColor));
+						PutSwitch(Lang::ESPtext.SnapLine, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawTracers, true, "###LineCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::tracerColor));
 						if (SussyAim::Cfg::ESP::drawTracers)
 							PutSliderInt(Lang::ESPtext.LinePosList, 10.f, &SussyAim::Cfg::ESP::tracerPos, &MinCombo, &MaxCombo, LinePos[SussyAim::Cfg::ESP::tracerPos]);
-						PutSwitch(Lang::ESPtext.EyeRay, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawEyeRay, true, "###LineCol", reinterpret_cast<float*>(&SussyAim::Cfg::ESP::EyeRayColor));
+						PutSwitch(Lang::ESPtext.EyeRay, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawEyeRay, true, "###LineCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::EyeRayColor));
 						PutSwitch(Lang::ESPtext.HealthBar, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawHealthBar);
 						PutSwitch(Lang::ESPtext.HealthNum, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawHealth);
 						PutSwitch(Lang::ESPtext.Weapon, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawWeapon);
@@ -222,14 +229,14 @@ namespace ViewMenu
 						PutSwitch(Lang::ESPtext.Distance, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawDistance);
 						PutSwitch(Lang::ESPtext.PlayerName, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawName);
 						PutSwitch(Lang::ESPtext.ShowScoped, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::showScoped);
-						PutSwitch(Lang::ESPtext.VisCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::visibleCheck, true, "###VisibleCol", reinterpret_cast<float*>(&SussyAim::Cfg::ESP::VisibleColor));
+						PutSwitch(Lang::ESPtext.VisCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::visibleCheck, true, "###VisibleCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::VisibleColor));
 					}
-					
+
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(ICON_FA_GRIN_ALT " ESP Preview");
 					// ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() }, { ImGui::GetCursorPosX() - ImGui::GetColumnWidth() * 0.65f, ImGui::GetCursorPosY() - ImGui::GetFrameHeight() });
-					SussyAim::Features::ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() });
+					SussyAim::Features::ESP::RenderPreview({ImGui::GetColumnWidth(), ImGui::GetCursorPosY()});
 					// :P
 					ImGui::NewLine();
 					ImGui::NewLine();
@@ -259,15 +266,15 @@ namespace ViewMenu
 					// 		PutSliderFloat(Lang::RadarText.AlphaSlider, 5.f, &RadarCFG::RadarBgAlpha, &AlphaMin, &AlphaMax, "%.1f");
 					// 	}
 					// }
-					
+
 					ImGui::NewLine();
-					ImGui::SeparatorText(ICON_FA_DOT_CIRCLE" Crosshairs");
+					ImGui::SeparatorText(ICON_FA_DOT_CIRCLE " Crosshairs");
 					float DotMin = 1.f, DotMax = 50.f;
 					int LengthMin = 1, LengthMax = 100;
 					int GapMin = 1, GapMax = 50;
 					int ThickMin = 1, ThickMax = 20;
 					float CircleRmin = 1.f, CircleRmax = 50.f;
-					PutSwitch(Lang::CrosshairsText.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Crosshair::ShowCrossHair, true, "###CrosshairsCol", reinterpret_cast<float*>(&SussyAim::Cfg::Crosshair::CrossHairColor));
+					PutSwitch(Lang::CrosshairsText.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Crosshair::ShowCrossHair, true, "###CrosshairsCol", reinterpret_cast<float *>(&SussyAim::Cfg::Crosshair::CrossHairColor));
 					if (SussyAim::Cfg::Crosshair::ShowCrossHair)
 					{
 						PutSwitch(Lang::CrosshairsText.Dot, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Crosshair::drawDot);
@@ -286,19 +293,19 @@ namespace ViewMenu
 						PutSwitch(Lang::CrosshairsText.Circle, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Crosshair::drawCircle);
 						if (SussyAim::Cfg::Crosshair::drawCircle)
 							PutSliderFloat(Lang::CrosshairsText.RadiusSlider, 5.f, &SussyAim::Cfg::Crosshair::CircleRadius, &CircleRmin, &CircleRmax, "%.f px");
-						PutSwitch(Lang::CrosshairsText.TargetCheck, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::TargetingCrosshairs, true, "###CircleCol", reinterpret_cast<float*>(&SussyAim::Cfg::Crosshair::TargetedColor));
+						PutSwitch(Lang::CrosshairsText.TargetCheck, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::TargetingCrosshairs, true, "###CircleCol", reinterpret_cast<float *>(&SussyAim::Cfg::Crosshair::TargetedColor));
 						PutSwitch(Lang::CrosshairsText.TeamCheck, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Crosshair::TeamCheck);
 					}
-					
+
 					ImGui::Columns(1);
 				}
-				
+
 				// Aimbot
 				else if (SussyAim::Cfg::page == 1)
 				{
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-					ImGui::SeparatorText(ICON_FA_USER" Aimbot");
+					ImGui::SeparatorText(ICON_FA_USER " Aimbot");
 					float FovMin = 0.f, FovMax = 50.f;
 					float SmoothMin = 0.f, SmoothMax = 5.f;
 					PutSwitch(Lang::AimbotText.Enable, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::enabled);
@@ -319,7 +326,7 @@ namespace ViewMenu
 							PutSwitch(Lang::AimbotText.Toggle, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::AimToggleMode);
 						}
 						PutSwitch(Lang::AimbotText.AimLock, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::always);
-						PutSwitch(Lang::AimbotText.DrawFov, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::DrawFov, true, "###FOVcol", reinterpret_cast<float*>(&SussyAim::Cfg::Menu::FovCircleColor));
+						PutSwitch(Lang::AimbotText.DrawFov, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::DrawFov, true, "###FOVcol", reinterpret_cast<float *>(&SussyAim::Cfg::Menu::FovCircleColor));
 						PutSwitch(Lang::AimbotText.VisCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::VisibleCheck);
 						PutSwitch(Lang::AimbotText.ScopeOnly, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Features::Aimbot::ScopeOnly);
 						PutSliderFloat(Lang::AimbotText.FovSlider, 10.f, &SussyAim::Features::Aimbot::AimFov, &FovMin, &FovMax, "%.1f");
@@ -354,7 +361,7 @@ namespace ViewMenu
 					PutSwitch("Enable RCS", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::RCS);
 
 					ImGui::NewLine();
-					ImGui::SeparatorText(ICON_FA_HAND_POINTER" Triggerbot");
+					ImGui::SeparatorText(ICON_FA_HAND_POINTER " Triggerbot");
 					int DelayMin = 10, DelayMax = 1000;
 					int DurationMin = 0, DurationMax = 1000;
 					PutSwitch(Lang::TriggerText.Enable, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::enabled);
@@ -382,19 +389,20 @@ namespace ViewMenu
 				else if (SussyAim::Cfg::page == 2)
 				{
 					int FovMin = 60, FovMax = 140;
+
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-					ImGui::SeparatorText(ICON_FA_SUN" Misc");
+					ImGui::SeparatorText(ICON_FA_SUN " Misc");
 
 					PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::ShowHeadShootLine);
 					PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::WorkInSpec);
-					PutSliderInt("Fov Changer: ", 10.f, &SussyAim::Cfg::Misc::Fov , &FovMin, &FovMax, "%d");
+					PutSliderInt(Lang::MiscText.fovChanger, 10.f, &SussyAim::Cfg::Misc::Fov, &FovMin, &FovMax, "%d");
 					PutSwitch(Lang::MiscText.NoFlash, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::NoFlash);
 					PutSwitch(Lang::MiscText.FastStop, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::FastStop);
 					PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::NoSmoke);
-					PutSwitch(Lang::MiscText.SmokeColor, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::SmokeColored, true, "###SmokeColor", reinterpret_cast<float*>(&SussyAim::Cfg::Misc::SmokeColor));
+					PutSwitch(Lang::MiscText.SmokeColor, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::SmokeColored, true, "###SmokeColor", reinterpret_cast<float *>(&SussyAim::Cfg::Misc::SmokeColor));
 					PutSwitch(Lang::MiscText.HitSound, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::HitSound);
-					PutSwitch(Lang::MiscText.bmbTimer, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::bombTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&SussyAim::Cfg::Misc::BombTimerCol));
+					PutSwitch(Lang::MiscText.bmbTimer, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::bombTimer, true, "###bmbTimerCol", reinterpret_cast<float *>(&SussyAim::Cfg::Misc::BombTimerCol));
 					PutSwitch(Lang::MiscText.Bhop, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::BunnyHop);
 					// PutSwitch(Lang::MiscText.SpecList, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::SpecList);
 					PutSwitch(Lang::MiscText.RadarHack, 10.f, ImGui::GetFrameHeight() * 1.7f, &SussyAim::Cfg::Misc::RadarHack);
@@ -411,7 +419,7 @@ namespace ViewMenu
 					PutSwitch(Lang::MiscText.TeamCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::TeamCheck);
 
 					ImGui::NewLine();
-					ImGui::SeparatorText(ICON_FA_FUTBOL" Fun");
+					ImGui::SeparatorText(ICON_FA_FUTBOL " Fun");
 					PutSwitch(Lang::MiscText.FakeDuck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::Jitter);
 					if (SussyAim::Cfg::Misc::Jitter)
 					{
@@ -421,7 +429,7 @@ namespace ViewMenu
 
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
-					ImGui::SeparatorText(ICON_FA_HEART" Menu Settings");
+					ImGui::SeparatorText(ICON_FA_HEART " Menu Settings");
 					PutSwitch(Lang::MiscText.AntiRecord, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::StreamProof);
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
@@ -429,7 +437,7 @@ namespace ViewMenu
 					if (ImGui::Combo("###Theme", &SussyAim::Cfg::theme, "Standard\0Custom\0"))
 						StyleChanger::UpdateSkin(SussyAim::Cfg::theme);
 					if (SussyAim::Cfg::theme == 1)
-					{	
+					{
 						ImColor windowBgColor = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
 						ImColor borderColor = ImGui::GetStyleColorVec4(ImGuiCol_Border);
 						ImColor childBgColor = ImGui::GetStyleColorVec4(ImGuiCol_ChildBg);
@@ -445,20 +453,20 @@ namespace ViewMenu
 						ImColor ScrollBg = ImGui::GetStyleColorVec4(ImGuiCol_ScrollbarBg);
 						// ########################################
 						ImGui::SeparatorText("Theme Color Settings");
-						PutColorEditor("Button Border", "###ThemeCol1", 5.f, 0.f, reinterpret_cast<float*>(&SussyAim::Cfg::Menu::ButtonBorderColor));
-						PutColorEditor("Border", "###ThemeCol2", 5.f, 0.f, reinterpret_cast<float*>(&borderColor));
-						PutColorEditor("Button", "###ThemeCol3", 5.f, 0.f, reinterpret_cast<float*>(&ButtonColor));
-						PutColorEditor("Button Hovered", "###ThemeCol4", 5.f, 0.f, reinterpret_cast<float*>(&ButtonHovered));
-						PutColorEditor("Button Active", "###ThemeCol5", 5.f, 0.f, reinterpret_cast<float*>(&ButtonActive));
-						PutColorEditor("Child Window Bg", "###ThemeCol6", 5.f, 0.f, reinterpret_cast<float*>(&childBgColor));
-						PutColorEditor("Frame Bg", "###ThemeCol7", 5.f, 0.f, reinterpret_cast<float*>(&FrameBgColor));
-						PutColorEditor("Frame Bg Hovered", "###ThemeCol8", 5.f, 0.f, reinterpret_cast<float*>(&FrameHovered));
-						PutColorEditor("Frame Bg Active", "###ThemeCol9", 5.f, 0.f, reinterpret_cast<float*>(&FrameActive));
-						PutColorEditor("Header", "###ThemeCol10", 5.f, 0.f, reinterpret_cast<float*>(&Header));
-						PutColorEditor("Header Active", "###ThemeCol11", 5.f, 0.f, reinterpret_cast<float*>(&HeaderActive));
-						PutColorEditor("Header Hovered", "###ThemeCol12", 5.f, 0.f, reinterpret_cast<float*>(&HeaderHovered));
-						PutColorEditor("Scrollbar Bg", "###ThemeCol13", 5.f, 0.f, reinterpret_cast<float*>(&ScrollBg));
-						PutColorEditor("Window Bg", "###ThemeCol14", 5.f, 0.f, reinterpret_cast<float*>(&windowBgColor));
+						PutColorEditor("Button Border", "###ThemeCol1", 5.f, 0.f, reinterpret_cast<float *>(&SussyAim::Cfg::Menu::ButtonBorderColor));
+						PutColorEditor("Border", "###ThemeCol2", 5.f, 0.f, reinterpret_cast<float *>(&borderColor));
+						PutColorEditor("Button", "###ThemeCol3", 5.f, 0.f, reinterpret_cast<float *>(&ButtonColor));
+						PutColorEditor("Button Hovered", "###ThemeCol4", 5.f, 0.f, reinterpret_cast<float *>(&ButtonHovered));
+						PutColorEditor("Button Active", "###ThemeCol5", 5.f, 0.f, reinterpret_cast<float *>(&ButtonActive));
+						PutColorEditor("Child Window Bg", "###ThemeCol6", 5.f, 0.f, reinterpret_cast<float *>(&childBgColor));
+						PutColorEditor("Frame Bg", "###ThemeCol7", 5.f, 0.f, reinterpret_cast<float *>(&FrameBgColor));
+						PutColorEditor("Frame Bg Hovered", "###ThemeCol8", 5.f, 0.f, reinterpret_cast<float *>(&FrameHovered));
+						PutColorEditor("Frame Bg Active", "###ThemeCol9", 5.f, 0.f, reinterpret_cast<float *>(&FrameActive));
+						PutColorEditor("Header", "###ThemeCol10", 5.f, 0.f, reinterpret_cast<float *>(&Header));
+						PutColorEditor("Header Active", "###ThemeCol11", 5.f, 0.f, reinterpret_cast<float *>(&HeaderActive));
+						PutColorEditor("Header Hovered", "###ThemeCol12", 5.f, 0.f, reinterpret_cast<float *>(&HeaderHovered));
+						PutColorEditor("Scrollbar Bg", "###ThemeCol13", 5.f, 0.f, reinterpret_cast<float *>(&ScrollBg));
+						PutColorEditor("Window Bg", "###ThemeCol14", 5.f, 0.f, reinterpret_cast<float *>(&windowBgColor));
 
 						// Update Color
 						ImGui::GetStyle().Colors[ImGuiCol_Border] = borderColor;
@@ -487,7 +495,9 @@ namespace ViewMenu
 
 					ImGui::Columns(1);
 				}
-			} ImGui::EndChild();
-		} ImGui::End();
+			}
+			ImGui::EndChild();
+		}
+		ImGui::End();
 	}
 }

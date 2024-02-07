@@ -131,7 +131,7 @@ namespace ConfigMenu {
 		// SussyAim::Cfg::ESP::FilledVisBox = false;
 		// SussyAim::Cfg::Misc::MoneyService = false;
 		// SussyAim::Cfg::Misc::ShowCashSpent = false;
-		// SussyAim::Cfg::Misc::FovHacker = false;
+		// SussyAim::Cfg::Misc::fovChanger = false;
 		// SussyAim::Cfg::Misc::RadarHack = false;
 		// SussyAim::Cfg::Misc::SpecList = false;
 		// SussyAim::Cfg::Misc::BombTimerCol = ImColor(255, 120, 0, 255);

@@ -144,6 +144,7 @@ namespace Lang
 		inline static const char* RadarHack;
 		inline static const char* NoSmoke;
 		inline static const char* SmokeColor;
+		inline static const char* fovChanger = "Fov Changer: ";
 		
 		inline static const char* FakeDuck;
 
