@@ -57,7 +57,7 @@ namespace OSImGui
 		WindowData Window;
 		WindowData DestWindow;
 	public:
-		virtual void NewWindow(std::string WindowName, Vec2 WindowSize, std::function<void()> CallBack) = 0;
+		//virtual void NewWindow(std::string WindowName, Vec2 WindowSize, std::function<void()> CallBack) = 0;
 		virtual void Quit() { IsRunning = true; };
 	public:
 		virtual bool CreateMyWindow() = 0;

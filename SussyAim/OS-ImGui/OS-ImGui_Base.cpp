@@ -3,6 +3,7 @@
 #include "..\Font\IconsFontAwesome5.h"
 #include "..\Resources\WeaponIcon.h"
 #include "..\Resources\Language.h"
+#include "../Utils/Style.h"
 
 namespace OSImGui
 {
@@ -11,7 +12,6 @@ namespace OSImGui
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO();
         io.Fonts->AddFontDefault();
-        (void)io;
 
         ImFontAtlas* fontAtlas = new ImFontAtlas();
         ImFontConfig arialConfig;
@@ -33,7 +33,7 @@ namespace OSImGui
         io.Fonts = fontAtlas;
 
         // ImGui::StyleColorsEnemyMouse();
-        ImGui::ApplyDefaultStyle();
+        Styles::Style1();
         io.LogFilename = nullptr;
 
         if (!ImGui_ImplWin32_Init(Window.hWnd))
@@ -52,7 +52,6 @@ namespace OSImGui
         ImGui_ImplDX11_Shutdown();
         ImGui_ImplWin32_Shutdown();
         ImGui::DestroyContext();
-
         g_Device.CleanupDeviceD3D();
         DestroyWindow(Window.hWnd);
         UnregisterClassA(Window.ClassName.c_str(), Window.hInstance);

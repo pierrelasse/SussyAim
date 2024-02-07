@@ -3507,7 +3507,7 @@ void ImGui::DestroyContext(ImGuiContext* ctx)
     if (ctx == NULL) //-V1051
         ctx = prev_ctx;
     SetCurrentContext(ctx);
-    Shutdown();
+    Shutdown(); // Problem
     SetCurrentContext((prev_ctx != ctx) ? prev_ctx : NULL);
     IM_DELETE(ctx);
 }

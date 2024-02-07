@@ -168,8 +168,6 @@ namespace IMGUI_STB_NAMESPACE
 using namespace IMGUI_STB_NAMESPACE;
 #endif
 
-#include "../../Utils/Style.h"
-
 //-----------------------------------------------------------------------------
 // [SECTION] Style functions
 //-----------------------------------------------------------------------------
@@ -371,11 +369,6 @@ void ImGui::StyleColorsLight(ImGuiStyle* dst)
     colors[ImGuiCol_NavWindowingDimBg]      = ImVec4(0.20f, 0.20f, 0.20f, 0.20f);
     colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.20f, 0.20f, 0.20f, 0.35f);
     colors[ImGuiCol_WindowShadow]           = ImVec4(0.08f, 0.08f, 0.08f, 0.35f);
-}
-
-void ImGui::ApplyDefaultStyle(ImGuiStyle* dst)
-{
-    Styles::Style1();
 }
 
 //-----------------------------------------------------------------------------

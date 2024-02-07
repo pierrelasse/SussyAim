@@ -176,6 +176,8 @@
     <ClInclude Include="Resources\Images.h" />
     <ClInclude Include="Resources\Language.h" />
     <ClInclude Include="Resources\WeaponIcon.h" />
+    <ClInclude Include="src\sacommon.hpp" />
+    <ClInclude Include="src\rendering\Menu.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -241,6 +243,8 @@
     <ClCompile Include="Features\StyleChanger.cpp" />
     <ClCompile Include="Resources\Language.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\rendering\view\view.h" />
+    <ClCompile Include="src\rendering\renderer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SussyAim.rc" />

@@ -77,13 +77,9 @@ namespace Misc
 		ProcessMgr.ReadMemory(pBulletServices + Offset::Pawn.TotalHit, totalHits);
 
 		if (totalHits != PreviousTotalHits) {
-			if (totalHits == 0 && PreviousTotalHits != 0)
-			{
-			}
-			else
+			if (!(totalHits == 0 && PreviousTotalHits != 0))
 			{
 				PlaySoundW(sound.c_str(), NULL, SND_FILENAME | SND_ASYNC);
-				std::cout << "[HitSound] Played hitsound" << std::endl;
 			}
 		}
 		PreviousTotalHits = totalHits;
@@ -192,25 +188,11 @@ namespace Misc
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
-		if (!MiscCFG::FovHacker)
-			return;
-
 		DWORD64 CameraServices = 0;
-		UINT CurrentFOV;
-		bool isScoped;
 		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
 			return;
-
-		// UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
-		UINT Desiredfov = 0x8C;
-		ProcessMgr.ReadMemory<UINT>(CameraServices + Offset::Pawn.iFov, CurrentFOV);
-		// std::cout << CurrentFOV << std::endl;
-
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.isScoped, isScoped);
-		if (!isScoped)
-		{
-			ProcessMgr.WriteMemory<UINT>(CameraServices + Offset::Pawn.iFov, Desiredfov);
-		}
+		UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
+		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Desiredfov);
 	}
 
 	void MoneyService(const CEntity& EntityList) noexcept

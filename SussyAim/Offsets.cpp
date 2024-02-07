@@ -64,7 +64,7 @@ bool Offset::UpdateOffsets()
 	if (!ProcessMgr.ReadMemory(TempAddress, TempAddress))
 		return false;
 
-	Offset::ViewAngle = TempAddress + 0x8F30 - ClientDLL;
+	Offset::ViewAngle = TempAddress + 0x5390 - ClientDLL;
 
 	TempAddress = SearchOffsets(Offset::Signatures::LocalPlayerPawn, ClientDLL);
 	if (TempAddress == 0)
