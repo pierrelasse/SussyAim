@@ -1,7 +1,7 @@
 ﻿// Settings
-#define G_VERSION_MAJOR 1
-#define G_VERSION_MINOR 4
-#define G_VERSION_PATCH 3
+#define G_VERSION_MAJOR 2
+#define G_VERSION_MINOR 1
+#define G_VERSION_PATCH 0
 
 // #define G_PRINTOFFSETS
 
@@ -154,7 +154,10 @@ int main()
     }
     catch (std::exception &ex)
     {
-        std::cerr << "Exception: " << ex.what() << std::endl;
+        std::cerr << "Std Exception caught: " << ex.what() << std::endl;
+    }
+    catch (...) {
+        std::cerr << "Unknown exception caught" << std::endl;
     }
     SetConsoleTextAttribute(SussyAim::hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 

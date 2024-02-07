@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #define ICON_FA_EYE "\xef\x81\xae"
+#define ESP_LINETICKNESS 1
 
 #include "../config/Config.hpp"
 #include "../rendering/renderer.hpp"
@@ -183,9 +184,9 @@ namespace SussyAim
 				std::string weaponIcon = GunIcon(Entity.Pawn.WeaponName);
 
 				if (SussyAim::Cfg::ESP::drawBones)
-					Render::DrawBone(Entity, SussyAim::Cfg::ESP::BoneColor, 1.3f);
+					Render::DrawBone(Entity, SussyAim::Cfg::ESP::BoneColor, ESP_LINETICKNESS);
 				if (SussyAim::Cfg::ESP::drawEyeRay)
-					Render::ShowLosLine(Entity, 50.0f, SussyAim::Cfg::ESP::EyeRayColor, 1.3f);
+					Render::ShowLosLine(Entity, 50.0f, SussyAim::Cfg::ESP::EyeRayColor, ESP_LINETICKNESS);
 				if (SussyAim::Cfg::ESP::drawHeadBox)
 					Render::DrawHeadCircle(Entity, SussyAim::Cfg::ESP::HeadBoxColor);
 
@@ -231,11 +232,11 @@ namespace SussyAim
 
 						if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && SussyAim::Cfg::ESP::visibleCheck)
 						{
-							Gui.Rectangle({Rect.x, Rect.y}, {Rect.z, Rect.w}, SussyAim::Cfg::ESP::VisibleColor, 1.3, SussyAim::Cfg::ESP::boxRounding);
+							Gui.Rectangle({Rect.x, Rect.y}, {Rect.z, Rect.w}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS, SussyAim::Cfg::ESP::boxRounding);
 						}
 						else
 						{
-							Gui.Rectangle({Rect.x, Rect.y}, {Rect.z, Rect.w}, SussyAim::Cfg::ESP::FrameColor, 1.3, SussyAim::Cfg::ESP::boxRounding);
+							Gui.Rectangle({Rect.x, Rect.y}, {Rect.z, Rect.w}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS, SussyAim::Cfg::ESP::boxRounding);
 						}
 					}
 					else if (SussyAim::Cfg::ESP::boxType == 2 || SussyAim::Cfg::ESP::boxType == 3)
@@ -253,25 +254,25 @@ namespace SussyAim
 						// Main Box Lines
 						if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && SussyAim::Cfg::ESP::visibleCheck)
 						{
-							Gui.Line({Rect.x, Rect.y}, {Rect.x + Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::VisibleColor, 1.3f);
-							Gui.Line({Rect.x, Rect.y}, {Rect.x, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, 1.3f);
-							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::VisibleColor, 1.3f);
-							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, 1.3f);
-							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x + Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::VisibleColor, 1.3f);
-							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, 1.3f);
-							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::VisibleColor, 1.3f);
-							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, 1.3f);
+							Gui.Line({Rect.x, Rect.y}, {Rect.x + Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x, Rect.y}, {Rect.x, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x + Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
 						}
 						else
 						{
-							Gui.Line({Rect.x, Rect.y}, {Rect.x + Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::FrameColor, 1.3f);
-							Gui.Line({Rect.x, Rect.y}, {Rect.x, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, 1.3f);
-							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::FrameColor, 1.3f);
-							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, 1.3f);
-							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x + Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::FrameColor, 1.3f);
-							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, 1.3f);
-							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::FrameColor, 1.3f);
-							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, 1.3f);
+							Gui.Line({Rect.x, Rect.y}, {Rect.x + Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x, Rect.y}, {Rect.x, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x + Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
+							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
 						}
 					}
 				}

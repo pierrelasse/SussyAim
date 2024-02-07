@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
+bool CEntity::UpdateController(const DWORD64 &PlayerControllerAddress)
 {
 	if (PlayerControllerAddress == 0)
 		return false;
@@ -22,7 +22,7 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 	return true;
 }
 
-bool CEntity::UpdatePawn(const DWORD64& PlayerPawnAddress)
+bool CEntity::UpdatePawn(const DWORD64 &PlayerPawnAddress)
 {
 	if (PlayerPawnAddress == 0)
 		return false;
@@ -69,7 +69,8 @@ bool PlayerController::GetMoney()
 	{
 		return false;
 	}
-	else {
+	else
+	{
 		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.Account, this->Money);
 		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.CashSpentThisRound, this->CashSpent);
 		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.TotalCashSpent, this->CashSpentTotal);
@@ -121,13 +122,12 @@ bool PlayerPawn::GetSpotted()
 	return GetDataAddressWithOffset<DWORD64>(Address, Offset::Pawn.bSpottedByMask, this->bSpottedByMask);
 }
 
-
 bool PlayerPawn::GetWeaponName()
 {
 	DWORD64 WeaponNameAddress = 0;
 	char Buffer[64]{};
 
-	WeaponNameAddress = ProcessMgr.TraceAddress(this->Address + Offset::Pawn.pClippingWeapon, { 0x10,0x20 ,0x0 });
+	WeaponNameAddress = ProcessMgr.TraceAddress(this->Address + Offset::Pawn.pClippingWeapon, {0x10, 0x20, 0x0});
 	if (WeaponNameAddress == 0)
 		return false;
 

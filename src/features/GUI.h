@@ -235,8 +235,9 @@ namespace ViewMenu
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(ICON_FA_GRIN_ALT " ESP Preview");
+					ImGui::Text("Preview will be removed");
 					// ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() }, { ImGui::GetCursorPosX() - ImGui::GetColumnWidth() * 0.65f, ImGui::GetCursorPosY() - ImGui::GetFrameHeight() });
-					SussyAim::Features::ESP::RenderPreview({ImGui::GetColumnWidth(), ImGui::GetCursorPosY()});
+					//SussyAim::Features::ESP::RenderPreview({ImGui::GetColumnWidth(), ImGui::GetCursorPosY()});
 					// :P
 					ImGui::NewLine();
 					ImGui::NewLine();
@@ -247,7 +248,6 @@ namespace ViewMenu
 					ImGui::NewLine();
 					ImGui::NewLine();
 					ImGui::NewLine();
-					//
 
 					// ImGui::SeparatorText(ICON_FA_COMPASS" External Radar");
 					// float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;

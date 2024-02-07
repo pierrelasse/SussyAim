@@ -99,7 +99,7 @@
     <ClInclude Include="src\config\ConfigMenu.hpp" />
     <ClInclude Include="src\config\ConfigSaver.hpp" />
     <ClInclude Include="src\features\Aimbot.hpp" />
-    <ClInclude Include="src\features\BombTimer.h" />
+    <ClInclude Include="src\features\BombTimer.hpp" />
     <ClInclude Include="src\features\Debugger.h" />
     <ClInclude Include="src\features\ESP.hpp" />
     <ClInclude Include="src\features\GetWeaponIcon.h" />
@@ -142,7 +142,6 @@
     <ClInclude Include="src\rendering\Resources\Language.h" />
     <ClInclude Include="src\rendering\Resources\WeaponIcon.h" />
     <ClInclude Include="src\rendering\Style.h" />
-    <ClInclude Include="src\rendering\view\view.hpp" />
     <ClInclude Include="src\resource.h" />
     <ClInclude Include="src\sacommon.hpp" />
     <ClInclude Include="src\utils\Format.h" />
@@ -191,9 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SussyAim.aps" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\features\Misc.cpp" />

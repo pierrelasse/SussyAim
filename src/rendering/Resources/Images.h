@@ -1,3 +1,5 @@
+#pragma once
+
 namespace Images
 {
 	unsigned char Logo[] = {

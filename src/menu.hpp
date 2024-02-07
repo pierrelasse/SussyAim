@@ -1,21 +1,23 @@
 #pragma once
 
 #include "sacommon.hpp"
-#include "rendering/view/view.hpp"
 #include "config/Config.hpp"
+
 #include "features/Aimbot.hpp"
+#include "features/BombTimer.hpp"
 #include "features/ESP.hpp"
 #include "features/HitSounds.hpp"
 #include "features/GUI.h"
 
+//#include "rendering/view/view.hpp"
+
 namespace SussyAim
 {
     inline DWORD currentTick;
-    inline DWORD lastTick;
+    inline DWORD lastTick = 0;
 
     bool updateShowMenu()
     {
-        lastTick = 0;
         currentTick = GetTickCount();
 
         if ((GetAsyncKeyState(VK_INSERT) & 0x8000) && currentTick - lastTick >= 150)
@@ -40,8 +42,8 @@ namespace SussyAim
     void tick()
     {
         if (updateShowMenu())
-            // SussyAim::view::render();
             ViewMenu::Render();
+            //SussyAim::view::render();
 
         // Update matrix
         if (!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix, 64))
@@ -79,15 +81,19 @@ namespace SussyAim
         {
             CEntity Entity;
             DWORD64 EntityAddress = 0;
+
             if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListEntry() + (i + 1) * 0x78, EntityAddress))
                 continue;
+
             if (EntityAddress == LocalEntity.Controller.Address)
             {
                 LocalPlayerControllerIndex = i;
                 continue;
             }
+
             if (!Entity.UpdateController(EntityAddress))
                 continue;
+
             if (!Entity.UpdatePawn(Entity.Pawn.Address))
                 continue;
 
@@ -205,7 +211,7 @@ namespace SussyAim
         // Misc::AirCheck(LocalEntity);
         // RenderCrossHair(ImGui::GetBackgroundDrawList());
 
-        // BombTimer::RenderWindow();
+        SussyAim::Features::BombTimer::render();
 
         {
             if (!SussyAim::Cfg::Aimbot::enabled)
