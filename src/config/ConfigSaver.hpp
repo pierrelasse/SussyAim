@@ -182,7 +182,6 @@ namespace MyConfigSaver
         emitter << YAML::Key << "FovHacker" << YAML::Value << SussyAim::Cfg::Misc::FovHacker;
         emitter << YAML::Key << "NoFlash" << YAML::Value << SussyAim::Cfg::Misc::NoFlash;
         emitter << YAML::Key << "Watermark" << YAML::Value << SussyAim::Cfg::Misc::WaterMark;
-        emitter << YAML::Key << "CheatList" << YAML::Value << SussyAim::Cfg::Misc::CheatList;
         emitter << YAML::Key << "HitSound" << YAML::Value << SussyAim::Cfg::Misc::HitSound;
         emitter << YAML::Key << "BombTimer" << YAML::Value << SussyAim::Cfg::Misc::bombTimer;
         emitter << YAML::Key << "TimerColor";
@@ -369,7 +368,6 @@ namespace MyConfigSaver
                 SussyAim::Cfg::Misc::FovHacker = config["Misc"]["FovHacker"].IsDefined() ? config["Misc"]["FovHacker"].as<bool>() : false;
                 SussyAim::Cfg::Misc::NoFlash = config["Misc"]["NoFlash"].as<bool>();
                 SussyAim::Cfg::Misc::WaterMark = config["Misc"]["Watermark"].as<bool>();
-                SussyAim::Cfg::Misc::CheatList = config["Misc"]["CheatList"].as<bool>();
                 SussyAim::Cfg::Misc::HitSound = config["Misc"]["HitSound"].as<bool>();
                 SussyAim::Cfg::Misc::bombTimer = config["Misc"]["BombTimer"].as<bool>();
                 SussyAim::Cfg::Misc::BombTimerCol.Value.x = config["Misc"]["TimerColor"]["r"].as<float>();

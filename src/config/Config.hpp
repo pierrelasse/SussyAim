@@ -196,7 +196,6 @@ namespace SussyAim
 			inline bool WorkInSpec = true;
 			inline bool NoFlash = false;
 			inline bool WaterMark = false;
-			inline bool CheatList = false;
 			inline bool HitSound = false;
 			inline bool SkinChanger = false;
 			inline bool bombTimer = true;

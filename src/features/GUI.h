@@ -408,7 +408,6 @@ namespace ViewMenu
 						PutSwitch(Lang::MiscText.ShowCashSpent, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::ShowCashSpent);
 					PutSwitch(Lang::MiscText.EnemySensor, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::EnemySensor);
 					PutSwitch(Lang::MiscText.Watermark, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::WaterMark);
-					PutSwitch(Lang::MiscText.CheatList, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::CheatList);
 					PutSwitch(Lang::MiscText.TeamCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::TeamCheck);
 
 					ImGui::NewLine();

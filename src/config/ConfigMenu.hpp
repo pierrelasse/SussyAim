@@ -216,7 +216,6 @@ namespace ConfigMenu {
 		// SussyAim::Cfg::Misc::WorkInSpec = true;
 		// SussyAim::Cfg::Misc::NoFlash = false;
 		// SussyAim::Cfg::Misc::WaterMark = false;
-		// SussyAim::Cfg::Misc::CheatList = false;
 		// SussyAim::Cfg::Misc::HitSound = false;
 		// SussyAim::Cfg::Misc::FastStop = false;
 

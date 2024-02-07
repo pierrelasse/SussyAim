@@ -191,7 +191,6 @@ namespace SussyAim
         // Misc::NadeManager(gGame);
         // Misc::FovChanger(LocalEntity);
         // Misc::Watermark();
-        // Misc::CheatList();
         // Misc::FakeDuck(LocalEntity);
         // Misc::BunnyHop(LocalEntity);
 

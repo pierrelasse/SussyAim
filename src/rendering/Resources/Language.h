@@ -136,7 +136,6 @@ namespace Lang
 		inline static const char* SpecList;
 		inline static const char* Bhop;
 		inline static const char* Watermark;
-		inline static const char* CheatList;
 		inline static const char* TeamCheck;
 		inline static const char* AntiRecord;
 		inline static const char* MoneyService;
@@ -277,7 +276,6 @@ namespace Lang
 		MiscText.SpecList = u8"Spec List";
 		MiscText.Bhop = u8"Bunny Hop";
 		MiscText.Watermark = u8"Watermark";
-		MiscText.CheatList = u8"Cheat List";
 		MiscText.TeamCheck = u8"Team Check";
 		MiscText.AntiRecord = u8"Anti Record";
 		MiscText.MoneyService = u8"Money Services";

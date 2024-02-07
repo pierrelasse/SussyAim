@@ -8,37 +8,6 @@ namespace Misc
 	bool wKeyPressed = false;
 	bool sKeyPressed = false;
 
-	void CheatList() noexcept
-	{
-		if (!SussyAim::Cfg::Misc::CheatList)
-			return;
-
-		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
-		ImGui::SetNextWindowBgAlpha(0.3f);
-		ImGui::SetNextWindowSize(ImVec2(200, 0));
-		ImGui::Begin("Cheats List", nullptr, windowFlags);
-
-		CheatText("ESP", SussyAim::Cfg::ESP::enabled);
-		if (SussyAim::Cfg::Aimbot::enabled && (SussyAim::Cfg::Aimbot::always || GetAsyncKeyState(SussyAim::Features::Aimbot::HotKey)))
-			ImGui::Text("Aimbot [Toggle]");
-		CheatText("RCS", SussyAim::Cfg::Aimbot::RCS);
-		// CheatText("Glow", SussyAim::Cfg::Misc::EnemySensor);
-		// CheatText("Radar", RadarCFG::ShowRadar);
-		if (SussyAim::Cfg::Triggerbot::enabled && (SussyAim::Cfg::Triggerbot::always || GetAsyncKeyState(SussyAim::Cfg::Triggerbot::hotkey)))
-			ImGui::Text("Triggerbot [Toggle]");
-
-		CheatText("Crosshair", SussyAim::Cfg::Crosshair::ShowCrossHair);
-		CheatText("Headshot Line", SussyAim::Cfg::Menu::ShowHeadShootLine);
-		CheatText("No Flash", SussyAim::Cfg::Misc::NoFlash);
-		CheatText("Fast Stop", SussyAim::Cfg::Misc::FastStop);
-		CheatText("Bhop", SussyAim::Cfg::Misc::BunnyHop);
-		CheatText("HitSound", SussyAim::Cfg::Misc::HitSound);
-		CheatText("Bomb Timer", SussyAim::Cfg::Misc::bombTimer);
-		CheatText("Spec List", SussyAim::Cfg::Misc::SpecList);
-
-		ImGui::End();
-	}
-
 	void Watermark() noexcept
 	{
 		if (!SussyAim::Cfg::Misc::WaterMark)
