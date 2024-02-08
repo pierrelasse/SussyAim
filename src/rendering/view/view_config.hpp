@@ -18,7 +18,7 @@ namespace SussyAim
 			void updateConfigFiles()
 			{
 				configFiles.clear();
-				for (const auto &entry : std::filesystem::directory_iterator(SussyAim::Cfg::dir))
+				for (const auto &entry : std::filesystem::directory_iterator(SussyAim::Cfg::dirConfigs))
 				{
 					if (entry.is_regular_file() && entry.path().extension() == ".yml")
 					{
@@ -33,7 +33,7 @@ namespace SussyAim
 					return;
 
 				std::string selectedConfigFile = configFiles[selectedConfig];
-				std::string fullPath = SussyAim::Cfg::dir + "\\" + selectedConfigFile;
+				std::string fullPath = SussyAim::Cfg::dirConfigs + selectedConfigFile;
 
 				if (std::remove(fullPath.c_str()) == 0)
 				{
@@ -113,7 +113,7 @@ namespace SussyAim
 
 				if (ImGui::Button("Open configs folder"))
 				{
-					Gui.OpenWebpage(SussyAim::Cfg::dir.c_str());
+					Gui.OpenWebpage(SussyAim::Cfg::dirConfigs.c_str());
 				}
 			}
 

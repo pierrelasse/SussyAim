@@ -8,11 +8,11 @@
 
 namespace OSImGui
 {
-	bool OSImGui::LoadTextureFromFile(const char* filename, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height)
+	bool OSImGui::LoadTextureFromFile(const char *filename, ID3D11ShaderResourceView **out_srv, int *out_width, int *out_height)
 	{
 		int image_width = 0;
 		int image_height = 0;
-		unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
+		unsigned char *image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
 		if (image_data == NULL)
 			return false;
 		D3D11_TEXTURE2D_DESC desc;
@@ -26,7 +26,7 @@ namespace OSImGui
 		desc.Usage = D3D11_USAGE_DEFAULT;
 		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 		desc.CPUAccessFlags = 0;
-		ID3D11Texture2D* pTexture = NULL;
+		ID3D11Texture2D *pTexture = NULL;
 		D3D11_SUBRESOURCE_DATA subResource;
 		subResource.pSysMem = image_data;
 		subResource.SysMemPitch = desc.Width * 4;
@@ -47,11 +47,11 @@ namespace OSImGui
 		return true;
 	}
 
-	bool OSImGui::LoadTextureFromMemory(unsigned char* Memory, UINT size, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height)
+	bool OSImGui::LoadTextureFromMemory(unsigned char *Memory, UINT size, ID3D11ShaderResourceView **out_srv, int *out_width, int *out_height)
 	{
 		int image_width = 0;
 		int image_height = 0;
-		unsigned char* image_data = stbi_load_from_memory(Memory, size, &image_width, &image_height, NULL, 4);
+		unsigned char *image_data = stbi_load_from_memory(Memory, size, &image_width, &image_height, NULL, 4);
 		if (image_data == NULL)
 			return false;
 		D3D11_TEXTURE2D_DESC desc;
@@ -65,7 +65,7 @@ namespace OSImGui
 		desc.Usage = D3D11_USAGE_DEFAULT;
 		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 		desc.CPUAccessFlags = 0;
-		ID3D11Texture2D* pTexture = NULL;
+		ID3D11Texture2D *pTexture = NULL;
 		D3D11_SUBRESOURCE_DATA subResource;
 		subResource.pSysMem = image_data;
 		subResource.SysMemPitch = desc.Width * 4;
@@ -86,30 +86,29 @@ namespace OSImGui
 		return true;
 	}
 
-	void OSImGui::ShowRawImage(unsigned char* image, int width, int height)
+	void OSImGui::ShowRawImage(unsigned char *image, int width, int height)
 	{
-		ImGuiWindow* window = ImGui::GetCurrentWindow();
+		ImGuiWindow *window = ImGui::GetCurrentWindow();
 		if (window->SkipItems)
 			return;
 
-		ImDrawList* draw_list = ImGui::GetWindowDrawList();
+		ImDrawList *draw_list = ImGui::GetWindowDrawList();
 		ImVec2 pos = ImGui::GetCursorScreenPos();
 
 		// Render image
 		draw_list->AddImage(
-			(void*)image,
+			(void *)image,
 			ImVec2(pos.x + width, pos.y + height),
 			ImVec2(0, 0),
-			ImVec2(1, 1)
-		);
+			ImVec2(1, 1));
 		// Update cursor pos
 		ImGui::Dummy(ImVec2(width, height));
 	}
 
-	void OSImGui::SwitchButton(const char* str_id, bool* v)
+	void OSImGui::SwitchButton(const char *str_id, bool *v)
 	{
 		ImVec2 p = ImGui::GetCursorScreenPos();
-		ImDrawList* DrawList = ImGui::GetWindowDrawList();
+		ImDrawList *DrawList = ImGui::GetWindowDrawList();
 		float Height = ImGui::GetFrameHeight();
 		float Width = Height * 1.7f;
 		float Radius = Height / 2 - 2;
@@ -119,7 +118,7 @@ namespace OSImGui
 			*v = !(*v);
 		// Animation
 		float t = *v ? 1.0f : 0.f;
-		ImGuiContext& g = *GImGui;
+		ImGuiContext &g = *GImGui;
 		float AnimationSpeed = 0.08f;
 		if (g.LastActiveId == g.CurrentWindow->GetID(str_id))
 		{
@@ -137,25 +136,26 @@ namespace OSImGui
 		ImGui::Text(str_id);
 	}
 
-	void OSImGui::MyProgressBar(float fraction, const ImVec2& Size, const char* overlay, ImVec4 Color)
+	void OSImGui::MyProgressBar(float fraction, const ImVec2 &Size, const char *overlay, ImVec4 Color)
 	{
 		ImGui::PushStyleColor(ImGuiCol_PlotHistogram, Color);
 		ImGui::ProgressBar(fraction, Size, overlay);
 		ImGui::PopStyleColor();
 	}
 
-	void OSImGui::OpenWebpage(const char* url)
+	void OSImGui::OpenWebpage(const char *url)
 	{
 		ShellExecuteA(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
 	}
 
-	void OSImGui::OpenWebpageButton(const char* label, const char* url)
+	void OSImGui::OpenWebpageButton(const char *label, const char *url)
 	{
 		if (ImGui::Button(label))
 			OpenWebpage(url);
 	}
 
-	void OSImGui::MyText(std::string Text, bool isCenter) {
+	void OSImGui::MyText(std::string Text, bool isCenter)
+	{
 		auto windowWidth = ImGui::GetWindowSize().x;
 		auto textWidth = ImGui::CalcTextSize(Text.c_str()).x;
 		if (isCenter)
@@ -172,7 +172,7 @@ namespace OSImGui
 		else
 		{
 			float TextWidth = ImGui::GetFont()->CalcTextSizeA(FontSize, FLT_MAX, 0.f, Text.c_str()).x;
-			ImVec2 Pos_ = { Pos.x - TextWidth / 2,Pos.y };
+			ImVec2 Pos_ = {Pos.x - TextWidth / 2, Pos.y};
 			ImGui::GetBackgroundDrawList()->AddText(ImGui::GetFont(), FontSize, Pos_, Color, Text.c_str());
 		}
 	}
@@ -188,15 +188,15 @@ namespace OSImGui
 
 	void OSImGui::Rectangle(Vec2 Pos, Vec2 Size, ImColor Color, float Thickness, float Rounding)
 	{
-		ImGui::GetBackgroundDrawList()->AddRect(Pos.ToImVec2(), { Pos.x + Size.x,Pos.y + Size.y }, Color, Rounding, 0, Thickness);
+		ImGui::GetBackgroundDrawList()->AddRect(Pos.ToImVec2(), {Pos.x + Size.x, Pos.y + Size.y}, Color, Rounding, 0, Thickness);
 	}
 
 	void OSImGui::RectangleFilled(Vec2 Pos, Vec2 Size, ImColor Color, float Rounding, int Nums)
 	{
-		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+		ImDrawList *DrawList = ImGui::GetBackgroundDrawList();
 		ImDrawCornerFlags rounding_corners = ImDrawCornerFlags_All;
 		ImVec2 a = Pos.ToImVec2();
-		ImVec2 b = { Pos.x + Size.x,Pos.y + Size.y };
+		ImVec2 b = {Pos.x + Size.x, Pos.y + Size.y};
 		Rounding = ImMin<float>(Rounding, fabsf(Size.x) * (((rounding_corners & ImDrawCornerFlags_Top) == ImDrawCornerFlags_Top) || ((rounding_corners & ImDrawCornerFlags_Bot) == ImDrawCornerFlags_Bot) ? 0.5f : 1.0f) - 1.0f);
 		Rounding = ImMin<float>(Rounding, fabsf(Size.y) * (((rounding_corners & ImDrawCornerFlags_Left) == ImDrawCornerFlags_Left) || ((rounding_corners & ImDrawCornerFlags_Right) == ImDrawCornerFlags_Right) ? 0.5f : 1.0f) - 1.0f);
 
@@ -219,10 +219,10 @@ namespace OSImGui
 
 	void OSImGui::RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor BgColor, ImColor TopColor, ImColor BotColor, float Rounding, int Nums)
 	{
-		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+		ImDrawList *DrawList = ImGui::GetBackgroundDrawList();
 		ImDrawCornerFlags rounding_corners = ImDrawCornerFlags_All;
 		ImVec2 a = Pos.ToImVec2();
-		ImVec2 b = { Pos.x + Size.x,Pos.y + Size.y };
+		ImVec2 b = {Pos.x + Size.x, Pos.y + Size.y};
 
 		Rounding = ImMin<float>(Rounding, fabsf(Size.x) * (((rounding_corners & ImDrawCornerFlags_Top) == ImDrawCornerFlags_Top) || ((rounding_corners & ImDrawCornerFlags_Bot) == ImDrawCornerFlags_Bot) ? 0.5f : 1.0f) - 1.0f);
 		Rounding = ImMin<float>(Rounding, fabsf(Size.y) * (((rounding_corners & ImDrawCornerFlags_Left) == ImDrawCornerFlags_Left) || ((rounding_corners & ImDrawCornerFlags_Right) == ImDrawCornerFlags_Right) ? 0.5f : 1.0f) - 1.0f);
@@ -259,20 +259,20 @@ namespace OSImGui
 
 	void OSImGui::Arc(ImVec2 Center, float Radius, ImColor Color, float Thickness, float Angle_begin, float Angle_end, float Nums)
 	{
-		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+		ImDrawList *DrawList = ImGui::GetBackgroundDrawList();
 		float angle = (Angle_end - Angle_begin) / Nums;
 		for (int i = 0; i < Nums; i++)
 		{
 			float angle_ = i * angle + Angle_begin - IM_PI / 2;
-			DrawList->PathLineTo({ Center.x - Radius * cos(angle_),Center.y - Radius * sin(angle_) });
+			DrawList->PathLineTo({Center.x - Radius * cos(angle_), Center.y - Radius * sin(angle_)});
 		}
 		DrawList->PathStroke(Color, false, Thickness);
 	}
 
-	void OSImGui::MyCheckBox(const char* str_id, bool* v)
+	void OSImGui::MyCheckBox(const char *str_id, bool *v)
 	{
 		ImVec2 p = ImGui::GetCursorScreenPos();
-		ImDrawList* DrawList = ImGui::GetWindowDrawList();
+		ImDrawList *DrawList = ImGui::GetWindowDrawList();
 		float Height = ImGui::GetFrameHeight();
 		float Width = Height * 1.7f;
 		float Radius = Height / 2 - 2;
@@ -280,22 +280,22 @@ namespace OSImGui
 		ImGui::InvisibleButton(str_id, ImVec2(Width, Height));
 		if (ImGui::IsItemClicked())
 			*v = !(*v);
-		// ×é¼þÒÆ¶¯¶¯»­
+		// ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		float t = *v ? 1.0f : 0.f;
-		ImGuiContext& g = *GImGui;
+		ImGuiContext &g = *GImGui;
 		float AnimationSpeed = 0.08f;
 		if (g.LastActiveId == g.CurrentWindow->GetID(str_id))
 		{
 			float T_Animation = ImSaturate(g.LastActiveIdTimer / AnimationSpeed);
 			t = *v ? (T_Animation) : (1.0f - T_Animation);
 		}
-		// Êó±êÐüÍ£ÑÕÉ«
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½É«
 		ImU32 Color;
 		if (ImGui::IsItemHovered())
 			Color = ImGui::GetColorU32(ImLerp(ImVec4(0.85f, 0.24f, 0.15f, 1.0f), ImVec4(0.55f, 0.85f, 0.13f, 1.000f), t));
 		else
 			Color = ImGui::GetColorU32(ImLerp(ImVec4(0.90f, 0.29f, 0.20f, 1.0f), ImVec4(0.60f, 0.90f, 0.18f, 1.000f), t));
-		// ×é¼þ»æÖÆ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		DrawList->AddRectFilled(ImVec2(p.x, p.y), ImVec2(p.x + Width, p.y + Height), Color, Height);
 		DrawList->AddCircleFilled(ImVec2(p.x + Radius + t * (Width - Radius * 2) + (t == 0 ? 2 : -2), p.y + Radius + 2), Radius, IM_COL32(255, 255, 255, 255), 360);
 		DrawList->AddCircle(ImVec2(p.x + Radius + t * (Width - Radius * 2) + (t == 0 ? 2 : -2), p.y + Radius + 2), Radius, IM_COL32(20, 20, 20, 80), 360, 1);
@@ -304,10 +304,10 @@ namespace OSImGui
 		ImGui::Text(str_id);
 	}
 
-	void OSImGui::MyCheckBox2(const char* str_id, bool* v)
+	void OSImGui::MyCheckBox2(const char *str_id, bool *v)
 	{
 		ImVec2 p = ImGui::GetCursorScreenPos();
-		ImDrawList* DrawList = ImGui::GetWindowDrawList();
+		ImDrawList *DrawList = ImGui::GetWindowDrawList();
 		float Height = ImGui::GetFrameHeight();
 		float Width = Height * 1.7f;
 		float Radius = Height / 2 - 2;
@@ -315,36 +315,35 @@ namespace OSImGui
 		ImGui::InvisibleButton(str_id, ImVec2(Width, Height));
 		if (ImGui::IsItemClicked())
 			*v = !(*v);
-		// ×é¼þÒÆ¶¯¶¯»­
+		// ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		float t = *v ? 1.0f : 0.f;
-		ImGuiContext& g = *GImGui;
+		ImGuiContext &g = *GImGui;
 		float AnimationSpeed = 0.15f;
 		if (g.LastActiveId == g.CurrentWindow->GetID(str_id))
 		{
 			float T_Animation = ImSaturate(g.LastActiveIdTimer / AnimationSpeed);
 			t = *v ? (T_Animation) : (1.0f - T_Animation);
 		}
-		// Êó±êÐüÍ£ÑÕÉ«
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½É«
 		ImU32 Color;
 		if (ImGui::IsItemHovered())
 			Color = ImGui::GetColorU32(ImLerp(ImVec4(0.08f, 0.18f, 0.21f, 1.0f), ImVec4(0.10f, 0.48f, 0.68f, 1.000f), t));
 		else
 			Color = ImGui::GetColorU32(ImLerp(ImVec4(0.12f, 0.22f, 0.25f, 1.0f), ImVec4(0.14f, 0.52f, 0.72f, 1.000f), t));
-		// ×é¼þ»æÖÆ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		DrawList->AddRectFilled(ImVec2(p.x, p.y), ImVec2(p.x + Width, p.y + Height), Color, 360);
 		DrawList->AddCircleFilled(ImVec2(p.x + Radius + 2 + t * (Width - (Radius + 2) * 2), p.y + Radius + 2), Radius + 2, IM_COL32(255, 255, 255, 255), 360);
 		DrawList->AddCircleFilled(ImVec2(p.x + Radius + t * (Width - Radius * 2) + (t == 0 ? 2 : -2), p.y + Radius + 2), Radius, IM_COL32(230, 230, 230, 255), 360);
 		if (*v)
-			DrawList->AddText(ImVec2(p.x + 45, p.y + 2), ImColor{ 255,255,255,255 }, str_id);
+			DrawList->AddText(ImVec2(p.x + 45, p.y + 2), ImColor{255, 255, 255, 255}, str_id);
 		else
-			DrawList->AddText(ImVec2(p.x + 45, p.y + 2), ImColor{ 185,185,185,255 }, str_id);
-
+			DrawList->AddText(ImVec2(p.x + 45, p.y + 2), ImColor{185, 185, 185, 255}, str_id);
 	}
 
-	void OSImGui::MyCheckBox3(const char* str_id, bool* v)
+	void OSImGui::MyCheckBox3(const char *str_id, bool *v)
 	{
 		ImVec2 p = ImGui::GetCursorScreenPos();
-		ImDrawList* DrawList = ImGui::GetWindowDrawList();
+		ImDrawList *DrawList = ImGui::GetWindowDrawList();
 		float Height = ImGui::GetFrameHeight();
 		float Width = Height;
 		float Left = 8;
@@ -353,16 +352,16 @@ namespace OSImGui
 
 		if (ImGui::IsItemClicked())
 			*v = !(*v);
-		// ×é¼þÒÆ¶¯¶¯»­
+		// ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		float t = *v ? 1.0f : 0.f;
-		ImGuiContext& g = *GImGui;
+		ImGuiContext &g = *GImGui;
 		float AnimationSpeed = 0.12f;
 		if (g.LastActiveId == g.CurrentWindow->GetID(str_id))
 		{
 			float T_Animation = ImSaturate(g.LastActiveIdTimer / AnimationSpeed);
 			t = *v ? (T_Animation) : (1.0f - T_Animation);
 		}
-		// Êó±êÐüÍ£ÑÕÉ«
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½É«
 		ImU32 Color;
 		ImU32 TickColor1, TickColor2;
 		if (ImGui::IsItemHovered())
@@ -375,31 +374,31 @@ namespace OSImGui
 
 		float Size = Width;
 		float Scale = (float)(Size) / 20.0f;
-		// µ×É«
+		// ï¿½ï¿½É«
 		DrawList->AddRectFilled(ImVec2(p.x, p.y), ImVec2(p.x + Width, p.y + Height), Color, 5, 15);
-		// Ñ¡ÖÐ¹´
+		// Ñ¡ï¿½Ð¹ï¿½
 		DrawList->AddLine(ImVec2(p.x + 3 * Scale, p.y + Size / 2 - 2 * Scale), ImVec2(p.x + Size / 2 - 1 * Scale, p.y + Size - 5 * Scale), TickColor1, 3 * Scale);
 		DrawList->AddLine(ImVec2(p.x + Size - 3 * Scale - 1, p.y + 3 * Scale + 1), ImVec2(p.x + Size / 2 - 1 * Scale, p.y + Size - 5 * Scale), TickColor1, 3 * Scale);
-		// Î´Ñ¡ÖÐ¹´
+		// Î´Ñ¡ï¿½Ð¹ï¿½
 		DrawList->AddLine(ImVec2(p.x + 3 * Scale, p.y + Size / 2 - 2 * Scale), ImVec2(p.x + Size / 2 - 1 * Scale, p.y + Size - 5 * Scale), TickColor2, 3 * Scale);
 		DrawList->AddLine(ImVec2(p.x + Size - 3 * Scale - 1, p.y + 3 * Scale + 1), ImVec2(p.x + Size / 2 - 1 * Scale, p.y + Size - 5 * Scale), TickColor2, 3 * Scale);
 		ImGui::SameLine();
 		ImGui::Text(str_id);
 	}
 
-	void OSImGui::MyCheckBox4(const char* str_id, bool* v)
+	void OSImGui::MyCheckBox4(const char *str_id, bool *v)
 	{
 		ImVec2 p = ImGui::GetCursorScreenPos();
-		ImDrawList* DrawList = ImGui::GetWindowDrawList();
+		ImDrawList *DrawList = ImGui::GetWindowDrawList();
 		float Height = ImGui::GetFrameHeight();
 		float Width = Height;
 		ImGui::InvisibleButton(str_id, ImVec2(Width, Height));
 
 		if (ImGui::IsItemClicked())
 			*v = !(*v);
-		// ×é¼þ¶¯»­
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		float t = *v ? 1.0f : 0.f;
-		ImGuiContext& g = *GImGui;
+		ImGuiContext &g = *GImGui;
 		float AnimationSpeed = 0.12f;
 		if (g.LastActiveId == g.CurrentWindow->GetID(str_id))
 		{
@@ -424,27 +423,27 @@ namespace OSImGui
 
 	void OSImGui::ShadowRectFilled(Vec2 Pos, Vec2 Size, ImColor RectColor, ImColor ShadowColor, float ShadowThickness, Vec2 ShadowOffset, float Rounding)
 	{
-		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+		ImDrawList *DrawList = ImGui::GetBackgroundDrawList();
 		ImDrawFlags Flags = (Rounding > 0.f) ? ImDrawFlags_RoundCornersMask_ : ImDrawFlags_None;
-		DrawList->AddShadowRect(Pos.ToImVec2(), { Pos.x + Size.x,Pos.y + Size.y }, ShadowColor, ShadowThickness, ShadowOffset.ToImVec2(), Flags, Rounding);
-		DrawList->AddRectFilled(Pos.ToImVec2(), { Pos.x + Size.x,Pos.y + Size.y }, RectColor, Rounding);
+		DrawList->AddShadowRect(Pos.ToImVec2(), {Pos.x + Size.x, Pos.y + Size.y}, ShadowColor, ShadowThickness, ShadowOffset.ToImVec2(), Flags, Rounding);
+		DrawList->AddRectFilled(Pos.ToImVec2(), {Pos.x + Size.x, Pos.y + Size.y}, RectColor, Rounding);
 	}
 
 	void OSImGui::ShadowCircle(Vec2 Pos, float Radius, ImColor CircleColor, ImColor ShadowColor, float ShadowThickness, Vec2 ShadowOffset, int Num)
 	{
-		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+		ImDrawList *DrawList = ImGui::GetBackgroundDrawList();
 		DrawList->AddShadowCircle(Pos.ToImVec2(), Radius, ShadowColor, ShadowThickness, ShadowOffset.ToImVec2(), ImDrawFlags_None, Num);
 		DrawList->AddCircleFilled(Pos.ToImVec2(), Radius, CircleColor, Num);
 	}
 
-	bool OSImGui::SliderScalarEx1(const char* label, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+	bool OSImGui::SliderScalarEx1(const char *label, ImGuiDataType data_type, void *p_data, const void *p_min, const void *p_max, const char *format, ImGuiSliderFlags flags)
 	{
-		ImGuiWindow* window = ImGui::GetCurrentWindow();
+		ImGuiWindow *window = ImGui::GetCurrentWindow();
 		if (window->SkipItems)
 			return false;
 
-		ImGuiContext& g = *GImGui;
-		const ImGuiStyle& style = g.Style;
+		ImGuiContext &g = *GImGui;
+		const ImGuiStyle &style = g.Style;
 		const ImGuiID id = window->GetID(label);
 		const float w = ImGui::CalcItemWidth();
 
@@ -498,7 +497,8 @@ namespace OSImGui
 		float frame_height_origin = frame_sc.GetHeight();
 		frame_sc.Min.y += frame_height_origin / 3;
 		frame_sc.Max.y -= frame_height_origin / 3;
-		const ImU32 frame_col = ImGui::GetColorU32(g.ActiveId == id ? ImGuiCol_FrameBgActive : hovered ? ImGuiCol_FrameBgHovered : ImGuiCol_FrameBg);
+		const ImU32 frame_col = ImGui::GetColorU32(g.ActiveId == id ? ImGuiCol_FrameBgActive : hovered ? ImGuiCol_FrameBgHovered
+																									   : ImGuiCol_FrameBg);
 		ImGui::RenderNavHighlight(frame_bb, id);
 		window->DrawList->AddRectFilled(frame_sc.Min, frame_sc.Max, frame_col, grab_radius);
 
@@ -511,35 +511,33 @@ namespace OSImGui
 		// Render grab
 		if (grab_bb.Max.x > grab_bb.Min.x)
 		{
-			window->DrawList->AddShadowCircle(grab_bb.GetCenter(), grab_radius, ImColor(30, 30, 30, 255), 9, { 0,0 });
+			window->DrawList->AddShadowCircle(grab_bb.GetCenter(), grab_radius, ImColor(30, 30, 30, 255), 9, {0, 0});
 			window->DrawList->AddCircleFilled(grab_bb.GetCenter(), grab_radius, ImColor(220, 220, 220, 255));
 		}
 
 		// Display value using user-provided display format so user can add prefix/suffix/decorations to the value.
 		char value_buf[64];
-		const char* value_buf_end = value_buf + ImGui::DataTypeFormatString(value_buf, IM_ARRAYSIZE(value_buf), data_type, p_data, format);
+		const char *value_buf_end = value_buf + ImGui::DataTypeFormatString(value_buf, IM_ARRAYSIZE(value_buf), data_type, p_data, format);
 		if (g.LogEnabled)
 			ImGui::LogSetNextTextDecoration("{", "}");
 		ImGui::RenderTextClipped(frame_bb.Min, frame_bb.Max, value_buf, value_buf_end, NULL, ImVec2(0.5f, 0.5f));
-
 
 		// label
 		if (label_size.x > 0.0f)
 			ImGui::RenderText(ImVec2(frame_bb.Max.x + style.ItemInnerSpacing.x, frame_bb.Min.y + style.FramePadding.y), label);
 
-
 		IMGUI_TEST_ENGINE_ITEM_INFO(id, label, g.LastItemData.StatusFlags | (temp_input_allowed ? ImGuiItemStatusFlags_Inputable : 0));
 		return value_changed;
 	}
 
-	bool OSImGui::SliderScalarEx2(const char* label, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+	bool OSImGui::SliderScalarEx2(const char *label, ImGuiDataType data_type, void *p_data, const void *p_min, const void *p_max, const char *format, ImGuiSliderFlags flags)
 	{
-		ImGuiWindow* window = ImGui::GetCurrentWindow();
+		ImGuiWindow *window = ImGui::GetCurrentWindow();
 		if (window->SkipItems)
 			return false;
 
-		ImGuiContext& g = *GImGui;
-		const ImGuiStyle& style = g.Style;
+		ImGuiContext &g = *GImGui;
+		const ImGuiStyle &style = g.Style;
 		const ImGuiID id = window->GetID(label);
 		const float w = ImGui::CalcItemWidth();
 
@@ -593,7 +591,8 @@ namespace OSImGui
 		float frame_height_origin = frame_sc.GetHeight();
 		frame_sc.Min.y += frame_height_origin / 3;
 		frame_sc.Max.y -= frame_height_origin / 3;
-		const ImU32 frame_col = ImGui::ColorConvertFloat4ToU32(g.ActiveId == id ? ImColor(60, 60, 60, 255) : hovered ? ImColor(130, 130, 130, 255) : ImColor(87, 87, 87, 255));
+		const ImU32 frame_col = ImGui::ColorConvertFloat4ToU32(g.ActiveId == id ? ImColor(60, 60, 60, 255) : hovered ? ImColor(130, 130, 130, 255)
+																													 : ImColor(87, 87, 87, 255));
 		ImGui::RenderNavHighlight(frame_bb, id);
 		window->DrawList->AddRectFilled(frame_sc.Min, frame_sc.Max, frame_col, grab_radius);
 
@@ -607,38 +606,35 @@ namespace OSImGui
 		if (grab_bb.Max.x > grab_bb.Min.x)
 		{
 			window->DrawList->AddRectFilled(
-				{ grab_bb.GetCenter().x - grab_radius * 1.5f, grab_bb.GetCenter().y - grab_radius },
-				{ grab_bb.GetCenter().x + grab_radius * 1.5f, grab_bb.GetCenter().y + grab_radius },
+				{grab_bb.GetCenter().x - grab_radius * 1.5f, grab_bb.GetCenter().y - grab_radius},
+				{grab_bb.GetCenter().x + grab_radius * 1.5f, grab_bb.GetCenter().y + grab_radius},
 				ImColor(220, 220, 220, 255), 3);
 			window->DrawList->AddLine(
-				{ grab_bb.GetCenter().x - grab_radius * 0.5f - 1, grab_bb.GetCenter().y - grab_radius * 0.75f },
-				{ grab_bb.GetCenter().x - grab_radius * 0.5f - 1, grab_bb.GetCenter().y + grab_radius * 0.75f },
+				{grab_bb.GetCenter().x - grab_radius * 0.5f - 1, grab_bb.GetCenter().y - grab_radius * 0.75f},
+				{grab_bb.GetCenter().x - grab_radius * 0.5f - 1, grab_bb.GetCenter().y + grab_radius * 0.75f},
 				ImColor(150, 150, 150, 255), 1.3f);
 			window->DrawList->AddLine(
-				{ grab_bb.GetCenter().x - 1, grab_bb.GetCenter().y - grab_radius * 0.75f },
-				{ grab_bb.GetCenter().x - 1, grab_bb.GetCenter().y + grab_radius * 0.75f },
+				{grab_bb.GetCenter().x - 1, grab_bb.GetCenter().y - grab_radius * 0.75f},
+				{grab_bb.GetCenter().x - 1, grab_bb.GetCenter().y + grab_radius * 0.75f},
 				ImColor(150, 150, 150, 255), 1.3f);
 			window->DrawList->AddLine(
-				{ grab_bb.GetCenter().x + grab_radius * 0.5f - 1, grab_bb.GetCenter().y - grab_radius * 0.75f },
-				{ grab_bb.GetCenter().x + grab_radius * 0.5f - 1, grab_bb.GetCenter().y + grab_radius * 0.75f },
+				{grab_bb.GetCenter().x + grab_radius * 0.5f - 1, grab_bb.GetCenter().y - grab_radius * 0.75f},
+				{grab_bb.GetCenter().x + grab_radius * 0.5f - 1, grab_bb.GetCenter().y + grab_radius * 0.75f},
 				ImColor(150, 150, 150, 255), 1.3f);
 		}
 
 		// Display value using user-provided display format so user can add prefix/suffix/decorations to the value.
 		char value_buf[64];
-		const char* value_buf_end = value_buf + ImGui::DataTypeFormatString(value_buf, IM_ARRAYSIZE(value_buf), data_type, p_data, format);
+		const char *value_buf_end = value_buf + ImGui::DataTypeFormatString(value_buf, IM_ARRAYSIZE(value_buf), data_type, p_data, format);
 		if (g.LogEnabled)
 			ImGui::LogSetNextTextDecoration("{", "}");
 		ImGui::RenderTextClipped(frame_bb.Min, frame_bb.Max, value_buf, value_buf_end, NULL, ImVec2(0.5f, 0.5f));
-
 
 		// label
 		if (label_size.x > 0.0f)
 			ImGui::RenderText(ImVec2(frame_bb.Max.x + style.ItemInnerSpacing.x, frame_bb.Min.y + style.FramePadding.y), label);
 
-
 		IMGUI_TEST_ENGINE_ITEM_INFO(id, label, g.LastItemData.StatusFlags | (temp_input_allowed ? ImGuiItemStatusFlags_Inputable : 0));
 		return value_changed;
 	}
 }
-

@@ -87,44 +87,30 @@ bool CGame::UpdateEntityListEntry()
 bool CGame::SetViewAngle(float Yaw, float Pitch)
 {
 	Vec2 Angle{Pitch, Yaw};
-
-	if (!ProcessMgr.WriteMemory<Vec2>(this->Address.ViewAngle, Angle))
-		return false;
-
-	return true;
+	return ProcessMgr.WriteMemory<Vec2>(this->Address.ViewAngle, Angle);
 }
 
 bool CGame::SetForceJump(int value)
 {
-	if (!ProcessMgr.WriteMemory<int>(this->Address.ForceJump, value))
-		return false;
-
-	return true;
+	return ProcessMgr.WriteMemory<int>(this->Address.ForceJump, value);
 }
+
 bool CGame::GetForceJump(int &value)
 {
-	if (!ProcessMgr.ReadMemory<int>(this->Address.ForceJump, value))
-		return false;
-
-	return true;
+	return ProcessMgr.ReadMemory<int>(this->Address.ForceJump, value);
 }
+
 bool CGame::SetForceCrouch(int value)
 {
-	if (!ProcessMgr.WriteMemory<int>(this->Address.ForceCrouch, value))
-		return false;
-
-	return true;
+	return ProcessMgr.WriteMemory<int>(this->Address.ForceCrouch, value);
 }
+
 bool CGame::GetForceCrouch(int &value)
 {
-	if (!ProcessMgr.ReadMemory<int>(this->Address.ForceCrouch, value))
-		return false;
-
-	return true;
+	return ProcessMgr.ReadMemory<int>(this->Address.ForceCrouch, value);
 }
 
-// MovingType: 0 = Forward, 1 = Left, 2 = Right
-bool CGame::SetForceMove(int MovingType, int Value)
+bool CGame::SetForceMove(int MovingType /* 0: Forward 1: Left 2: Right */, int Value)
 {
 	switch (MovingType)
 	{

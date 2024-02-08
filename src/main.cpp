@@ -56,8 +56,14 @@ namespace SussyAim
             std::cout << " OK" << std::endl;
         }
 
-        SussyAim::Cfg::dir = fs::current_path().string() + "\\SussyAim";
-        SussyAim::Cfg::dirSounds = SussyAim::Cfg::dir + "\\Sounds";
+        SussyAim::Cfg::dir = fs::current_path().string();
+        for (char &c : SussyAim::Cfg::dir)
+            if (c == '\\')
+                c = '/';
+
+        SussyAim::Cfg::dir += "/SussyAim/";
+        SussyAim::Cfg::dirConfigs = SussyAim::Cfg::dir + "configs/";
+        SussyAim::Cfg::dirSounds = SussyAim::Cfg::dir + "sounds/";
 
         if (!Offset::UpdateOffsets())
         {
@@ -77,7 +83,7 @@ namespace SussyAim
         std::cout << "[Game] Client DLL Address: " << gGame.GetClientDLLAddress() << std::endl;
 
         if (fs::exists(SussyAim::Cfg::dir))
-            std::cout << "[Info] Config folder found: " << SussyAim::Cfg::dir << std::endl;
+            std::cout << "[Info] Config folder: " << SussyAim::Cfg::dir << std::endl;
         else
         {
             if (fs::create_directory(SussyAim::Cfg::dir))
@@ -89,8 +95,21 @@ namespace SussyAim
             }
         }
 
+        if (fs::exists(SussyAim::Cfg::dirConfigs))
+            std::cout << "[Info] Configs folder: " << SussyAim::Cfg::dirConfigs << std::endl;
+        else
+        {
+            if (fs::create_directory(SussyAim::Cfg::dirConfigs))
+                std::cout << "[Info] Configs folder created: " << SussyAim::Cfg::dirConfigs << std::endl;
+            else
+            {
+                std::cerr << "[Info] Error: Failed to create the file directory." << std::endl;
+                return;
+            }
+        }
+
         if (fs::exists(SussyAim::Cfg::dirSounds))
-            std::cout << "[Info] Hitsound folder found: " << SussyAim::Cfg::dirSounds << std::endl;
+            std::cout << "[Info] Hitsound folder: " << SussyAim::Cfg::dirSounds << std::endl;
         else
         {
             if (fs::create_directory(SussyAim::Cfg::dirSounds))
@@ -156,7 +175,8 @@ int main()
     {
         std::cerr << "Std Exception caught: " << ex.what() << std::endl;
     }
-    catch (...) {
+    catch (...)
+    {
         std::cerr << "Unknown exception caught" << std::endl;
     }
     SetConsoleTextAttribute(SussyAim::hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);

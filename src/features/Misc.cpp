@@ -62,34 +62,12 @@ namespace Misc
 		getCurrentTime(&ptm);
 
 		ImGui::Text("%d fps | %02d:%02d:%02d",
-			FrameRate != 0.0f ? static_cast<int>(FrameRate) : 0,
-			ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
+					FrameRate != 0.0f ? static_cast<int>(FrameRate) : 0,
+					ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 		ImGui::End();
 	}
 
-	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept
-	{
-		if (!SussyAim::Cfg::Misc::HitSound)
-			return;
-
-		std::string soundDir = SussyAim::Cfg::dirSounds + "\\Hit.wav";
-		std::wstring sound = Misc::STR2LPCWSTR(soundDir);
-
-		uintptr_t pBulletServices;
-		int totalHits;
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.BulletServices, pBulletServices);
-		ProcessMgr.ReadMemory(pBulletServices + Offset::Pawn.TotalHit, totalHits);
-
-		if (totalHits != PreviousTotalHits) {
-			if (!(totalHits == 0 && PreviousTotalHits != 0))
-			{
-				PlaySoundW(sound.c_str(), NULL, SND_FILENAME | SND_ASYNC);
-			}
-		}
-		PreviousTotalHits = totalHits;
-	}
-
-	void NoFlash(const CEntity& aLocalPlayer) noexcept
+	void NoFlash(const CEntity &aLocalPlayer) noexcept
 	{
 		if (!SussyAim::Cfg::Misc::NoFlash)
 			return;
@@ -118,19 +96,19 @@ namespace Misc
 	void NadeManager(CGame Game) noexcept
 	{
 		std::vector<std::string> EntityNames = {
-		"smokegrenade_projectile", "weapon_glock", "weapon_smokegrenade", "basemodelentity",
-		"c_cs_player_for_precache", "info_particle_system", "prop_dynamic", "post_processing_volume",
-		"env_player_visibility", "team_intro_terrorist", "c_cs_observer_for_precache",
-		"team_intro_counterterrorist", "point_camera", "sky_camera", "env_sky", "team_select_terrorist",
-		"team_select_counterterrorist", "point_camera", "func_bomb_target", "env_cubemap_fog",
-		"csgo_viewmodel", "cs_minimap_boundary", "cs_gamerules", "cs_player_manager", "vote_controller",
-		"weapon_incgrenade", "molotov_projectile"
-		};
+			"smokegrenade_projectile", "weapon_glock", "weapon_smokegrenade", "basemodelentity",
+			"c_cs_player_for_precache", "info_particle_system", "prop_dynamic", "post_processing_volume",
+			"env_player_visibility", "team_intro_terrorist", "c_cs_observer_for_precache",
+			"team_intro_counterterrorist", "point_camera", "sky_camera", "env_sky", "team_select_terrorist",
+			"team_select_counterterrorist", "point_camera", "func_bomb_target", "env_cubemap_fog",
+			"csgo_viewmodel", "cs_minimap_boundary", "cs_gamerules", "cs_player_manager", "vote_controller",
+			"weapon_incgrenade", "molotov_projectile"};
 
 		if (!SussyAim::Cfg::Misc::NoSmoke && !SussyAim::Cfg::Misc::SmokeColored)
 			return;
 
-		for (int i_smoke = 64; i_smoke < 1024; i_smoke++) {
+		for (int i_smoke = 64; i_smoke < 1024; i_smoke++)
+		{
 			uintptr_t SmokeEntity = GetSmokeEntity(i_smoke, Game.GetEntityListEntry());
 
 			uintptr_t ent_base, addr;
@@ -152,7 +130,7 @@ namespace Misc
 			{
 				char toread[32];
 				std::string classname;
-				Vector3 COLOR = { SussyAim::Cfg::Misc::SmokeColor.Value.x, SussyAim::Cfg::Misc::SmokeColor.Value.y ,SussyAim::Cfg::Misc::SmokeColor.Value.z };
+				Vector3 COLOR = {SussyAim::Cfg::Misc::SmokeColor.Value.x, SussyAim::Cfg::Misc::SmokeColor.Value.y, SussyAim::Cfg::Misc::SmokeColor.Value.z};
 				ProcessMgr.ReadMemory<uintptr_t>(ent_base + 0x10, addr);
 				ProcessMgr.ReadMemory<uintptr_t>(addr + 0x20, addr);
 				ProcessMgr.ReadMemory<char[32]>(addr, toread);
@@ -181,7 +159,7 @@ namespace Misc
 		}
 	}
 
-	void RadarHack(const CEntity& EntityList) noexcept
+	void RadarHack(const CEntity &EntityList) noexcept
 	{
 		if (!SussyAim::Cfg::Misc::RadarHack)
 			return;
@@ -190,7 +168,7 @@ namespace Misc
 		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::Pawn.bSpottedByMask, SpottedStatus);
 	}
 
-	void FovChanger(const CEntity& aLocalPlayer) noexcept
+	void FovChanger(const CEntity &aLocalPlayer) noexcept
 	{
 		DWORD64 CameraServices = 0;
 		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
@@ -199,7 +177,7 @@ namespace Misc
 		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Desiredfov);
 	}
 
-	void MoneyService(const CEntity& EntityList) noexcept
+	void MoneyService(const CEntity &EntityList) noexcept
 	{
 		if (!SussyAim::Cfg::Misc::MoneyService)
 			return;
@@ -225,7 +203,7 @@ namespace Misc
 		}
 	}
 
-	void FakeDuck(const CEntity& aLocalPlayer) noexcept
+	void FakeDuck(const CEntity &aLocalPlayer) noexcept
 	{
 
 		DWORD64 MovementServices;
@@ -236,12 +214,13 @@ namespace Misc
 		{
 			ProcessMgr.WriteMemory(MovementServices + 0x1E4, unDuck);
 		}
-		else {
+		else
+		{
 			ProcessMgr.WriteMemory(MovementServices + 0x1E4, Ducking);
 		}
 	}
 
-	void BunnyHop(const CEntity& Local) noexcept
+	void BunnyHop(const CEntity &Local) noexcept
 	{
 		if (!SussyAim::Cfg::Misc::BunnyHop)
 			return;

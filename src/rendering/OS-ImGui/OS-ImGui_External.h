@@ -7,8 +7,10 @@ namespace OSImGui
 	{
 	private:
 		WindowType Type = NEW;
+
 	public:
 		void AttachAnotherWindow(std::string DestWindowName, std::string DestWindowClassName, std::function<void()> CallBack);
+
 	private:
 		void MainLoop();
 		bool UpdateWindowData();

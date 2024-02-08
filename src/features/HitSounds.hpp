@@ -14,7 +14,7 @@ namespace SussyAim
 
             void run(const CEntity &aLocalPlayer) noexcept
             {
-                std::string soundDir = SussyAim::Cfg::dirSounds + "\\Hit.wav";
+                std::string soundDir = SussyAim::Cfg::dirSounds + "Hit.wav";
                 std::wstring sound = Misc::STR2LPCWSTR(soundDir);
 
                 uintptr_t pBulletServices;

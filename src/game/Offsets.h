@@ -11,7 +11,6 @@ namespace Offset
 	inline DWORD ForceForward;
 	inline DWORD ForceLeft;
 	inline DWORD ForceRight;
-
 	inline DWORD EntityList;
 	inline DWORD Matrix;
 	inline DWORD ViewAngle;

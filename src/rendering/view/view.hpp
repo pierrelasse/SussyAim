@@ -21,15 +21,10 @@ namespace SussyAim
 	{
 		void LoadImages()
 		{
-			if (AS_Logo == NULL)
-			{
-				std::cout << "[GUI] Loading images" << std::endl;
-				Gui.LoadTextureFromMemory(Images::Logo, sizeof Images::Logo, &AS_Logo, &LogoW, &LogoH);
-				Gui.LoadTextureFromMemory(Images::TabVisual, sizeof Images::TabVisual, &MenuButton1, &buttonW, &buttonH);
-				Gui.LoadTextureFromMemory(Images::TabAimbot, sizeof Images::TabAimbot, &MenuButton2, &buttonW, &buttonH);
-				Gui.LoadTextureFromMemory(Images::TabMisc, sizeof Images::TabMisc, &MenuButton3, &buttonW, &buttonH);
-				Gui.LoadTextureFromMemory(Images::TabConfig, sizeof Images::TabConfig, &MenuButton4, &buttonW, &buttonH);
-			}
+			if (AS_Logo != NULL)
+				return;
+			std::cout << "[GUI] Loading logo image" << std::endl;
+			Gui.LoadTextureFromMemory(Images::Logo, sizeof Images::Logo, &AS_Logo, &LogoW, &LogoH);
 		}
 
 		void renderQuitButton()

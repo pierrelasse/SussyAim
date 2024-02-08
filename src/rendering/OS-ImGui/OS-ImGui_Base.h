@@ -7,17 +7,17 @@
 #include <codecvt>
 #include <vector>
 #include <dwmapi.h>
-#pragma comment(lib,"dwmapi.lib")
+#pragma comment(lib, "dwmapi.lib")
 
 namespace OSImGui
 {
 	class D3DDevice
 	{
 	public:
-		ID3D11Device* g_pd3dDevice = nullptr;
-		ID3D11DeviceContext* g_pd3dDeviceContext = nullptr;
-		IDXGISwapChain* g_pSwapChain = nullptr;
-		ID3D11RenderTargetView* g_mainRenderTargetView = nullptr;
+		ID3D11Device *g_pd3dDevice = nullptr;
+		ID3D11DeviceContext *g_pd3dDeviceContext = nullptr;
+		IDXGISwapChain *g_pSwapChain = nullptr;
+		ID3D11RenderTargetView *g_mainRenderTargetView = nullptr;
 #ifdef _CONSOLE
 		bool CreateDeviceD3D(HWND hWnd);
 		void CleanupDeviceD3D();
@@ -37,7 +37,7 @@ namespace OSImGui
 	class WindowData
 	{
 	public:
-		HWND  hWnd = NULL;
+		HWND hWnd = NULL;
 		HINSTANCE hInstance = nullptr;
 		std::string Name;
 		std::wstring wName;
@@ -45,7 +45,7 @@ namespace OSImGui
 		std::wstring wClassName;
 		Vec2 Pos;
 		Vec2 Size;
-		ImColor BgColor{ 255, 255, 255 };
+		ImColor BgColor{255, 255, 255};
 	};
 
 	class OSImGui_Base
@@ -53,16 +53,19 @@ namespace OSImGui
 	public:
 		std::function<void()> CallBackFn = nullptr;
 		bool IsRunning = false;
+
 	public:
 		WindowData Window;
 		WindowData DestWindow;
+
 	public:
 		virtual void Quit() { IsRunning = true; };
+
 	public:
 		virtual bool CreateMyWindow() = 0;
-		virtual void MainLoop() {};
-		bool InitImGui(ID3D11Device* device, ID3D11DeviceContext* device_context);
+		virtual void MainLoop(){};
+		bool InitImGui(ID3D11Device *device, ID3D11DeviceContext *device_context);
 		void CleanImGui();
-		std::wstring StringToWstring(std::string& str);
+		std::wstring StringToWstring(std::string &str);
 	};
 }

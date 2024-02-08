@@ -2,7 +2,7 @@
 
 inline const DWORD BLOCKMAXSIZE = 409600;
 
-int GetSignatureArray(const std::string& Signature, std::vector<WORD>& SignatureArray)
+int GetSignatureArray(const std::string &Signature, std::vector<WORD> &SignatureArray)
 {
 	std::string Sig = Signature;
 	Sig.erase(std::remove(Sig.begin(), Sig.end(), ' '), Sig.end());
@@ -21,14 +21,14 @@ int GetSignatureArray(const std::string& Signature, std::vector<WORD>& Signature
 	return SignatureArray.size();
 }
 
-void GetNextArray(std::vector<short>& NextArray, const std::vector<WORD>& SignatureArray)
+void GetNextArray(std::vector<short> &NextArray, const std::vector<WORD> &SignatureArray)
 {
 	std::size_t Size = SignatureArray.size();
 	for (int i = 0; i < Size; i++)
 		NextArray[SignatureArray[i]] = i;
 }
 
-void SearchMemoryBlock(byte* MemoryBuffer, const std::vector<short>& NextArray, const std::vector<WORD>& SignatureArray, DWORD64 StartAddress, DWORD Size, std::vector<DWORD64>& ResultArray)
+void SearchMemoryBlock(byte *MemoryBuffer, const std::vector<short> &NextArray, const std::vector<WORD> &SignatureArray, DWORD64 StartAddress, DWORD Size, std::vector<DWORD64> &ResultArray)
 {
 	if (!ProcessMgr.ReadMemory(StartAddress, *MemoryBuffer, Size))
 		return;
@@ -37,9 +37,11 @@ void SearchMemoryBlock(byte* MemoryBuffer, const std::vector<short>& NextArray, 
 
 	for (int i = 0, j, k; i < Size;)
 	{
-		j = i; k = 0;
+		j = i;
+		k = 0;
 
-		for (; k < SignatureLength && j < Size && (SignatureArray[k] == MemoryBuffer[j] || SignatureArray[k] == 256); k++, j++);
+		for (; k < SignatureLength && j < Size && (SignatureArray[k] == MemoryBuffer[j] || SignatureArray[k] == 256); k++, j++)
+			;
 
 		if (k == SignatureLength)
 			ResultArray.push_back(StartAddress + i);
@@ -55,13 +57,13 @@ void SearchMemoryBlock(byte* MemoryBuffer, const std::vector<short>& NextArray, 
 	}
 }
 
-std::vector<DWORD64> ProcessManager::SearchMemory(const std::string& Signature, DWORD64 StartAddress, DWORD64 EndAddress, int SearchNum)
+std::vector<DWORD64> ProcessManager::SearchMemory(const std::string &Signature, DWORD64 StartAddress, DWORD64 EndAddress, int SearchNum)
 {
 	std::vector<DWORD64> ResultArray;
 	std::vector<WORD> SignatureArray;
 	std::vector<short> NextArray(260, -1);
 
-	byte* MemoryBuffer = new byte[BLOCKMAXSIZE];
+	byte *MemoryBuffer = new byte[BLOCKMAXSIZE];
 
 	if (GetSignatureArray(Signature, SignatureArray) <= 0)
 		return ResultArray;
@@ -95,7 +97,6 @@ std::vector<DWORD64> ProcessManager::SearchMemory(const std::string& Signature, 
 	}
 
 END:
-
 	delete[] MemoryBuffer;
 	return ResultArray;
 }

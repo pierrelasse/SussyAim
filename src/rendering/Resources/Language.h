@@ -169,8 +169,6 @@ namespace Lang
 		inline static const char* ConfigName;
 	} ConfigText;
 
-	void ChangeLang(int LangIndex);
-
 	inline void English()
 	{
 		Global.Date = u8"None";

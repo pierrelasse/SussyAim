@@ -10,29 +10,32 @@ namespace SussyAim
 	namespace Cfg
 	{
 		inline std::string dir;
+		inline std::string dirConfigs;
 		inline std::string dirSounds;
+
 		inline int page = 0; // 0: Visual 1: Aimbot 2: Misc 3: Config
 		inline int theme = 0;
 
 		struct
-			{
-				ImVec2 LogoPos = ImVec2(30.f, 30.f);
-				ImVec2 Logo2Pos = ImVec2(25.f, 25.f);
-				ImVec2 Button1Pos = ImVec2(30.f, 142.f);
-				ImVec2 Button2Pos = ImVec2(30.f, 142.f + 90.f);
-				ImVec2 Button3Pos = ImVec2(30.f, 142.f + 180.f);
-				ImVec2 Button4Pos = ImVec2(30.f, 142.f + 270.f);
-				ImVec2 ChildPos = ImVec2(257.f, 20.f);
-				ImVec2 ChildSize = ImVec2(574.f, 474.f);
-				ImColor BorderColor_Yellow = ImColor(127, 18, 39, 200);
-				ImColor BorderColor_Purple = ImColor(255, 0, 238, 255);
-			} WCS; // Window Component Settings
+		{
+			ImVec2 LogoPos = ImVec2(30.f, 30.f);
+			ImVec2 Logo2Pos = ImVec2(25.f, 25.f);
+			ImVec2 Button1Pos = ImVec2(30.f, 142.f);
+			ImVec2 Button2Pos = ImVec2(30.f, 142.f + 90.f);
+			ImVec2 Button3Pos = ImVec2(30.f, 142.f + 180.f);
+			ImVec2 Button4Pos = ImVec2(30.f, 142.f + 270.f);
+			ImVec2 ChildPos = ImVec2(257.f, 20.f);
+			ImVec2 ChildSize = ImVec2(574.f, 474.f);
+			ImColor BorderColor_Yellow = ImColor(127, 18, 39, 200);
+			ImColor BorderColor_Purple = ImColor(255, 0, 238, 255);
+		} WCS; // Window Component Settings
 
 		// namespace Visual
 		// {
 		// }
 
-		namespace Aimbot {
+		namespace Aimbot
+		{
 			inline bool enabled = true;
 
 			inline bool always = false;
@@ -45,7 +48,8 @@ namespace SussyAim
 			inline bool RCS = true;
 		}
 
-		namespace Triggerbot {
+		namespace Triggerbot
+		{
 			inline bool enabled = false;
 			inline bool always = false;
 			inline int hotkey = 0;
@@ -65,7 +69,6 @@ namespace SussyAim
 			// 0: Window 1: Collapse
 			inline int WindowStyle = 0;
 
-			
 			inline bool Bhop = false;
 
 			// inline int BoxType = 1;

@@ -17,7 +17,7 @@ namespace MyConfigSaver
 {
     void SaveConfig(const std::string &filename)
     {
-        std::ofstream configFile(SussyAim::Cfg::dir + '\\' + filename);
+        std::ofstream configFile(SussyAim::Cfg::dirConfigs + filename);
         if (!configFile.is_open())
         {
             std::cerr << "[Info] Error: Could not open the configuration file." << std::endl;
@@ -261,14 +261,14 @@ namespace MyConfigSaver
 
         configFile << emitter.c_str();
         configFile.close();
-        std::cout << "[Info] Configuration saved to " << SussyAim::Cfg::dir + '\\' + filename << std::endl;
+        std::cout << "[Info] Configuration saved to " << SussyAim::Cfg::dirConfigs + filename << std::endl;
     }
 
     void LoadConfig(const std::string &filename)
     {
         try
         {
-            YAML::Node config = YAML::LoadFile(SussyAim::Cfg::dir + '\\' + filename);
+            YAML::Node config = YAML::LoadFile(SussyAim::Cfg::dirConfigs + filename);
             if (config["ESP"])
             {
                 // If you want to make the new version compatible with the old configuration, you can add IsDefine(), like line 284.
@@ -425,7 +425,7 @@ namespace MyConfigSaver
             SussyAim::Features::Aimbot::SetHotKey(SussyAim::Cfg::Aimbot::AimbotHotKey);
             StyleChanger::UpdateSkin(SussyAim::Cfg::theme);
 
-            std::cout << "[Info] Configuration loaded from " << SussyAim::Cfg::dir + '\\' + filename << std::endl;
+            std::cout << "[Info] Configuration loaded from " << SussyAim::Cfg::dirConfigs + filename << std::endl;
         }
         catch (const std::exception &ex)
         {

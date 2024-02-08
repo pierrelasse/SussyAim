@@ -7,6 +7,7 @@ class globalvars
 {
 public:
     DWORD64 address = 0;
+
 public:
     float g_fRealTime;
     int g_iFrameCount;
@@ -16,9 +17,9 @@ public:
     float g_fCurrentTime2;
     int g_iTickCount;
     float g_fIntervalPerTick2;
-    void* g_vCurrentNetchan; // ?
-    char* g_cCurrentMap; // ? https://www.unknowncheats.me/forum/counter-strike-2-a/603800-check-empty-mapname-globalvars.html
-    char* g_cCurrentMapName; // ? https://www.unknowncheats.me/forum/counter-strike-2-a/603800-check-empty-mapname-globalvars.html
+    void *g_vCurrentNetchan; // ?
+    char *g_cCurrentMap;     // ? https://www.unknowncheats.me/forum/counter-strike-2-a/603800-check-empty-mapname-globalvars.html
+    char *g_cCurrentMapName; // ? https://www.unknowncheats.me/forum/counter-strike-2-a/603800-check-empty-mapname-globalvars.html
 public:
     bool UpdateGlobalvars();
     bool GetRealTime();
@@ -32,5 +33,6 @@ public:
     bool GetCurrentNetchan();
     bool GetCurrentMap();
     bool GetCurrentMapName();
+
 private:
 };

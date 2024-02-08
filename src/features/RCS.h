@@ -9,9 +9,9 @@ namespace RCS
 {
 	inline int RCSBullet = 1;
 
-	inline void UpdateAngles(const CEntity& Local, Vec2& Angles)
+	inline void UpdateAngles(const CEntity &Local, Vec2 &Angles)
 	{
-		auto oldPunch = Vec2{ };
+		auto oldPunch = Vec2{};
 		auto shotsFired = Local.Pawn.ShotsFired;
 
 		int ScreenCenterX = Gui.Window.Size.x / 2;
@@ -23,8 +23,7 @@ namespace RCS
 			auto viewAngles = Local.Pawn.ViewAngle;
 			auto aimPunch = Local.Pawn.AimPunchAngle;
 
-			auto newAngles = Vec2
-			{
+			auto newAngles = Vec2{
 				viewAngles.x + oldPunch.x - aimPunch.x * 2.f,
 				viewAngles.y + oldPunch.y - aimPunch.y * 2.f,
 			};

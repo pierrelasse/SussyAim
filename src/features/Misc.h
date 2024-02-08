@@ -19,7 +19,7 @@ namespace Misc
 	};
 
 	// Convert std::string into std::wstring
-	static inline std::wstring STR2LPCWSTR(const std::string& str)
+	static inline std::wstring STR2LPCWSTR(const std::string &str)
 	{
 		int size = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, nullptr, 0);
 		std::wstring result(size, L'\0');
@@ -27,24 +27,29 @@ namespace Misc
 		return result;
 	}
 
-	static inline void CheatText(const char* Cheat, bool config)
+	static inline void CheatText(const char *Cheat, bool config)
 	{
 		if (config)
 			ImGui::Text(Cheat);
 	}
 
-	static inline void getCurrentTime(struct tm* ptm) {
+	static inline void getCurrentTime(struct tm *ptm)
+	{
 		time_t now = time(NULL);
 		localtime_s(ptm, &now);
 	}
 
 	// Thanks @PedroGoncalves for the suggestion
-	static inline void StopKeyEvent(int WalkKey, bool* KeyStatus, int StopKey, float duration) {
-		if (GetAsyncKeyState(WalkKey) & 0x8000) {
+	static inline void StopKeyEvent(int WalkKey, bool *KeyStatus, int StopKey, float duration)
+	{
+		if (GetAsyncKeyState(WalkKey) & 0x8000)
+		{
 			*KeyStatus = true;
 		}
-		else {
-			if (*KeyStatus) {
+		else
+		{
+			if (*KeyStatus)
+			{
 				keybd_event(StopKey, MapVirtualKey(StopKey, 0), KEYEVENTF_SCANCODE, 0);
 				Sleep(50);
 				keybd_event(StopKey, MapVirtualKey(StopKey, 0), KEYEVENTF_KEYUP, 0);
@@ -53,33 +58,31 @@ namespace Misc
 		}
 	}
 
-	static inline uintptr_t GetSmokeEntity(int i, uintptr_t EntityListEntry) {
+	static inline uintptr_t GetSmokeEntity(int i, uintptr_t EntityListEntry)
+	{
 		uintptr_t Entity = EntityListEntry + 0x78 * (i + 1);
 		return Entity;
 	}
 
-	inline bool AirCheck(const CEntity& Local)
+	inline bool AirCheck(const CEntity &Local)
 	{
 		const bool hasFlagInAir = Local.Pawn.HasFlag(PlayerPawn::Flags::IN_AIR);
 		return hasFlagInAir;
 	}
-	inline bool CrouchCheck(const CEntity& Local)
+	inline bool CrouchCheck(const CEntity &Local)
 	{
 		const bool hasFlagDucking = Local.Pawn.HasFlag(PlayerPawn::Flags::IN_CROUCH);
 		return hasFlagDucking;
 	}
 
 	void Watermark() noexcept;
-	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
-	void NoFlash(const CEntity& aLocalPlayer) noexcept;
+	void NoFlash(const CEntity &aLocalPlayer) noexcept;
 	void FastStop() noexcept;
 	void NadeManager(CGame Game) noexcept;
-	void RadarHack(const CEntity& EntityList) noexcept;
-	void FovChanger(const CEntity& aLocalPlayer) noexcept;
-	void MoneyService(const CEntity& EntityList) noexcept;
-	void FakeDuck(const CEntity& EntityList) noexcept;
-	void BunnyHop(const CEntity& Local) noexcept;
+	void RadarHack(const CEntity &EntityList) noexcept;
+	void FovChanger(const CEntity &aLocalPlayer) noexcept;
+	void MoneyService(const CEntity &EntityList) noexcept;
+	void FakeDuck(const CEntity &EntityList) noexcept;
+	void BunnyHop(const CEntity &Local) noexcept;
 	void CheatList() noexcept;
-	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
-	void Jitter(const CEntity& EntityList) noexcept;
 }
