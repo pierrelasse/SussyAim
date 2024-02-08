@@ -13,7 +13,7 @@ namespace SussyAim
 			void render()
 			{
 				ImGui::Columns(2, nullptr, false);
-				ImGui::SetCursorPos(ImVec2(15.f, 24.f));
+				// ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 				ImGui::SeparatorText(ICON_FA_EYE " ESP");
 				float MinRounding = 0.f, MaxRouding = 5.f;
 				int MinCombo = 0, MaxCombo = 2;
@@ -49,7 +49,7 @@ namespace SussyAim
 				}
 
 				ImGui::NextColumn();
-				ImGui::SetCursorPosY(24.f);
+				// ImGui::SetCursorPosY(24.f);
 				ImGui::SeparatorText(ICON_FA_DOT_CIRCLE " Crosshairs");
 				float DotMin = 1.f, DotMax = 50.f;
 				int LengthMin = 1, LengthMax = 100;

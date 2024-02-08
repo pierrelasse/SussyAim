@@ -10,6 +10,7 @@
 #include "../Resources/Images.h"
 
 #include "view_aimbot.hpp"
+#include "view_triggerbot.hpp"
 #include "view_config.hpp"
 #include "view_misc.hpp"
 #include "view_visual.hpp"
@@ -46,93 +47,135 @@ namespace SussyAim
 			ImGui::PopStyleColor(4);
 		}
 
+		const char *format(const char *s, ...)
+		{
+			static char buffer[4096];
+			va_list args;
+			va_start(args, s);
+			vsnprintf(buffer, sizeof(buffer), s, args);
+			va_end(args);
+			return buffer;
+		}
+
 		static void render()
 		{
 			LoadImages();
 
-			ImTextureID ImageID;
-			ImVec2 LogoSize, LogoPos;
-			ImageID = (void *)AS_Logo;
-			LogoSize = ImVec2(LogoW, LogoH);
-			LogoPos = SussyAim::Cfg::WCS.LogoPos;
-			SussyAim::Cfg::Menu::ButtonBorderColor = SussyAim::Cfg::WCS.BorderColor_Yellow;
-
 			ImColor BorderColor = SussyAim::Cfg::Menu::ButtonBorderColor;
 
 			char TempText[256];
-			ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar;
+			ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse;
 			ImGui::SetNextWindowPos({(ImGui::GetIO().DisplaySize.x - 851.0f) / 2.0f, (ImGui::GetIO().DisplaySize.y - 514.0f) / 2.0f}, ImGuiCond_Once);
-			ImGui::SetNextWindowSize({851, 514});
-			ImGui::Begin("main", nullptr, Flags);
+			ImGui::SetNextWindowSize({851, 514}, ImGuiCond_Once);
+
+			static const char *windowTitle = format("SussyAim v%d.%d.%d###main", G_VERSION_MAJOR, G_VERSION_MINOR, G_VERSION_PATCH);
+			ImGui::Begin(windowTitle, nullptr, Flags);
 			{
-				renderQuitButton();
+				// renderQuitButton();
 
-				ImGui::SetCursorPos(LogoPos);
-				ImGui::Image(ImageID, LogoSize);
-
-				ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button1Pos);
-				ImGui::Image((void *)MenuButton1, ImVec2(buttonW, buttonH));
-				if (ImGui::IsItemClicked())
+				ImGui::BeginGroup();
 				{
-					SussyAim::Cfg::page = 0;
+					static ImTextureID ImageID = (void *)AS_Logo;
+					static ImVec2 LogoSize = ImVec2(LogoW, LogoH);
+					ImGui::Image(ImageID, LogoSize);
 				}
-				ImGui::GetWindowDrawList()->AddRect(
-					ImVec2(SussyAim::Cfg::WCS.Button1Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button1Pos.y + ImGui::GetWindowPos().y),
-					ImVec2(SussyAim::Cfg::WCS.Button1Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button1Pos.y + buttonH + ImGui::GetWindowPos().y),
-					BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				ImGui::EndGroup();
 
-				ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button2Pos);
-				ImGui::Image((void *)MenuButton2, ImVec2(buttonW, buttonH));
-				if (ImGui::IsItemClicked())
+				ImGui::BeginGroup();
+				ImGui::BeginTabBar("main_a");
 				{
-					SussyAim::Cfg::page = 1;
+					if (ImGui::BeginTabItem("Aimbot"))
+					{
+						SussyAim::view::aimbot::render();
+						ImGui::EndTabItem();
+					}
+					if (ImGui::BeginTabItem("Triggerbot"))
+					{
+						SussyAim::view::triggerbot::render();
+						ImGui::EndTabItem();
+					}
+					if (ImGui::BeginTabItem("Visual"))
+					{
+						SussyAim::view::visual::render();
+						ImGui::EndTabItem();
+					}
+					if (ImGui::BeginTabItem("Misc"))
+					{
+						SussyAim::view::misc::render();
+						ImGui::EndTabItem();
+					}
+					if (ImGui::BeginTabItem("Config"))
+					{
+						SussyAim::view::config::render();
+						ImGui::EndTabItem();
+					}
 				}
-				ImGui::GetWindowDrawList()->AddRect(
-					ImVec2(SussyAim::Cfg::WCS.Button2Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button2Pos.y + ImGui::GetWindowPos().y),
-					ImVec2(SussyAim::Cfg::WCS.Button2Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button2Pos.y + buttonH + ImGui::GetWindowPos().y),
-					BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				ImGui::EndTabBar();
+				ImGui::EndGroup();
 
-				ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button3Pos);
-				ImGui::Image((void *)MenuButton3, ImVec2(buttonW, buttonH));
-				if (ImGui::IsItemClicked())
-				{
-					SussyAim::Cfg::page = 2;
-				}
-				ImGui::GetWindowDrawList()->AddRect(
-					ImVec2(SussyAim::Cfg::WCS.Button3Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button3Pos.y + ImGui::GetWindowPos().y),
-					ImVec2(SussyAim::Cfg::WCS.Button3Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button3Pos.y + buttonH + ImGui::GetWindowPos().y),
-					BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				// ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button1Pos);
+				// ImGui::Image((void *)MenuButton1, ImVec2(buttonW, buttonH));
+				// if (ImGui::IsItemClicked())
+				// {
+				// 	SussyAim::Cfg::page = 0;
+				// }
+				// ImGui::GetWindowDrawList()->AddRect(
+				// 	ImVec2(SussyAim::Cfg::WCS.Button1Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button1Pos.y + ImGui::GetWindowPos().y),
+				// 	ImVec2(SussyAim::Cfg::WCS.Button1Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button1Pos.y + buttonH + ImGui::GetWindowPos().y),
+				// 	BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
-				ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button4Pos);
-				ImGui::Image((void *)MenuButton4, ImVec2(buttonW, buttonH));
-				if (ImGui::IsItemClicked())
-				{
-					SussyAim::Cfg::page = 3;
-				}
-				ImGui::GetWindowDrawList()->AddRect(
-					ImVec2(SussyAim::Cfg::WCS.Button4Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button4Pos.y + ImGui::GetWindowPos().y),
-					ImVec2(SussyAim::Cfg::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
-					BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				// ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button2Pos);
+				// ImGui::Image((void *)MenuButton2, ImVec2(buttonW, buttonH));
+				// if (ImGui::IsItemClicked())
+				// {
+				// 	SussyAim::Cfg::page = 1;
+				// }
+				// ImGui::GetWindowDrawList()->AddRect(
+				// 	ImVec2(SussyAim::Cfg::WCS.Button2Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button2Pos.y + ImGui::GetWindowPos().y),
+				// 	ImVec2(SussyAim::Cfg::WCS.Button2Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button2Pos.y + buttonH + ImGui::GetWindowPos().y),
+				// 	BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
-				ImGui::SetCursorPos(SussyAim::Cfg::WCS.ChildPos);
+				// ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button3Pos);
+				// ImGui::Image((void *)MenuButton3, ImVec2(buttonW, buttonH));
+				// if (ImGui::IsItemClicked())
+				// {
+				// 	SussyAim::Cfg::page = 2;
+				// }
+				// ImGui::GetWindowDrawList()->AddRect(
+				// 	ImVec2(SussyAim::Cfg::WCS.Button3Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button3Pos.y + ImGui::GetWindowPos().y),
+				// 	ImVec2(SussyAim::Cfg::WCS.Button3Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button3Pos.y + buttonH + ImGui::GetWindowPos().y),
+				// 	BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
-				ImGui::BeginChild("Page", SussyAim::Cfg::WCS.ChildSize);
-				switch (SussyAim::Cfg::page)
-				{
-				case 0:
-					SussyAim::view::visual::render();
-					break;
-				case 1:
-					SussyAim::view::aimbot::render();
-					break;
-				case 2:
-					SussyAim::view::misc::render();
-					break;
-				case 3:
-					SussyAim::view::config::render();
-					break;
-				}
-				ImGui::EndChild();
+				// ImGui::SetCursorPos(SussyAim::Cfg::WCS.Button4Pos);
+				// ImGui::Image((void *)MenuButton4, ImVec2(buttonW, buttonH));
+				// if (ImGui::IsItemClicked())
+				// {
+				// 	SussyAim::Cfg::page = 3;
+				// }
+				// ImGui::GetWindowDrawList()->AddRect(
+				// 	ImVec2(SussyAim::Cfg::WCS.Button4Pos.x + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button4Pos.y + ImGui::GetWindowPos().y),
+				// 	ImVec2(SussyAim::Cfg::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, SussyAim::Cfg::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
+				// 	BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+
+				// ImGui::SetCursorPos(SussyAim::Cfg::WCS.ChildPos);
+
+				// ImGui::BeginChild("Page", SussyAim::Cfg::WCS.ChildSize);
+				// switch (SussyAim::Cfg::page)
+				// {
+				// case 0:
+				// 	SussyAim::view::visual::render();
+				// 	break;
+				// case 1:
+				// 	SussyAim::view::aimbot::render();
+				// 	break;
+				// case 2:
+				// 	SussyAim::view::misc::render();
+				// 	break;
+				// case 3:
+				// 	SussyAim::view::config::render();
+				// 	break;
+				// }
+				// ImGui::EndChild();
 			}
 			ImGui::End();
 		}

@@ -144,11 +144,6 @@ namespace SussyAim
 			inline bool DrawFov = true; // aimbot?
 		}
 
-		namespace DebuggerConfig
-		{
-			inline bool Debug = false;
-		}
-
 		namespace Crosshair
 		{
 			inline float CrossHairSize = 75;

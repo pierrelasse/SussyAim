@@ -100,7 +100,6 @@
     <ClInclude Include="src\config\ConfigSaver.hpp" />
     <ClInclude Include="src\features\Aimbot.hpp" />
     <ClInclude Include="src\features\BombTimer.hpp" />
-    <ClInclude Include="src\features\Debugger.h" />
     <ClInclude Include="src\features\ESP.hpp" />
     <ClInclude Include="src\features\GetWeaponIcon.h" />
     <ClInclude Include="src\features\HitSounds.hpp" />
@@ -199,7 +198,6 @@
   <ItemGroup>
     <ClCompile Include="src\features\Misc.cpp" />
     <ClCompile Include="src\features\Mouse.cpp" />
-    <ClCompile Include="src\features\StyleChanger.cpp" />
     <ClCompile Include="src\game\Bone.cpp" />
     <ClCompile Include="src\game\Entity.cpp" />
     <ClCompile Include="src\game\Game.cpp" />

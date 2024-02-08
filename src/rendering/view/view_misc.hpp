@@ -15,8 +15,8 @@ namespace SussyAim
 				int FovMin = 60, FovMax = 140;
 
 				ImGui::Columns(2, nullptr, false);
-				ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-				ImGui::SeparatorText(ICON_FA_SUN " Miscabc");
+				// ImGui::SetCursorPos(ImVec2(15.f, 24.f));
+				ImGui::SeparatorText(ICON_FA_SUN " Misc");
 
 				PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::ShowHeadShootLine);
 				PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::WorkInSpec);
@@ -33,7 +33,7 @@ namespace SussyAim
 				PutSwitch(Lang::MiscText.RadarHack, 10.f, ImGui::GetFrameHeight() * 1.7f, &SussyAim::Cfg::Misc::RadarHack);
 				if (SussyAim::Cfg::Misc::RadarHack)
 				{
-					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
+					// ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 					ImGui::TextColored(ImColor(255, 50, 0, 255), Lang::MiscText.VisCheckDisable);
 				}
 				PutSwitch(Lang::MiscText.MoneyService, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::MoneyService);
@@ -48,15 +48,15 @@ namespace SussyAim
 				PutSwitch(Lang::MiscText.FakeDuck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::Jitter);
 				if (SussyAim::Cfg::Misc::Jitter)
 				{
-					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
+					// ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 					ImGui::TextColored(ImColor(255, 50, 0, 255), "This might cause BAN");
 				}
 
 				ImGui::NextColumn();
-				ImGui::SetCursorPosY(24.f);
+				// ImGui::SetCursorPosY(24.f);
 				ImGui::SeparatorText(ICON_FA_HEART " Menu Settings");
 				PutSwitch(Lang::MiscText.AntiRecord, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::StreamProof);
-				ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
+				// ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 				ImGui::TextDisabled(Lang::MiscText.ThemeList);
 				ImGui::SameLine();
 				if (ImGui::Combo("###Theme", &SussyAim::Cfg::theme, "Standard\0Custom\0"))

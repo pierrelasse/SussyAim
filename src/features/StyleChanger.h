@@ -4,5 +4,8 @@
 
 namespace StyleChanger
 {
-	void UpdateSkin(int Skin) noexcept;
+	static void UpdateSkin(int Skin) noexcept
+	{
+		Styles::Style1();
+	}
 }

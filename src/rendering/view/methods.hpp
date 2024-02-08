@@ -24,7 +24,7 @@ namespace SussyAim
 			ImGui::SetCursorPosX(checkboxPosX);
 		}
 
-		inline void PutSwitch(const char *string, float CursorX, float ContentWidth, bool *v, bool ColorEditor = false, const char *lable = NULL, float col[4] = NULL, const char *Tip = NULL)
+		inline bool PutSwitch(const char *string, float CursorX, float ContentWidth, bool *v, bool ColorEditor = false, const char *lable = NULL, float col[4] = NULL, const char *Tip = NULL)
 		{
 			ImGui::PushID(string);
 			float CurrentCursorX = ImGui::GetCursorPosX();
@@ -47,6 +47,7 @@ namespace SussyAim
 			// Gui.SwitchButton(string, v);
 			ImGui::Checkbox("###", v);
 			ImGui::PopID();
+			return v;
 		}
 
 		inline void PutColorEditor(const char *text, const char *lable, float CursorX, float ContentWidth, float col[4], const char *Tip = NULL)
