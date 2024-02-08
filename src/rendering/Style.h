@@ -6,13 +6,12 @@ namespace Styles
 {
     inline void Style1()
     {
-        // AimStar style from ImThemes
         ImGuiStyle &style = ImGui::GetStyle();
 
         style.Alpha = 1.0f;
         style.DisabledAlpha = 0.6000000238418579f;
         style.WindowPadding = ImVec2(6.0f, 3.0f);
-        style.WindowRounding = 10.0f;
+        // style.WindowRounding = 10.0f;
         style.WindowBorderSize = 1.0f;
         style.WindowMinSize = ImVec2(32.0f, 32.0f);
         style.WindowTitleAlign = ImVec2(0.5f, 0.5f);

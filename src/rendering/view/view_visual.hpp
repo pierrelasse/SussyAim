@@ -50,40 +50,6 @@ namespace SussyAim
 
 				ImGui::NextColumn();
 				ImGui::SetCursorPosY(24.f);
-				ImGui::SeparatorText(ICON_FA_GRIN_ALT " ESP Preview");
-				ImGui::Text("Preview will be removed");
-				// ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() }, { ImGui::GetCursorPosX() - ImGui::GetColumnWidth() * 0.65f, ImGui::GetCursorPosY() - ImGui::GetFrameHeight() });
-				// SussyAim::Features::ESP::RenderPreview({ImGui::GetColumnWidth(), ImGui::GetCursorPosY()});
-				// :P
-				ImGui::NewLine();
-				ImGui::NewLine();
-				ImGui::NewLine();
-				ImGui::NewLine();
-				ImGui::NewLine();
-				ImGui::NewLine();
-				ImGui::NewLine();
-				ImGui::NewLine();
-				ImGui::NewLine();
-
-				// ImGui::SeparatorText(ICON_FA_COMPASS" External Radar");
-				// float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;
-				// float ProportionMin = 500.f, ProportionMax = 3300.f;
-				// float RadarRangeMin = 100.f, RadarRangeMax = 300.f;
-				// float AlphaMin = 0.f, AlphaMax = 1.f;
-				// PutSwitch(Lang::RadarText.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &RadarCFG::ShowRadar);
-				// if (RadarCFG::ShowRadar)
-				// {
-				// 	PutSwitch(Lang::RadarText.CustomCheck, 5.f, ImGui::GetFrameHeight() * 1.7, &RadarCFG::customRadar);
-				// 	if (RadarCFG::customRadar)
-				// 	{
-				// 		PutSliderFloat(Lang::RadarText.SizeSlider, 5.f, &RadarCFG::RadarPointSizeProportion, &RadarPointSizeProportionMin, &RadarPointSizeProportionMax, "%1.f");
-				// 		PutSliderFloat(Lang::RadarText.ProportionSlider, 5.f, &RadarCFG::Proportion, &ProportionMin, &ProportionMax, "%.1f");
-				// 		PutSliderFloat(Lang::RadarText.RangeSlider, 5.f, &RadarCFG::RadarRange, &RadarRangeMin, &RadarRangeMax, "%.1f");
-				// 		PutSliderFloat(Lang::RadarText.AlphaSlider, 5.f, &RadarCFG::RadarBgAlpha, &AlphaMin, &AlphaMax, "%.1f");
-				// 	}
-				// }
-
-				ImGui::NewLine();
 				ImGui::SeparatorText(ICON_FA_DOT_CIRCLE " Crosshairs");
 				float DotMin = 1.f, DotMax = 50.f;
 				int LengthMin = 1, LengthMax = 100;

@@ -103,7 +103,6 @@
     <ClInclude Include="src\features\Debugger.h" />
     <ClInclude Include="src\features\ESP.hpp" />
     <ClInclude Include="src\features\GetWeaponIcon.h" />
-    <ClInclude Include="src\features\GUI.h" />
     <ClInclude Include="src\features\HitSounds.hpp" />
     <ClInclude Include="src\features\Misc.h" />
     <ClInclude Include="src\features\Mouse.h" />

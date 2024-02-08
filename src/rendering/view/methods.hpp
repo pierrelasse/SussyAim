@@ -44,7 +44,8 @@ namespace SussyAim
 				AlignRight(ContentWidth);
 			}
 
-			Gui.SwitchButton(string, v);
+			// Gui.SwitchButton(string, v);
+			ImGui::Checkbox("###", v);
 			ImGui::PopID();
 		}
 

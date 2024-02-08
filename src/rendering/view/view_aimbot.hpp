@@ -10,10 +10,8 @@ namespace SussyAim
 	{
 		namespace aimbot
 		{
-			void render()
+			void renderAimbot()
 			{
-				ImGui::Columns(2, nullptr, false);
-				ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 				ImGui::SeparatorText(ICON_FA_USER " Aimbot");
 				float FovMin = 0.f, FovMax = 50.f;
 				float SmoothMin = 0.f, SmoothMax = 5.f;
@@ -65,12 +63,16 @@ namespace SussyAim
 						}
 					}
 				}
-				ImGui::NextColumn();
-				ImGui::SetCursorPosY(24.f);
-				ImGui::SeparatorText(ICON_FA_ARROW_ALT_CIRCLE_DOWN " RCS");
-				PutSwitch("Enable RCS", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::RCS);
+			}
 
-				ImGui::NewLine();
+			void renderRCS()
+			{
+				ImGui::SeparatorText(ICON_FA_ARROW_ALT_CIRCLE_DOWN " RCS");
+				PutSwitch("Enable RCS", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::RCS, false, 0, 0, "test");
+			}
+
+			void renderTriggerbot()
+			{
 				ImGui::SeparatorText(ICON_FA_HAND_POINTER " Triggerbot");
 				int DelayMin = 10, DelayMax = 1000;
 				int DurationMin = 0, DurationMax = 1000;
@@ -91,6 +93,20 @@ namespace SussyAim
 					PutSliderInt(Lang::TriggerText.DelaySlider, 5.f, &SussyAim::Features::Triggerbot::TriggerDelay, &DelayMin, &DelayMax, "%d ms");
 					PutSliderInt(Lang::TriggerText.FakeShotSlider, 5.f, &SussyAim::Features::Triggerbot::FakeShotDelay, &DurationMin, &DurationMax, "%d ms");
 				}
+			}
+
+			void render()
+			{
+				ImGui::Columns(2, nullptr, false);
+				ImGui::SetCursorPos(ImVec2(15.f, 24.f));
+				renderAimbot();
+
+				ImGui::NextColumn();
+				ImGui::SetCursorPosY(24.f);
+				renderRCS();
+
+				ImGui::NewLine();
+				renderTriggerbot();
 
 				ImGui::Columns(1);
 			}

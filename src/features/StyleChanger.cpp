@@ -4,6 +4,7 @@ namespace StyleChanger
 {
 	void UpdateSkin(int Skin) noexcept
 	{
-		Styles::Style1();
+		if (Skin == 0)
+			Styles::Style1();
 	}
 }
