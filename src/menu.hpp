@@ -179,6 +179,20 @@ namespace SussyAim
                     Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
                 }
 
+                // It is meaningless to render a empty bar
+                if (SussyAim::Cfg::ESP::ArmorBar && Entity.Pawn.Armor > 0)
+                {
+                    bool HasHelmet;
+                    ImVec2 ArmorBarPos;
+                    ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
+                    if (SussyAim::Cfg::ESP::drawHealthBar)
+                        ArmorBarPos = {Rect.x - 10.f, Rect.y};
+                    else
+                        ArmorBarPos = {Rect.x - 6.f, Rect.y};
+                    ImVec2 ArmorBarSize = {4.f, Rect.w};
+                    Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
+                }
+
                 Render::DrawDistance(LocalEntity, Entity, Rect);
             }
             // SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);

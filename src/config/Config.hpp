@@ -142,7 +142,10 @@ namespace SussyAim
 			inline ImColor BoxFilledVisColor = ImColor(0, 0, 255, 255);
 			inline ImColor FilledColor2 = ImColor(0, 255, 102, 255);
 
-			inline bool DrawFov = true; // aimbot?
+			inline bool DrawFov = true; // TODO: aimbot
+
+			inline bool ArmorBar = false;
+			inline bool ShowArmorNum = false;
 		}
 
 		namespace Crosshair
