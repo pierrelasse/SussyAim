@@ -78,7 +78,7 @@ namespace Misc
 	}
 
 	void Watermark() noexcept;
-	void NoFlash(const CEntity &aLocalPlayer) noexcept;
+	void FlashImmunity(const CEntity &aLocalPlayer) noexcept;
 	void FastStop() noexcept;
 	void NadeManager(CGame Game) noexcept;
 	void RadarHack(const CEntity &EntityList) noexcept;

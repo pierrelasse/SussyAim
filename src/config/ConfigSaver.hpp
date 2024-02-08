@@ -180,7 +180,7 @@ namespace MyConfigSaver
         emitter << YAML::EndMap;
         emitter << YAML::Key << "WorkInSpec" << YAML::Value << SussyAim::Cfg::Misc::WorkInSpec;
         emitter << YAML::Key << "FovChanger" << YAML::Value << SussyAim::Cfg::Misc::fovChanger;
-        emitter << YAML::Key << "NoFlash" << YAML::Value << SussyAim::Cfg::Misc::NoFlash;
+        emitter << YAML::Key << "FlashImmunity" << YAML::Value << SussyAim::Cfg::Misc::FlashImmunity;
         emitter << YAML::Key << "CheatList" << YAML::Value << SussyAim::Cfg::Misc::CheatList;
         emitter << YAML::Key << "Watermark" << YAML::Value << SussyAim::Cfg::Misc::WaterMark;
         emitter << YAML::Key << "HitSound" << YAML::Value << SussyAim::Cfg::Misc::HitSound;
@@ -368,7 +368,7 @@ namespace MyConfigSaver
                 SussyAim::Cfg::Menu::HeadShootLineColor.Value.w = config["Misc"]["HeadShootLineColor"]["a"].as<float>();
                 SussyAim::Cfg::Misc::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
                 SussyAim::Cfg::Misc::fovChanger = config["Misc"]["FovChanger"].IsDefined() ? config["Misc"]["FovChanger"].as<bool>() : false;
-                SussyAim::Cfg::Misc::NoFlash = config["Misc"]["NoFlash"].as<bool>();
+                SussyAim::Cfg::Misc::FlashImmunity = config["Misc"]["FlashImmunity"].IsDefined() ? config["Misc"]["FlashImmunity"].as<float>() : 0.f;
                 SussyAim::Cfg::Misc::CheatList = config["Misc"]["CheatList"].IsDefined() ? config["Misc"]["CheatList"].as<bool>() : false;
                 SussyAim::Cfg::Misc::WaterMark = config["Misc"]["Watermark"].as<bool>();
                 SussyAim::Cfg::Misc::HitSound = config["Misc"]["HitSound"].as<bool>();

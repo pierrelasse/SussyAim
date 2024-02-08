@@ -28,12 +28,13 @@ namespace Misc
 		CheatText("ESP", SussyAim::Cfg::ESP::enabled);
 		CheatText("Fake Duck", SussyAim::Cfg::Misc::Jitter);
 		CheatText("Fast Stop", SussyAim::Cfg::Misc::FastStop);
+		if (SussyAim::Cfg::Misc::FlashImmunity != 0)
+			ImGui::Text("Flash Immunity");
 		if (SussyAim::Cfg::Misc::Fov != 90)
 			ImGui::Text("Fov Changer");
 		CheatText("Headshot Line", SussyAim::Cfg::Menu::ShowHeadShootLine);
 		CheatText("HitSound", SussyAim::Cfg::Misc::HitSound);
 		CheatText("Money Service", SussyAim::Cfg::Misc::MoneyService);
-		CheatText("No Flash", SussyAim::Cfg::Misc::NoFlash);
 		CheatText("No Smoke", SussyAim::Cfg::Misc::NoSmoke);
 		CheatText("Radar Hack", SussyAim::Cfg::Misc::RadarHack);
 		CheatText("RCS", SussyAim::Cfg::Aimbot::RCS);
@@ -67,13 +68,13 @@ namespace Misc
 		ImGui::End();
 	}
 
-	void NoFlash(const CEntity &aLocalPlayer) noexcept
+	void FlashImmunity(const CEntity &aLocalPlayer) noexcept
 	{
-		if (!SussyAim::Cfg::Misc::NoFlash)
-			return;
-
-		float duration = 0.0f;
-		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashDuration, duration);
+		if (SussyAim::Cfg::Misc::FlashImmunity > 0.f && SussyAim::Cfg::Misc::FlashImmunity <= 255.f)
+		{
+			const float maxAlpha = 255.f - SussyAim::Cfg::Misc::FlashImmunity;
+			ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, maxAlpha);
+		}
 	}
 
 	void FastStop() noexcept
@@ -170,6 +171,9 @@ namespace Misc
 
 	void FovChanger(const CEntity &aLocalPlayer) noexcept
 	{
+		if (!SussyAim::Cfg::Misc::fovChanger)
+			return;
+
 		DWORD64 CameraServices = 0;
 		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
 			return;

@@ -10,16 +10,20 @@ namespace SussyAim
 	{
 		namespace misc
 		{
+			inline float FlashMin = 0.f, FlashMax = 255.f;
+			inline int FovMin = 30, FovMax = 200;
+
 			void render()
 			{
 				PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::ShowHeadShootLine);
 				PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::WorkInSpec);
 
 				PutSwitch("Fov changer", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::fovChanger);
-				int FovMin = 60, FovMax = 140;
-				PutSliderInt("##fovChangerValue", 10.f, &SussyAim::Cfg::Misc::Fov, &FovMin, &FovMax, "%d");
+				ImGui::SameLine();
+				Gui.SliderScalarEx2("##fovChangerValue", ImGuiDataType_Float, &SussyAim::Cfg::Misc::Fov, &FovMin, &FovMax, SussyAim::Cfg::Misc::Fov == 90 ? "Normal (90)" : "%d", ImGuiSliderFlags_None);
 
-				PutSwitch(Lang::MiscText.NoFlash, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::NoFlash);
+				PutSliderFloat("Max flash alpha", 10.f, &SussyAim::Cfg::Misc::FlashImmunity, &FlashMin, &FlashMax, SussyAim::Cfg::Misc::FlashImmunity == 0.f ? "Off" : "-%.f/-255");
+
 				PutSwitch(Lang::MiscText.FastStop, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::FastStop);
 				PutSwitch("Force Scope", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::ForceScope);
 				PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::NoSmoke);

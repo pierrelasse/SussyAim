@@ -269,9 +269,7 @@ public:
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
 
-		if (WriteProcessMemory(hProcess, reinterpret_cast<LPVOID>(Address), &Value, sizeof(ReadType), 0))
-			return true;
-		return false;
+		return WriteProcessMemory(hProcess, reinterpret_cast<LPVOID>(Address), &Value, sizeof(ReadType), 0);
 	}
 
 	/// <summary>

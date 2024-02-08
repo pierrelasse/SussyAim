@@ -190,7 +190,7 @@ namespace SussyAim
         if (SussyAim::Cfg::Misc::HitSound)
             SussyAim::Features::HitSounds::run(LocalEntity);
 
-        Misc::NoFlash(LocalEntity);
+        Misc::FlashImmunity(LocalEntity);
         Misc::FastStop();
         Misc::NadeManager(gGame);
         Misc::FovChanger(LocalEntity);

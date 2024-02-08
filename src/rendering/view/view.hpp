@@ -50,8 +50,10 @@ namespace SussyAim
 
 		static void renderMainMenu()
 		{
+#ifdef G_IMGUI_DEMO
 			if (SussyAim::view::menu::showImGuiDemo)
 				ImGui::ShowDemoWindow();
+#endif
 
 			if (AS_Logo == NULL)
 			{

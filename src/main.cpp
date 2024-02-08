@@ -7,6 +7,8 @@
 
 #define G_PROGRAMFILENAME "cs2.exe"
 
+//#define G_IMGUI_DEMO
+
 // Settings End
 
 #include "config/Config.hpp"
