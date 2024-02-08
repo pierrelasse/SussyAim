@@ -1,16 +1,17 @@
 #pragma once
+
 #include <string>
 
 template <typename... Args>
-inline std::string Format(const char *pFormat, Args... args)
+inline std::string Format(const char *format, Args... args)
 {
-	int Length = std::snprintf(nullptr, 0, pFormat, args...);
-	if (Length <= 0)
+	const int len = std::snprintf(nullptr, 0, format, args...);
+	if (len <= 0)
 		return "";
-	char *Str = new char[Length + 1];
-	std::string Result;
-	std::snprintf(Str, Length + 1, pFormat, args...);
-	Result = std::string(Str);
-	delete[] Str;
-	return Result;
+	char *s = new char[len + 1];
+	std::string res;
+	std::snprintf(s, len + 1, format, args...);
+	res = std::string(s);
+	delete[] s;
+	return res;
 }

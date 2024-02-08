@@ -12,16 +12,17 @@ namespace SussyAim
 		{
 			void render()
 			{
-				PutSwitch("Predict recoil", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::RCS, false, 0, 0, "Very op");
+				PutSwitch("Enabled", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::enabled);
+				
+				ImGui::Spacing();
 
 				float FovMin = 0.f, FovMax = 50.f;
 				float SmoothMin = 0.f, SmoothMax = 5.f;
-				PutSwitch(Lang::AimbotText.Enable, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::enabled);
 				if (SussyAim::Cfg::Aimbot::enabled)
 				{
 					ImGui::TextDisabled(Lang::AimbotText.HotKeyList);
 					ImGui::SameLine();
-					if (ImGui::Combo("###AimKey", &SussyAim::Cfg::Aimbot::AimbotHotKey, "LALT\0LBUTTON\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0MouseForward\0"))
+					if (ImGui::Combo("###AimKey", &SussyAim::Cfg::Aimbot::AimbotHotKey, "LALT\0LBUTTON\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0"))
 					{
 						ImGui::TextDisabled(Lang::AimbotText.HotKeyList);
 						ImGui::SameLine();
@@ -38,9 +39,12 @@ namespace SussyAim
 					PutSwitch(Lang::AimbotText.AutoShot, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Features::Aimbot::AutoShot);
 					PutSliderFloat(Lang::AimbotText.FovSlider, 10.f, &SussyAim::Features::Aimbot::AimFov, &FovMin, &FovMax, "%.1f");
 					PutSliderFloat(Lang::AimbotText.SmoothSlider, 10.f, &SussyAim::Features::Aimbot::Smooth, &SmoothMin, &SmoothMax, "%.1f");
+
+					ImGui::Spacing();
+					
 					ImGui::TextDisabled(Lang::AimbotText.BoneList);
 					ImGui::SameLine();
-					if (ImGui::Combo("###AimPos", &SussyAim::Cfg::Aimbot::AimPosition, "Head\0Neck\0Chest\0Penis\0"))
+					if (ImGui::Combo("###AimPos", &SussyAim::Cfg::Aimbot::AimPosition, "Head\0Neck\0Chest\0Pelvis\0"))
 					{
 						switch (SussyAim::Cfg::Aimbot::AimPosition)
 						{
@@ -60,6 +64,10 @@ namespace SussyAim
 							break;
 						}
 					}
+
+					ImGui::Spacing();
+
+					PutSwitch("Predict recoil", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::RCS, false, 0, 0, "Very op");
 				}
 			}
 

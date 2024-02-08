@@ -8,6 +8,7 @@
 namespace SpecList
 {
     float spectatorOffsetY = 0;
+
     bool isSpectating(const uint32_t m_hPawn)
     {
         uintptr_t pCSPlayerPawn, m_pObserverServices, m_hObserverTarget;

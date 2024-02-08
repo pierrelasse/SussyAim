@@ -2,6 +2,7 @@
 
 #include "../sacommon.hpp"
 #include "../game/Entity.h"
+#include "../config/Config.hpp"
 
 namespace SussyAim
 {
