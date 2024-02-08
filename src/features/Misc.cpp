@@ -249,4 +249,21 @@ namespace Misc
 			gGame.SetForceJump(256);
 		}
 	}
+
+	void ForceScope(const CEntity &aLocalPlayer) noexcept
+	{
+		if (!SussyAim::Cfg::Misc::ForceScope)
+			return;
+
+		if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
+		{
+			Zoom = true;
+			UINT Scopefov = 45;
+			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Scopefov);
+		}
+		else
+		{
+			Zoom = false;
+		}
+	}
 }

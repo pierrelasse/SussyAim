@@ -207,6 +207,7 @@ namespace SussyAim
 			inline bool SmokeColored = false;
 			inline bool FireColored = false;
 			inline bool CheatList = false;
+			inline bool ForceScope = false;
 			inline bool fovChanger = false;
 			inline int Fov = 90;
 			inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);

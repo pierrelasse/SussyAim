@@ -369,7 +369,7 @@ namespace MyConfigSaver
                 SussyAim::Cfg::Misc::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
                 SussyAim::Cfg::Misc::fovChanger = config["Misc"]["FovChanger"].IsDefined() ? config["Misc"]["FovChanger"].as<bool>() : false;
                 SussyAim::Cfg::Misc::NoFlash = config["Misc"]["NoFlash"].as<bool>();
-                SussyAim::Cfg::Misc::CheatList = config["Misc"]["CheatList"].as<bool>();
+                SussyAim::Cfg::Misc::CheatList = config["Misc"]["CheatList"].IsDefined() ? config["Misc"]["CheatList"].as<bool>() : false;
                 SussyAim::Cfg::Misc::WaterMark = config["Misc"]["Watermark"].as<bool>();
                 SussyAim::Cfg::Misc::HitSound = config["Misc"]["HitSound"].as<bool>();
                 SussyAim::Cfg::Misc::bombTimer = config["Misc"]["BombTimer"].as<bool>();

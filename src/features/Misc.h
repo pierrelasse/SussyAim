@@ -12,6 +12,8 @@
 
 namespace Misc
 {
+	inline bool Zoom;
+
 	struct Vector3
 	{
 		float x, y, z;
@@ -85,4 +87,5 @@ namespace Misc
 	void FakeDuck(const CEntity &EntityList) noexcept;
 	void BunnyHop(const CEntity &Local) noexcept;
 	void CheatList() noexcept;
+	void ForceScope(const CEntity &aLocalPlayer) noexcept;
 }

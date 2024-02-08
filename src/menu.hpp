@@ -198,6 +198,7 @@ namespace SussyAim
         Misc::FakeDuck(LocalEntity);
         Misc::BunnyHop(LocalEntity);
         Misc::CheatList();
+        Misc::ForceScope(LocalEntity);
 
         // Fov line
         Render::DrawFov(LocalEntity, SussyAim::Cfg::Menu::FovLineSize, SussyAim::Cfg::Menu::FovLineColor, 1);

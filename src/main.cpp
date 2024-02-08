@@ -1,7 +1,7 @@
 ﻿// Settings
 #define G_VERSION_MAJOR 2
-#define G_VERSION_MINOR 2
-#define G_VERSION_PATCH 0
+#define G_VERSION_MINOR 4
+#define G_VERSION_PATCH 2
 
 // #define G_PRINTOFFSETS
 

@@ -23,6 +23,7 @@ namespace SussyAim
 				PutSliderInt(Lang::MiscText.fovChanger, 10.f, &SussyAim::Cfg::Misc::Fov, &FovMin, &FovMax, "%d");
 				PutSwitch(Lang::MiscText.NoFlash, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::NoFlash);
 				PutSwitch(Lang::MiscText.FastStop, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::FastStop);
+				PutSwitch("Force Scope", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::ForceScope);
 				PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::NoSmoke);
 				PutSwitch(Lang::MiscText.SmokeColor, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::SmokeColored, true, "###SmokeColor", reinterpret_cast<float *>(&SussyAim::Cfg::Misc::SmokeColor));
 				PutSwitch(Lang::MiscText.HitSound, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::HitSound);
