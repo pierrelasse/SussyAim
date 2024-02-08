@@ -155,6 +155,15 @@ namespace SussyAim
 
 				ImGui::Columns(1);
 			}
+
+			void renderItem()
+			{
+				if (ImGui::BeginTabItem(ICON_FA_COGS " Config"))
+				{
+					render();
+					ImGui::EndTabItem();
+				}
+			}
 		}
 	}
 }

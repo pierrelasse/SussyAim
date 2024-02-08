@@ -41,7 +41,7 @@ namespace SussyAim
     void tick()
     {
         if (updateShowMenu())
-            SussyAim::view::render();
+            SussyAim::view::renderMainMenu();
 
         // Update matrix
         if (!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix, 64))

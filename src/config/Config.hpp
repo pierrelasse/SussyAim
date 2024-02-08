@@ -37,14 +37,12 @@ namespace SussyAim
 		namespace Aimbot
 		{
 			inline bool enabled = true;
-
 			inline bool always = false;
 			inline bool AimToggleMode = false;
 			inline int AimbotHotKey = 0;
 			inline int AimPosition = 0; // 0: head 1: neck 3: spine
 			inline DWORD AimPositionIndex = BONEINDEX::head;
 			inline bool VisibleCheck = true;
-
 			inline bool RCS = true;
 		}
 

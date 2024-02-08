@@ -27,26 +27,28 @@ namespace SussyAim
 		inline bool PutSwitch(const char *string, float CursorX, float ContentWidth, bool *v, bool ColorEditor = false, const char *lable = NULL, float col[4] = NULL, const char *Tip = NULL)
 		{
 			ImGui::PushID(string);
-			float CurrentCursorX = ImGui::GetCursorPosX();
-			ImGui::SetCursorPosX(CurrentCursorX + CursorX);
-			ImGui::TextDisabled(string);
+
+			ImGui::Checkbox("", v);
 			if (Tip && ImGui::IsItemHovered())
 				ImGui::SetTooltip(Tip);
-			ImGui::SameLine();
+
 			if (ColorEditor)
 			{
-				AlignRight(ContentWidth + ImGui::GetFrameHeight() + 8);
-				ImGui::ColorEdit4(lable, col, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_AlphaPreview);
 				ImGui::SameLine();
-			}
-			else
-			{
-				AlignRight(ContentWidth);
+				ImGui::ColorEdit4("", col, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_AlphaPreview);
+				if (Tip && ImGui::IsItemHovered())
+					ImGui::SetTooltip(Tip);
 			}
 
-			// Gui.SwitchButton(string, v);
-			ImGui::Checkbox("###", v);
+			ImGui::SameLine();
+			ImGui::TextDisabled(string);
+			if (ImGui::IsItemClicked())
+				(*v) = !(*v);
+			if (Tip && ImGui::IsItemHovered())
+				ImGui::SetTooltip(Tip);
+
 			ImGui::PopID();
+
 			return v;
 		}
 
