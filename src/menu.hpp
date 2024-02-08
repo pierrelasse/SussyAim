@@ -7,9 +7,8 @@
 #include "features/BombTimer.hpp"
 #include "features/ESP.hpp"
 #include "features/HitSounds.hpp"
-#include "features/GUI.h"
 
-//#include "rendering/view/view.hpp"
+#include "rendering/view/view.hpp"
 
 namespace SussyAim
 {
@@ -42,8 +41,7 @@ namespace SussyAim
     void tick()
     {
         if (updateShowMenu())
-            ViewMenu::Render();
-            //SussyAim::view::render();
+            SussyAim::view::render();
 
         // Update matrix
         if (!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix, 64))
@@ -192,24 +190,25 @@ namespace SussyAim
         if (SussyAim::Cfg::Misc::HitSound)
             SussyAim::Features::HitSounds::run(LocalEntity);
 
-        // Misc::NoFlash(LocalEntity);
-        // Misc::FastStop();
-        // Misc::NadeManager(gGame);
-        // Misc::FovChanger(LocalEntity);
-        // Misc::Watermark();
-        // Misc::FakeDuck(LocalEntity);
-        // Misc::BunnyHop(LocalEntity);
+        Misc::NoFlash(LocalEntity);
+        Misc::FastStop();
+        Misc::NadeManager(gGame);
+        Misc::FovChanger(LocalEntity);
+        Misc::Watermark();
+        Misc::FakeDuck(LocalEntity);
+        Misc::BunnyHop(LocalEntity);
+        Misc::CheatList();
 
         // Fov line
-        // Render::DrawFov(LocalEntity, SussyAim::Cfg::Menu::FovLineSize, SussyAim::Cfg::Menu::FovLineColor, 1);
+        Render::DrawFov(LocalEntity, SussyAim::Cfg::Menu::FovLineSize, SussyAim::Cfg::Menu::FovLineColor, 1);
 
         // HeadShoot Line
-        // Render::HeadShootLine(LocalEntity, SussyAim::Cfg::Menu::HeadShootLineColor);
+        Render::HeadShootLine(LocalEntity, SussyAim::Cfg::Menu::HeadShootLineColor);
 
         // CrossHair
-        // Triggerbot::TargetCheck(LocalEntity);
-        // Misc::AirCheck(LocalEntity);
-        // RenderCrossHair(ImGui::GetBackgroundDrawList());
+        SussyAim::Features::Triggerbot::TargetCheck(LocalEntity);
+        Misc::AirCheck(LocalEntity);
+        RenderCrossHair(ImGui::GetBackgroundDrawList());
 
         SussyAim::Features::BombTimer::render();
 

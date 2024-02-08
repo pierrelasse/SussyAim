@@ -16,7 +16,7 @@ namespace SussyAim
 
 				ImGui::Columns(2, nullptr, false);
 				ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-				ImGui::SeparatorText(ICON_FA_SUN " Misc");
+				ImGui::SeparatorText(ICON_FA_SUN " Miscabc");
 
 				PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::ShowHeadShootLine);
 				PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::WorkInSpec);
@@ -24,9 +24,10 @@ namespace SussyAim
 				PutSwitch(Lang::MiscText.NoFlash, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::NoFlash);
 				PutSwitch(Lang::MiscText.FastStop, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::FastStop);
 				PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::NoSmoke);
-				PutSwitch(Lang::MiscText.SmokeColor, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::SmokeColored, true, "###SmokeColor", reinterpret_cast<float*>(&SussyAim::Cfg::Misc::SmokeColor));
+				PutSwitch(Lang::MiscText.SmokeColor, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::SmokeColored, true, "###SmokeColor", reinterpret_cast<float *>(&SussyAim::Cfg::Misc::SmokeColor));
 				PutSwitch(Lang::MiscText.HitSound, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::HitSound);
-				PutSwitch(Lang::MiscText.bmbTimer, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::bombTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&SussyAim::Cfg::Misc::BombTimerCol));
+				PutSwitch(Lang::MiscText.bmbTimer, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::bombTimer, true, "###bmbTimerCol", reinterpret_cast<float *>(&SussyAim::Cfg::Misc::BombTimerCol));
+				PutSwitch("Cheat List", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::CheatList);
 				PutSwitch(Lang::MiscText.Bhop, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::BunnyHop);
 				// PutSwitch(Lang::MiscText.SpecList, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::SpecList);
 				PutSwitch(Lang::MiscText.RadarHack, 10.f, ImGui::GetFrameHeight() * 1.7f, &SussyAim::Cfg::Misc::RadarHack);
@@ -77,20 +78,20 @@ namespace SussyAim
 					ImColor ScrollBg = ImGui::GetStyleColorVec4(ImGuiCol_ScrollbarBg);
 					// ########################################
 					ImGui::SeparatorText("Theme Color Settings");
-					PutColorEditor("Button Border", "###ThemeCol1", 5.f, 0.f, reinterpret_cast<float*>(&SussyAim::Cfg::Menu::ButtonBorderColor));
-					PutColorEditor("Border", "###ThemeCol2", 5.f, 0.f, reinterpret_cast<float*>(&borderColor));
-					PutColorEditor("Button", "###ThemeCol3", 5.f, 0.f, reinterpret_cast<float*>(&ButtonColor));
-					PutColorEditor("Button Hovered", "###ThemeCol4", 5.f, 0.f, reinterpret_cast<float*>(&ButtonHovered));
-					PutColorEditor("Button Active", "###ThemeCol5", 5.f, 0.f, reinterpret_cast<float*>(&ButtonActive));
-					PutColorEditor("Child Window Bg", "###ThemeCol6", 5.f, 0.f, reinterpret_cast<float*>(&childBgColor));
-					PutColorEditor("Frame Bg", "###ThemeCol7", 5.f, 0.f, reinterpret_cast<float*>(&FrameBgColor));
-					PutColorEditor("Frame Bg Hovered", "###ThemeCol8", 5.f, 0.f, reinterpret_cast<float*>(&FrameHovered));
-					PutColorEditor("Frame Bg Active", "###ThemeCol9", 5.f, 0.f, reinterpret_cast<float*>(&FrameActive));
-					PutColorEditor("Header", "###ThemeCol10", 5.f, 0.f, reinterpret_cast<float*>(&Header));
-					PutColorEditor("Header Active", "###ThemeCol11", 5.f, 0.f, reinterpret_cast<float*>(&HeaderActive));
-					PutColorEditor("Header Hovered", "###ThemeCol12", 5.f, 0.f, reinterpret_cast<float*>(&HeaderHovered));
-					PutColorEditor("Scrollbar Bg", "###ThemeCol13", 5.f, 0.f, reinterpret_cast<float*>(&ScrollBg));
-					PutColorEditor("Window Bg", "###ThemeCol14", 5.f, 0.f, reinterpret_cast<float*>(&windowBgColor));
+					PutColorEditor("Button Border", "###ThemeCol1", 5.f, 0.f, reinterpret_cast<float *>(&SussyAim::Cfg::Menu::ButtonBorderColor));
+					PutColorEditor("Border", "###ThemeCol2", 5.f, 0.f, reinterpret_cast<float *>(&borderColor));
+					PutColorEditor("Button", "###ThemeCol3", 5.f, 0.f, reinterpret_cast<float *>(&ButtonColor));
+					PutColorEditor("Button Hovered", "###ThemeCol4", 5.f, 0.f, reinterpret_cast<float *>(&ButtonHovered));
+					PutColorEditor("Button Active", "###ThemeCol5", 5.f, 0.f, reinterpret_cast<float *>(&ButtonActive));
+					PutColorEditor("Child Window Bg", "###ThemeCol6", 5.f, 0.f, reinterpret_cast<float *>(&childBgColor));
+					PutColorEditor("Frame Bg", "###ThemeCol7", 5.f, 0.f, reinterpret_cast<float *>(&FrameBgColor));
+					PutColorEditor("Frame Bg Hovered", "###ThemeCol8", 5.f, 0.f, reinterpret_cast<float *>(&FrameHovered));
+					PutColorEditor("Frame Bg Active", "###ThemeCol9", 5.f, 0.f, reinterpret_cast<float *>(&FrameActive));
+					PutColorEditor("Header", "###ThemeCol10", 5.f, 0.f, reinterpret_cast<float *>(&Header));
+					PutColorEditor("Header Active", "###ThemeCol11", 5.f, 0.f, reinterpret_cast<float *>(&HeaderActive));
+					PutColorEditor("Header Hovered", "###ThemeCol12", 5.f, 0.f, reinterpret_cast<float *>(&HeaderHovered));
+					PutColorEditor("Scrollbar Bg", "###ThemeCol13", 5.f, 0.f, reinterpret_cast<float *>(&ScrollBg));
+					PutColorEditor("Window Bg", "###ThemeCol14", 5.f, 0.f, reinterpret_cast<float *>(&windowBgColor));
 
 					// Update Color
 					ImGui::GetStyle().Colors[ImGuiCol_Border] = borderColor;

@@ -181,6 +181,7 @@ namespace MyConfigSaver
         emitter << YAML::Key << "WorkInSpec" << YAML::Value << SussyAim::Cfg::Misc::WorkInSpec;
         emitter << YAML::Key << "FovChanger" << YAML::Value << SussyAim::Cfg::Misc::fovChanger;
         emitter << YAML::Key << "NoFlash" << YAML::Value << SussyAim::Cfg::Misc::NoFlash;
+        emitter << YAML::Key << "CheatList" << YAML::Value << SussyAim::Cfg::Misc::CheatList;
         emitter << YAML::Key << "Watermark" << YAML::Value << SussyAim::Cfg::Misc::WaterMark;
         emitter << YAML::Key << "HitSound" << YAML::Value << SussyAim::Cfg::Misc::HitSound;
         emitter << YAML::Key << "BombTimer" << YAML::Value << SussyAim::Cfg::Misc::bombTimer;
@@ -237,6 +238,7 @@ namespace MyConfigSaver
         emitter << YAML::Key << "AimPos" << YAML::Value << SussyAim::Cfg::Aimbot::AimPosition;
         emitter << YAML::Key << "VisibleCheck" << YAML::Value << SussyAim::Cfg::Aimbot::VisibleCheck;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << SussyAim::Features::Aimbot::ScopeOnly;
+        emitter << YAML::Key << "AutoShot" << YAML::Value << SussyAim::Features::Aimbot::AutoShot;
         emitter << YAML::EndMap;
 
         emitter << YAML::Key << "Triggerbot";
@@ -367,6 +369,7 @@ namespace MyConfigSaver
                 SussyAim::Cfg::Misc::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
                 SussyAim::Cfg::Misc::fovChanger = config["Misc"]["FovChanger"].IsDefined() ? config["Misc"]["FovChanger"].as<bool>() : false;
                 SussyAim::Cfg::Misc::NoFlash = config["Misc"]["NoFlash"].as<bool>();
+                SussyAim::Cfg::Misc::CheatList = config["Misc"]["CheatList"].as<bool>();
                 SussyAim::Cfg::Misc::WaterMark = config["Misc"]["Watermark"].as<bool>();
                 SussyAim::Cfg::Misc::HitSound = config["Misc"]["HitSound"].as<bool>();
                 SussyAim::Cfg::Misc::bombTimer = config["Misc"]["BombTimer"].as<bool>();
@@ -404,6 +407,7 @@ namespace MyConfigSaver
                 SussyAim::Features::Aimbot::Smooth = config["Aimbot"]["Smooth"].as<float>();
                 SussyAim::Cfg::Aimbot::AimPosition = config["Aimbot"]["AimPos"].as<int>();
                 SussyAim::Cfg::Aimbot::VisibleCheck = config["Aimbot"]["VisibleCheck"].as<bool>();
+                SussyAim::Features::Aimbot::AutoShot = config["Aimbot"]["AutoShot"].IsDefined() ? config["Aimbot"]["AutoShot"].as<bool>() : false;
             }
             if (config["Triggerbot"])
             {

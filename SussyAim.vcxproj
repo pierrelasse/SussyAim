@@ -142,6 +142,12 @@
     <ClInclude Include="src\rendering\Resources\Language.h" />
     <ClInclude Include="src\rendering\Resources\WeaponIcon.h" />
     <ClInclude Include="src\rendering\Style.h" />
+    <ClInclude Include="src\rendering\view\methods.hpp" />
+    <ClInclude Include="src\rendering\view\view.hpp" />
+    <ClInclude Include="src\rendering\view\view_aimbot.hpp" />
+    <ClInclude Include="src\rendering\view\view_config.hpp" />
+    <ClInclude Include="src\rendering\view\view_misc.hpp" />
+    <ClInclude Include="src\rendering\view\view_visual.hpp" />
     <ClInclude Include="src\resource.h" />
     <ClInclude Include="src\sacommon.hpp" />
     <ClInclude Include="src\utils\Format.h" />

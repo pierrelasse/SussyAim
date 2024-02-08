@@ -22,6 +22,7 @@ namespace SussyAim
 		{
 			inline int HotKey = VK_LMENU;
 			inline bool ScopeOnly = false;
+			inline bool AutoShot = false;
 			inline float AimFov = 5;
 			inline float Smooth = 0.0f;
 			inline Vec2 RCSScale = {1.f, 1.f};
@@ -112,6 +113,11 @@ namespace SussyAim
 					if (!Smooth)
 					{
 						mouse_event(MOUSEEVENTF_MOVE, (DWORD)(TargetX), (DWORD)(TargetY), NULL, NULL);
+						if (AutoShot)
+						{
+							mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+							mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+						}
 						return;
 					}
 
@@ -138,6 +144,11 @@ namespace SussyAim
 						}
 					}
 					mouse_event(MOUSEEVENTF_MOVE, TargetX, TargetY, NULL, NULL);
+					if (AutoShot)
+					{
+						mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+						mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+					}
 				}
 			}
 		}

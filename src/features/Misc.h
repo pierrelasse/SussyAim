@@ -79,6 +79,7 @@ namespace Misc
 	void MoneyService(const CEntity& EntityList) noexcept;
 	void FakeDuck(const CEntity& EntityList) noexcept;
 	void BunnyHop(const CEntity& Local) noexcept;
+	void CheatList() noexcept;
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
 	void Jitter(const CEntity& EntityList) noexcept;
 }

@@ -1,6 +1,6 @@
 ﻿// Settings
 #define G_VERSION_MAJOR 2
-#define G_VERSION_MINOR 1
+#define G_VERSION_MINOR 2
 #define G_VERSION_PATCH 0
 
 // #define G_PRINTOFFSETS
@@ -19,7 +19,7 @@ namespace SussyAim
 {
     HANDLE hConsole;
 
-    void runSussyAim()
+    static void runSussyAim()
     {
         SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
         printf(R"(   _____                              _           

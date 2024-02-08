@@ -31,7 +31,8 @@ namespace SussyAim
 			}
 		}
 
-		void renderQuitButton() {
+		void renderQuitButton()
+		{
 			static const ImVec4 nothingColor = ImVec4(0, 0, 0, 0);
 			ImGui::PushStyleColor(ImGuiCol_Button, nothingColor);
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, nothingColor);
@@ -45,7 +46,7 @@ namespace SussyAim
 			ImGui::PopStyleColor(4);
 		}
 
-		void render()
+		static void render()
 		{
 			LoadImages();
 
@@ -116,30 +117,20 @@ namespace SussyAim
 				ImGui::SetCursorPos(SussyAim::Cfg::WCS.ChildPos);
 
 				ImGui::BeginChild("Page", SussyAim::Cfg::WCS.ChildSize);
+				switch (SussyAim::Cfg::page)
 				{
-					// Visual
-					if (SussyAim::Cfg::page == 0)
-					{
-						SussyAim::view::visual::render();
-					}
-
-					// Aimbot
-					else if (SussyAim::Cfg::page == 1)
-					{
-						SussyAim::view::aimbot::render();
-					}
-
-					// Misc
-					else if (SussyAim::Cfg::page == 2)
-					{
-						SussyAim::view::misc::render();
-					}
-
-					// Config
-					else if (SussyAim::Cfg::page == 3)
-					{
-						SussyAim::view::config::render();
-					}
+				case 0:
+					SussyAim::view::visual::render();
+					break;
+				case 1:
+					SussyAim::view::aimbot::render();
+					break;
+				case 2:
+					SussyAim::view::misc::render();
+					break;
+				case 3:
+					SussyAim::view::config::render();
+					break;
 				}
 				ImGui::EndChild();
 			}

@@ -8,6 +8,43 @@ namespace Misc
 	bool wKeyPressed = false;
 	bool sKeyPressed = false;
 
+	void CheatList() noexcept
+	{
+		if (!SussyAim::Cfg::Misc::CheatList)
+			return;
+
+		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
+		ImGui::SetNextWindowBgAlpha(0.3f);
+		ImGui::SetNextWindowSize(ImVec2(200, 0));
+		ImGui::Begin("Cheats List", nullptr, windowFlags);
+
+		if (SussyAim::Cfg::Aimbot::enabled && (SussyAim::Cfg::Aimbot::always || GetAsyncKeyState(SussyAim::Cfg::Aimbot::AimbotHotKey)))
+			ImGui::Text("Aimbot [Toggle]");
+		CheatText("Anti Record", SussyAim::Cfg::Menu::StreamProof);
+		CheatText("Bhop", SussyAim::Cfg::Misc::BunnyHop);
+		CheatText("Bomb Timer", SussyAim::Cfg::Misc::bombTimer);
+		CheatText("Crosshair", SussyAim::Cfg::Crosshair::ShowCrossHair);
+		CheatText("Enemy Sensor", SussyAim::Cfg::Misc::EnemySensor);
+		CheatText("ESP", SussyAim::Cfg::ESP::enabled);
+		CheatText("Fake Duck", SussyAim::Cfg::Misc::Jitter);
+		CheatText("Fast Stop", SussyAim::Cfg::Misc::FastStop);
+		if (SussyAim::Cfg::Misc::Fov != 90)
+			ImGui::Text("Fov Changer");
+		CheatText("Headshot Line", SussyAim::Cfg::Menu::ShowHeadShootLine);
+		CheatText("HitSound", SussyAim::Cfg::Misc::HitSound);
+		CheatText("Money Service", SussyAim::Cfg::Misc::MoneyService);
+		CheatText("No Flash", SussyAim::Cfg::Misc::NoFlash);
+		CheatText("No Smoke", SussyAim::Cfg::Misc::NoSmoke);
+		CheatText("Radar Hack", SussyAim::Cfg::Misc::RadarHack);
+		CheatText("RCS", SussyAim::Cfg::Aimbot::RCS);
+		CheatText("Smoke Color", SussyAim::Cfg::Misc::SmokeColored);
+		CheatText("Spec List", SussyAim::Cfg::Misc::SpecList);
+		if (SussyAim::Cfg::Triggerbot::enabled && (SussyAim::Cfg::Triggerbot::always || GetAsyncKeyState(SussyAim::Cfg::Triggerbot::hotkey)))
+			ImGui::Text("TriggerBot [Toggle]");
+
+		ImGui::End();
+	}
+
 	void Watermark() noexcept
 	{
 		if (!SussyAim::Cfg::Misc::WaterMark)
