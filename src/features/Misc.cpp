@@ -26,7 +26,7 @@ namespace Misc
 		CheatText("Crosshair", SussyAim::Cfg::Crosshair::ShowCrossHair);
 		CheatText("Enemy Sensor", SussyAim::Cfg::Misc::EnemySensor);
 		CheatText("ESP", SussyAim::Cfg::ESP::enabled);
-		CheatText("Fake Duck", SussyAim::Cfg::Misc::Jitter);
+		CheatText("Fake Duck", SussyAim::Cfg::Misc::fakeDuck);
 		CheatText("Fast Stop", SussyAim::Cfg::Misc::FastStop);
 		if (SussyAim::Cfg::Misc::FlashImmunity != 0)
 			ImGui::Text("Flash Immunity");
@@ -96,14 +96,14 @@ namespace Misc
 
 	void NadeManager(CGame Game) noexcept
 	{
-		std::vector<std::string> EntityNames = {
-			"smokegrenade_projectile", "weapon_glock", "weapon_smokegrenade", "basemodelentity",
-			"c_cs_player_for_precache", "info_particle_system", "prop_dynamic", "post_processing_volume",
-			"env_player_visibility", "team_intro_terrorist", "c_cs_observer_for_precache",
-			"team_intro_counterterrorist", "point_camera", "sky_camera", "env_sky", "team_select_terrorist",
-			"team_select_counterterrorist", "point_camera", "func_bomb_target", "env_cubemap_fog",
-			"csgo_viewmodel", "cs_minimap_boundary", "cs_gamerules", "cs_player_manager", "vote_controller",
-			"weapon_incgrenade", "molotov_projectile"};
+		// static std::vector<std::string> EntityNames = {
+		// 	"smokegrenade_projectile", "weapon_glock", "weapon_smokegrenade", "basemodelentity",
+		// 	"c_cs_player_for_precache", "info_particle_system", "prop_dynamic", "post_processing_volume",
+		// 	"env_player_visibility", "team_intro_terrorist", "c_cs_observer_for_precache",
+		// 	"team_intro_counterterrorist", "point_camera", "sky_camera", "env_sky", "team_select_terrorist",
+		// 	"team_select_counterterrorist", "point_camera", "func_bomb_target", "env_cubemap_fog",
+		// 	"csgo_viewmodel", "cs_minimap_boundary", "cs_gamerules", "cs_player_manager", "vote_controller",
+		// 	"weapon_incgrenade", "molotov_projectile"};
 
 		if (!SussyAim::Cfg::Misc::NoSmoke && !SussyAim::Cfg::Misc::SmokeColored)
 			return;
@@ -209,18 +209,14 @@ namespace Misc
 
 	void FakeDuck(const CEntity &aLocalPlayer) noexcept
 	{
-
-		DWORD64 MovementServices;
-		float Tick;
-		bool Ducking = 1, unDuck = 0;
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.MovementServices, MovementServices);
-		if (!SussyAim::Cfg::Misc::Jitter)
+		const bool value = SussyAim::Cfg::Misc::fakeDuck;
+		static bool lastValue = 0;
+		if (value != lastValue)
 		{
-			ProcessMgr.WriteMemory(MovementServices + 0x1E4, unDuck);
-		}
-		else
-		{
-			ProcessMgr.WriteMemory(MovementServices + 0x1E4, Ducking);
+			lastValue = value;
+			DWORD64 MovementServices;
+			ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.MovementServices, MovementServices);
+			ProcessMgr.WriteMemory(MovementServices + 0x1E4, value);
 		}
 	}
 

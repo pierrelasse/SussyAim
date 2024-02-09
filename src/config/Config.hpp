@@ -215,7 +215,7 @@ namespace SussyAim
 			inline ImColor SmokeColor = ImColor(255, 0, 0, 255);
 			inline ImColor FireColor = ImColor(0, 255, 0, 255);
 
-			inline bool Jitter = false;
+			inline bool fakeDuck = false;
 		}
 	}
 }

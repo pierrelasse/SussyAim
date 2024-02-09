@@ -5,16 +5,45 @@
 
 #define G_PROGRAMFILENAME "cs2.exe"
 
-//#define G_PRINTOFFSETS
-//#define G_IMGUI_DEMO
+// #define G_PRINTOFFSETS
+// #define G_IMGUI_DEMO
 
 // Settings End
 
 #include "config/Config.hpp"
 #include "game/Offsets.h"
 #include "menu.hpp"
+#include "utils/ColorConsole.hpp"
 
 namespace fs = std::filesystem;
+
+static void printProcessMgrAttachFail(HANDLE &hConsole, const char *message)
+{
+    std::cout << hue::red;
+    std::cout << " FAIL" << std::endl;
+    std::cout << hue::light_red;
+    std::cout << "  " << message << std::endl;
+}
+
+static bool ensureDir(std::string &dir, const char *name)
+{
+    if (fs::exists(dir))
+    {
+        std::cout << "[Files] Folder '" << name << "': " << dir << std::endl;
+        return false;
+    }
+
+    if (fs::create_directory(dir))
+    {
+        std::cout << hue::light_green;
+        std::cout << "[Files] Created folder '" << name << "': " << dir << std::endl;
+        return false;
+    }
+
+    std::cout << hue::light_red;
+    std::cerr << "[Files] Error: Couldn't create folder '" << name << "' at: " << dir << std::endl;
+    return true;
+}
 
 namespace SussyAim
 {
@@ -22,40 +51,41 @@ namespace SussyAim
 
     static void runSussyAim()
     {
-        SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-        printf(R"(   _____                              _           
-  / ____|                       /\   (_)          
- | (___  _   _ ___ ___ _   _   /  \   _ _ __ ___  
-  \___ \| | | / __/ __| | | | / /\ \ | | '_ ` _ \ 
-  ____) | |_| \__ \__ \ |_| |/ ____ \| | | | | | |
- |_____/ \__,_|___/___/\__, /_/    \_\_|_| |_| |_|
-   By pierrelasse       __/ |  v%d.%d.%d
-    and AimStar ppl    |___/%s)",
-               G_VERSION_MAJOR, G_VERSION_MINOR, G_VERSION_PATCH, "\n\n");
+        std::cout << hue::red;
+        printf("   _____                              _\n");
+        printf("  / ____|                       /\\   (_)\n");
+        printf(" | (___  _   _ ___ ___ _   _   /  \\   _ _ __ ___\n");
+        printf("  \\___ \\| | | / __/ __| | | | / /\\ \\ | | '_ ` _ \\\n");
+        printf("  ____) | |_| \\__ \\__ \\ |_| |/ ____ \\| | | | | | |\n");
+        printf(" |_____/ \\__,_|___/___/\\__, /_/    \\_\\_|_| |_| |_|\n");
+        std::cout << hue::light_red;
+        printf("   By pierrelasse");
+        std::cout << hue::red;
+        printf("      __/ |  ");
+        std::cout << hue::light_red;
+        printf("v%d.%d.%d\n    and AimStar ppl", G_VERSION_MAJOR, G_VERSION_MINOR, G_VERSION_PATCH);
+        std::cout << hue::red;
+        printf("    |___/\n\n");
 
-        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+        std::cout << hue::reset;
 
-        std::cout << "[ProcessMgr] Attaching to " G_PROGRAMFILENAME;
+        printf("[ProcessMgr] Attaching to " G_PROGRAMFILENAME);
         switch (ProcessMgr.Attach(G_PROGRAMFILENAME))
         {
         case 1:
-            std::cout << " FAIL" << std::endl;
-            SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-            std::cout << "  Please launch the game first!" << std::endl;
+            printProcessMgrAttachFail(hConsole, "Please launch the game first!");
             return;
         case 2:
-            std::cout << " FAIL" << std::endl;
-            SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-            std::cout << "  Failed to hook process, please run the cheat as Administrator (Right click the executable > Run as Adminstrator)." << std::endl;
+            printProcessMgrAttachFail(hConsole, "Failed to hook process, please run the cheat as Administrator (Right click the executable > Run as Adminstrator)");
             return;
         case 3:
-            std::cout << " FAIL" << std::endl;
-            SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-            std::cout << "  Failed to get module address" << std::endl;
+            printProcessMgrAttachFail(hConsole, "Failed to get module address");
             return;
         default:
-            std::cout << " OK" << std::endl;
+            std::cout << hue::light_green;
+            printf(" OK\n");
         }
+        std::cout << hue::reset;
 
         SussyAim::Cfg::dir = fs::current_path().string();
         for (char &c : SussyAim::Cfg::dir)
@@ -63,73 +93,45 @@ namespace SussyAim
                 c = '/';
 
         SussyAim::Cfg::dir += "/SussyAim/";
-        SussyAim::Cfg::dirConfigs = SussyAim::Cfg::dir + "configs/";
-        SussyAim::Cfg::dirSounds = SussyAim::Cfg::dir + "sounds/";
+        if (ensureDir(SussyAim::Cfg::dir, "Root"))
+            return;
 
-        if (!Offset::UpdateOffsets())
+        SussyAim::Cfg::dirConfigs = SussyAim::Cfg::dir + "configs/";
+        if (ensureDir(SussyAim::Cfg::dirConfigs, "Configs"))
+            return;
+
+        SussyAim::Cfg::dirSounds = SussyAim::Cfg::dir + "sounds/";
+        if (ensureDir(SussyAim::Cfg::dirSounds, "Sounds"))
+            return;
+
+        if (Offset::UpdateOffsets())
         {
-            SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-            std::cout << "[ERROR] Failed to update offsets" << std::endl;
+        }
+        else
+        {
+            std::cout << hue::light_red;
+            std::cout << "[Offsets] Error: Failed to update offsets" << std::endl;
             return;
         }
 
         if (!gGame.InitAddress())
         {
-            SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-            std::cout << "[ERROR] Failed initializing addresses" << std::endl;
+            std::cout << hue::light_red;
+            std::cout << "[gGame] Failed initializing addresses" << std::endl;
             return;
         }
 
-        std::cout << "[Game] Process ID: " << ProcessMgr.ProcessID << std::endl;
-        std::cout << "[Game] Client DLL Address: " << gGame.GetClientDLLAddress() << std::endl;
+        std::cout << "[ProcessMgr] Process ID: " << ProcessMgr.ProcessID << std::endl;
+        std::cout << "[gGame] Client DLL Address: " << gGame.GetClientDLLAddress() << std::endl;
 
-        if (fs::exists(SussyAim::Cfg::dir))
-            std::cout << "[Info] Config folder: " << SussyAim::Cfg::dir << std::endl;
-        else
-        {
-            if (fs::create_directory(SussyAim::Cfg::dir))
-                std::cout << "[Info] Config folder created: " << SussyAim::Cfg::dir << std::endl;
-            else
-            {
-                std::cerr << "[Info] Error: Failed to create the config directory." << std::endl;
-                return;
-            }
-        }
-
-        if (fs::exists(SussyAim::Cfg::dirConfigs))
-            std::cout << "[Info] Configs folder: " << SussyAim::Cfg::dirConfigs << std::endl;
-        else
-        {
-            if (fs::create_directory(SussyAim::Cfg::dirConfigs))
-                std::cout << "[Info] Configs folder created: " << SussyAim::Cfg::dirConfigs << std::endl;
-            else
-            {
-                std::cerr << "[Info] Error: Failed to create the file directory." << std::endl;
-                return;
-            }
-        }
-
-        if (fs::exists(SussyAim::Cfg::dirSounds))
-            std::cout << "[Info] Hitsound folder: " << SussyAim::Cfg::dirSounds << std::endl;
-        else
-        {
-            if (fs::create_directory(SussyAim::Cfg::dirSounds))
-                std::cout << "[Info] Hitsound folder created: " << SussyAim::Cfg::dirSounds << std::endl;
-            else
-            {
-                std::cerr << "[Info] Error: Failed to create the file directory." << std::endl;
-                return;
-            }
-        }
-
-        std::cout << std::endl;
-        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-        std::cout << "[Init] Initialized successfully!" << std::endl;
-        std::cout << "[Init] Menu bind: INSERT" << std::endl;
-        std::cout << std::endl;
+        std::cout << std::endl
+                  << hue::light_green
+                  << "[Init] Attached successfully!" << std::endl
+                  << "[Init] Menu bind: INSERT" << std::endl
+                  << std::endl;
 
 #ifdef G_PRINTOFFSETS
-        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
+        std::cout << hue::yellow;
         std::cout << "=======[ Offset List ]=======" << std::endl;
         std::cout << std::setw(23) << std::left << "EntityList:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::EntityList << std::endl;
         std::cout << std::setw(23) << std::left << "Matrix:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::Matrix << std::endl;
@@ -144,22 +146,22 @@ namespace SussyAim
         std::cout << std::endl;
 #endif
 
-        SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+        std::cout << hue::reset;
         try
         {
             std::cout << "[GUI] Attaching" << std::endl;
             Gui.AttachAnotherWindow("Counter-Strike 2", "SDL_app", SussyAim::tick);
         }
-        catch (OSImGui::OSException &e)
+        catch (OSImGui::OSException &ex)
         {
             try
             {
                 std::cout << "[GUI] Attaching china edition" << std::endl;
                 Gui.AttachAnotherWindow("反恐精英：全球攻势", "SDL_app", SussyAim::tick);
             }
-            catch (OSImGui::OSException &e)
+            catch (OSImGui::OSException &ex1)
             {
-                std::cout << e.what() << std::endl;
+                std::cout << ex1.what() << std::endl;
             }
         }
     }
@@ -174,18 +176,19 @@ int main()
     }
     catch (std::exception &ex)
     {
+        std::cout << hue::reset;
         std::cerr << "Std Exception caught: " << ex.what() << std::endl;
     }
     catch (...)
     {
+        std::cout << hue::reset;
         std::cerr << "Unknown exception caught" << std::endl;
     }
-    SetConsoleTextAttribute(SussyAim::hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
     try
     {
-        std::cout << std::endl
-                  << "Done. Use Ctrl+C to exit" << std::endl;
+        std::cout << hue::black_on_gray;
+        printf("\nDone. Use Ctrl+C to exit\n");
         while (true)
         {
             std::this_thread::sleep_for(1h);
@@ -194,6 +197,7 @@ int main()
     catch (std::exception &ex)
     {
     }
+    std::cout << hue::reset;
 
     return 0;
 }

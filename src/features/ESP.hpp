@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #define ICON_FA_EYE "\xef\x81\xae"
-#define ESP_LINETICKNESS 1
+#define ESP_LINETICKNESS .5
 
 #include "../config/Config.hpp"
 #include "../rendering/renderer.hpp"
@@ -12,10 +12,10 @@ namespace SussyAim
 	{
 		namespace ESP
 		{
-			// https://www.unknowncheats.me/forum/counter-strike-2-a/608799-weapon-icon-esp.html
 			const char *GunIcon(const std::string weapon)
 			{
-				std::map<std::string, const char *> gunIcons = {
+				// https://www.unknowncheats.me/forum/counter-strike-2-a/608799-weapon-icon-esp.html
+				static const std::map<std::string, const char *> gunIcons = {
 					{"nova", "T"},
 					{"ak47", "A"},
 					{"awp", "C"},
@@ -25,51 +25,42 @@ namespace SussyAim
 					{"famas", "H"},
 					{"ump45", "b"},
 					{"glock", "g"},
-				};
-
-				gunIcons["knife"] = "]";
-				gunIcons["knife_t"] = "[";
-				gunIcons["deagle"] = "A";
-				gunIcons["elite"] = "B";
-				gunIcons["fiveseven"] = "C";
-				gunIcons["glock"] = "D";		//
-				gunIcons["revolver"] = "J";		//
-				gunIcons["hkp2000"] = "E";		//
-				gunIcons["p250"] = "F";			//
-				gunIcons["usp_silencer"] = "G"; //
-				gunIcons["tec9"] = "H";			//
-				gunIcons["cz75a"] = "I";		//
-				gunIcons["mac10"] = "K";		//
-				gunIcons["ump45"] = "L";
-				gunIcons["bizon"] = "M"; //
-				gunIcons["mp7"] = "N";	 //
-				gunIcons["mp9"] = "R";
-				gunIcons["p90"] = "O";
-				gunIcons["galilar"] = "Q";
-				gunIcons["famas"] = "R";
-				gunIcons["m4a1_silencer"] = "T"; //
-				gunIcons["m4a1"] = "S";			 //
-				gunIcons["aug"] = "U";
-				gunIcons["sg556"] = "V";
-				gunIcons["ak47"] = "W";
-				gunIcons["g3sg1"] = "X";
-				gunIcons["scar20"] = "Y"; //
-				gunIcons["awp"] = "Z";
-				gunIcons["ssg08"] = "a"; //
-				gunIcons["xm1014"] = "b";
-				gunIcons["sawedoff"] = "c";
-				gunIcons["mag7"] = "d";
-				gunIcons["nova"] = "e";
-				gunIcons["negev"] = "f";
-				gunIcons["m249"] = "g";
-				gunIcons["taser"] = "h";
-				gunIcons["flashbang"] = "i";
-				gunIcons["hegrenade"] = "j";
-				gunIcons["smokegrenade"] = "k";
-				gunIcons["molotov"] = "l"; //
-				gunIcons["decoy"] = "m";
-				gunIcons["incgrenade"] = "n";
-				gunIcons["c4"] = "o";
+					{"knife", "]"},
+					{"knife_t", "["},
+					{"elite", "B"},
+					{"fiveseven", "C"},
+					{"revolver", "J"},
+					{"hkp2000", "E"},
+					{"p250", "F"},
+					{"usp_silencer", "G"},
+					{"tec9", "H"},
+					{"cz75a", "I"},
+					{"mac10", "K"},
+					{"bizon", "M"},
+					{"mp7", "N"},
+					{"p90", "O"},
+					{"galilar", "Q"},
+					{"m4a1_silencer", "T"},
+					{"m4a1", "S"},
+					{"aug", "U"},
+					{"sg556", "V"},
+					{"g3sg1", "X"},
+					{"scar20", "Y"},
+					{"ssg08", "a"},
+					{"xm1014", "b"},
+					{"sawedoff", "c"},
+					{"mag7", "d"},
+					{"nova", "e"},
+					{"negev", "f"},
+					{"m249", "g"},
+					{"taser", "h"},
+					{"flashbang", "i"},
+					{"hegrenade", "j"},
+					{"smokegrenade", "k"},
+					{"molotov", "l"},
+					{"decoy", "m"},
+					{"incgrenade", "n"},
+					{"c4", "o"}};
 
 				auto it = gunIcons.find(weapon);
 				if (it != gunIcons.end())
@@ -87,49 +78,49 @@ namespace SussyAim
 				float offsetX;
 				float offsetY;
 			};
-			std::unordered_map<std::string, WeaponIconSize> weaponIconSizes = {
-				{"knife", {20.0f, 20.0f, -8.0f, 0.0f}},
-				{"deagle", {20.0f, 20.0f, -8.0f, 0.0f}},
-				{"elite", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"fiveseven", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"glock", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"revolver", {20.0f, 20.0f, -5.0f, 0.0f}},
-				{"hkp2000", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"p250", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"usp_silencer", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"tec9", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"cz75a", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"mac10", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"ump45", {20.0f, 20.0f, -10.0f, 0.0f}},
-				{"bizon", {20.0f, 20.0f, -10.0f, 0.0f}},
-				{"mp7", {20.0f, 20.0f, -5.0f, 0.0f}},
-				{"mp9", {20.0f, 20.0f, -10.0f, 0.0f}},
-				{"p90", {20.0f, 20.0f, -10.0f, 0.0f}},
-				{"galilar", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"famas", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"m4a1_silencer", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"m4a1", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"aug", {20.0f, 20.0f, -10.0f, 0.0f}},
-				{"sg556", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"ak47", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"g3sg1", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"scar20", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"awp", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"ssg08", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"xm1014", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"sawedoff", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"mag7", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"nova", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"negev", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"m249", {20.0f, 20.0f, -15.0f, 0.0f}},
-				{"taser", {20.0f, 20.0f, 0.0f, 0.0f}},
-				{"flashbang", {20.0f, 20.0f, 5.0f, 0.0f}},
-				{"hegrenade", {20.0f, 20.0f, 5.0f, 0.0f}},
-				{"smokegrenade", {20.0f, 20.0f, 5.0f, 0.0f}},
-				{"molotov", {20.0f, 20.0f, 5.0f, 0.0f}},
-				{"decoy", {20.0f, 20.0f, 5.0f, 0.0f}},
-				{"incgrenade", {20.0f, 20.0f, 5.0f, 0.0f}},
-				{"c4", {20.0f, 20.0f, 0.0f, 0.0f}},
+			static const std::unordered_map<std::string, WeaponIconSize> weaponIconSizes = {
+				{"knife", {20.f, 20.f, -8.f, 0.f}},
+				{"deagle", {20.f, 20.f, -8.f, 0.f}},
+				{"elite", {20.f, 20.f, 0.f, 0.f}},
+				{"fiveseven", {20.f, 20.f, 0.f, 0.f}},
+				{"glock", {20.f, 20.f, 0.f, 0.f}},
+				{"revolver", {20.f, 20.f, -5.f, 0.f}},
+				{"hkp2000", {20.f, 20.f, 0.f, 0.f}},
+				{"p250", {20.f, 20.f, 0.f, 0.f}},
+				{"usp_silencer", {20.f, 20.f, 0.f, 0.f}},
+				{"tec9", {20.f, 20.f, 0.f, 0.f}},
+				{"cz75a", {20.f, 20.f, 0.f, 0.f}},
+				{"mac10", {20.f, 20.f, 0.f, 0.f}},
+				{"ump45", {20.f, 20.f, -10.f, 0.f}},
+				{"bizon", {20.f, 20.f, -10.f, 0.f}},
+				{"mp7", {20.f, 20.f, -5.f, 0.f}},
+				{"mp9", {20.f, 20.f, -10.f, 0.f}},
+				{"p90", {20.f, 20.f, -10.f, 0.f}},
+				{"galilar", {20.f, 20.f, -15.f, 0.f}},
+				{"famas", {20.f, 20.f, -15.f, 0.f}},
+				{"m4a1_silencer", {20.f, 20.f, -15.f, 0.f}},
+				{"m4a1", {20.f, 20.f, -15.f, 0.f}},
+				{"aug", {20.f, 20.f, -10.f, 0.f}},
+				{"sg556", {20.f, 20.f, -15.f, 0.f}},
+				{"ak47", {20.f, 20.f, -15.f, 0.f}},
+				{"g3sg1", {20.f, 20.f, -15.f, 0.f}},
+				{"scar20", {20.f, 20.f, -15.f, 0.f}},
+				{"awp", {20.f, 20.f, -15.f, 0.f}},
+				{"ssg08", {20.f, 20.f, -15.f, 0.f}},
+				{"xm1014", {20.f, 20.f, -15.f, 0.f}},
+				{"sawedoff", {20.f, 20.f, -15.f, 0.f}},
+				{"mag7", {20.f, 20.f, -15.f, 0.f}},
+				{"nova", {20.f, 20.f, -15.f, 0.f}},
+				{"negev", {20.f, 20.f, -15.f, 0.f}},
+				{"m249", {20.f, 20.f, -15.f, 0.f}},
+				{"taser", {20.f, 20.f, 0.f, 0.f}},
+				{"flashbang", {20.f, 20.f, 5.f, 0.f}},
+				{"hegrenade", {20.f, 20.f, 5.f, 0.f}},
+				{"smokegrenade", {20.f, 20.f, 5.f, 0.f}},
+				{"molotov", {20.f, 20.f, 5.f, 0.f}},
+				{"decoy", {20.f, 20.f, 5.f, 0.f}},
+				{"incgrenade", {20.f, 20.f, 5.f, 0.f}},
+				{"c4", {20.f, 20.f, 0.f, 0.f}},
 			};
 
 			ImVec4 GetBoxRect(const CEntity &Entity, int BoxType)
@@ -186,7 +177,7 @@ namespace SussyAim
 				if (SussyAim::Cfg::ESP::drawBones)
 					Render::DrawBone(Entity, SussyAim::Cfg::ESP::BoneColor, ESP_LINETICKNESS);
 				if (SussyAim::Cfg::ESP::drawEyeRay)
-					Render::ShowLosLine(Entity, 50.0f, SussyAim::Cfg::ESP::EyeRayColor, ESP_LINETICKNESS);
+					Render::ShowLosLine(Entity, 50.f, SussyAim::Cfg::ESP::EyeRayColor, ESP_LINETICKNESS);
 				if (SussyAim::Cfg::ESP::drawHeadBox)
 					Render::DrawHeadCircle(Entity, SussyAim::Cfg::ESP::HeadBoxColor);
 
@@ -230,7 +221,7 @@ namespace SussyAim
 						if (SussyAim::Cfg::ESP::drawBoxOutline)
 							Gui.Rectangle({Rect.x, Rect.y}, {Rect.z, Rect.w}, SussyAim::Cfg::ESP::FrameColor & IM_COL32_A_MASK, 3, SussyAim::Cfg::ESP::boxRounding);
 
-						if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && SussyAim::Cfg::ESP::visibleCheck)
+						if (SussyAim::Cfg::ESP::visibleCheck && ((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))))
 						{
 							Gui.Rectangle({Rect.x, Rect.y}, {Rect.z, Rect.w}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS, SussyAim::Cfg::ESP::boxRounding);
 						}
@@ -252,28 +243,15 @@ namespace SussyAim
 						Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor & IM_COL32_A_MASK, 3);
 
 						// Main Box Lines
-						if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && SussyAim::Cfg::ESP::visibleCheck)
-						{
-							Gui.Line({Rect.x, Rect.y}, {Rect.x + Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x, Rect.y}, {Rect.x, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x + Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::VisibleColor, ESP_LINETICKNESS);
-						}
-						else
-						{
-							Gui.Line({Rect.x, Rect.y}, {Rect.x + Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x, Rect.y}, {Rect.x, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z, Rect.y + Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x + Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y + Rect.w}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
-							Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f}, SussyAim::Cfg::ESP::FrameColor, ESP_LINETICKNESS);
-						}
+						ImColor mainBoxColor = SussyAim::Cfg::ESP::visibleCheck && ((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) ? SussyAim::Cfg::ESP::VisibleColor : SussyAim::Cfg::ESP::FrameColor;
+						Gui.Line({Rect.x, Rect.y}, {Rect.x + Rect.z * 0.25f, Rect.y}, mainBoxColor, ESP_LINETICKNESS);
+						Gui.Line({Rect.x, Rect.y}, {Rect.x, Rect.y + Rect.w * 0.25f}, mainBoxColor, ESP_LINETICKNESS);
+						Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y}, mainBoxColor, ESP_LINETICKNESS);
+						Gui.Line({Rect.x + Rect.z, Rect.y}, {Rect.x + Rect.z, Rect.y + Rect.w * 0.25f}, mainBoxColor, ESP_LINETICKNESS);
+						Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x + Rect.z * 0.25f, Rect.y + Rect.w}, mainBoxColor, ESP_LINETICKNESS);
+						Gui.Line({Rect.x, Rect.y + Rect.w}, {Rect.x, Rect.y + Rect.w - Rect.w * 0.25f}, mainBoxColor, ESP_LINETICKNESS);
+						Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z - Rect.z * 0.25f, Rect.y + Rect.w}, mainBoxColor, ESP_LINETICKNESS);
+						Gui.Line({Rect.x + Rect.z, Rect.y + Rect.w}, {Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f}, mainBoxColor, ESP_LINETICKNESS);
 					}
 				}
 
@@ -288,11 +266,11 @@ namespace SussyAim
 						if (SussyAim::Cfg::ESP::ammoBar)
 							textPosition.y += 5;
 						// Gui.StrokeText(Entity.Pawn.WeaponName, { Rect.x + Rect.z / 2,Rect.y + Rect.w + 10}, ImColor(255, 255, 255, 255), 14, true);
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{textPosition.x - 1, textPosition.y - 1}, ImColor(0, 0, 0, 255), weaponIcon.c_str());
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{textPosition.x - 1, textPosition.y + 1}, ImColor(0, 0, 0, 255), weaponIcon.c_str());
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{textPosition.x + 1, textPosition.y + 1}, ImColor(0, 0, 0, 255), weaponIcon.c_str());
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{textPosition.x + 1, textPosition.y - 1}, ImColor(0, 0, 0, 255), weaponIcon.c_str());
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, textPosition, ImColor(255, 255, 255, 255), weaponIcon.c_str());
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.f, ImVec2{textPosition.x - 1, textPosition.y - 1}, ImColor(0, 0, 0, 255), weaponIcon.c_str());
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.f, ImVec2{textPosition.x - 1, textPosition.y + 1}, ImColor(0, 0, 0, 255), weaponIcon.c_str());
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.f, ImVec2{textPosition.x + 1, textPosition.y + 1}, ImColor(0, 0, 0, 255), weaponIcon.c_str());
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.f, ImVec2{textPosition.x + 1, textPosition.y - 1}, ImColor(0, 0, 0, 255), weaponIcon.c_str());
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.f, textPosition, ImColor(255, 255, 255, 255), weaponIcon.c_str());
 					}
 				}
 
@@ -303,11 +281,11 @@ namespace SussyAim
 					ProcessMgr.ReadMemory<bool>(Entity.Pawn.Address + Offset::Pawn.isScoped, isScoped);
 					if (isScoped)
 					{
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{IconPos.x - 1, IconPos.y - 1}, ImColor(0, 0, 0, 255), "s");
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{IconPos.x - 1, IconPos.y + 1}, ImColor(0, 0, 0, 255), "s");
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{IconPos.x + 1, IconPos.y + 1}, ImColor(0, 0, 0, 255), "s");
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{IconPos.x + 1, IconPos.y - 1}, ImColor(0, 0, 0, 255), "s");
-						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, IconPos, ImColor(0, 200, 255, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.f, ImVec2{IconPos.x - 1, IconPos.y - 1}, ImColor(0, 0, 0, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.f, ImVec2{IconPos.x - 1, IconPos.y + 1}, ImColor(0, 0, 0, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.f, ImVec2{IconPos.x + 1, IconPos.y + 1}, ImColor(0, 0, 0, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.f, ImVec2{IconPos.x + 1, IconPos.y - 1}, ImColor(0, 0, 0, 255), "s");
+						ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.f, IconPos, ImColor(0, 200, 255, 255), "s");
 					}
 				}
 
@@ -348,7 +326,7 @@ namespace SussyAim
 					ImU32 EyeC = SussyAim::Cfg::ESP::EyeRayColor;
 					ImVec2 lineStart(centerPos.x + 44, centerPos.y + 15);
 					ImVec2 lineEnd(centerPos.x - 10, centerPos.y + 20);
-					ImGui::GetWindowDrawList()->AddLine(lineStart, lineEnd, EyeC, 2.0f);
+					ImGui::GetWindowDrawList()->AddLine(lineStart, lineEnd, EyeC, 2.f);
 				}
 
 				if (SussyAim::Cfg::ESP::drawBones)
@@ -400,10 +378,10 @@ namespace SussyAim
 					switch (SussyAim::Cfg::ESP::HeadBoxStyle)
 					{
 					case 0:
-						ImGui::GetWindowDrawList()->AddCircle({centerPos.x + 44, centerPos.y + 17}, 12.0f, SussyAim::Cfg::ESP::HeadBoxColor, 0, 1.8f);
+						ImGui::GetWindowDrawList()->AddCircle({centerPos.x + 44, centerPos.y + 17}, 12.f, SussyAim::Cfg::ESP::HeadBoxColor, 0, 1.8f);
 						break;
 					case 1:
-						ImGui::GetWindowDrawList()->AddCircleFilled({centerPos.x + 44, centerPos.y + 17}, 12.0f, SussyAim::Cfg::ESP::HeadBoxColor, 0);
+						ImGui::GetWindowDrawList()->AddCircleFilled({centerPos.x + 44, centerPos.y + 17}, 12.f, SussyAim::Cfg::ESP::HeadBoxColor, 0);
 					default:
 						break;
 					}
@@ -451,7 +429,7 @@ namespace SussyAim
 						// DrawPreviewBox(rectStartPos, rectEndPos, boxColor, SussyAim::Cfg::ESP::BoxRounding, 1.3f, false);
 						rectStartPos = {centerPos.x + 20, centerPos.y + 15};
 						rectEndPos = {rectStartPos.x + 50, rectStartPos.y + 132};
-						DrawPreviewBox(rectStartPos, rectEndPos, boxColor, SussyAim::Cfg::ESP::boxRounding, 1.0f, false);
+						DrawPreviewBox(rectStartPos, rectEndPos, boxColor, SussyAim::Cfg::ESP::boxRounding, 1.f, false);
 						break;
 					case 2:
 						ImGui::GetWindowDrawList()->AddLine(rectStartPos, {rectStartPos.x + rectSize.x * 0.25f, rectStartPos.y}, boxColor, 1.3f);
@@ -490,7 +468,7 @@ namespace SussyAim
 					{
 						ImVec2 HBS(HBPos.x - 6, HBPos.y);
 						ImVec2 HBE(HBPos.x - 3, HBPos.y + HBSize.y);
-						ImGui::GetWindowDrawList()->AddRectFilled(HBS, HBE, greenColor, 0.0f, ImDrawCornerFlags_All);
+						ImGui::GetWindowDrawList()->AddRectFilled(HBS, HBE, greenColor, 0.f, ImDrawCornerFlags_All);
 					}
 				}
 
@@ -501,13 +479,13 @@ namespace SussyAim
 					{
 						ImVec2 ABS(centerPos.x, centerPos.y + rectSize.y + 2);
 						ImVec2 ABE(centerPos.x + rectSize.x, centerPos.y + rectSize.y + 5);
-						ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, yellowColor, 0.0f, ImDrawCornerFlags_All);
+						ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, yellowColor, 0.f, ImDrawCornerFlags_All);
 					}
 					else
 					{
 						ImVec2 ABS(centerPos.x + 20, centerPos.y + rectSize.y);
 						ImVec2 ABE(centerPos.x + rectSize.x - 30, centerPos.y + rectSize.y + 3);
-						ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, yellowColor, 0.0f, ImDrawCornerFlags_All);
+						ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, yellowColor, 0.f, ImDrawCornerFlags_All);
 					}
 				}
 
@@ -571,12 +549,12 @@ namespace SussyAim
 					if (SussyAim::Cfg::Menu::HealthBarType == 2)
 					{
 						textPos = {centerPos.x + 27, centerPos.y + 155};
-						ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, textPos, IM_COL32(255, 255, 255, 255), "W");
+						ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.f, textPos, IM_COL32(255, 255, 255, 255), "W");
 					}
 					if (SussyAim::Cfg::Menu::HealthBarType == 0 || SussyAim::Cfg::Menu::HealthBarType == 1)
 					{
 						textPos = {centerPos.x + 27, centerPos.y + 150};
-						ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, textPos, IM_COL32(255, 255, 255, 255), "W");
+						ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.f, textPos, IM_COL32(255, 255, 255, 255), "W");
 					}
 
 					if (SussyAim::Cfg::ESP::showScoped)
@@ -586,7 +564,7 @@ namespace SussyAim
 							centerPos.y += 2;
 							centerPos.x += 25;
 						}
-						ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, centerPos, IM_COL32(200, 255, 255, 255), "s");
+						ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.f, centerPos, IM_COL32(200, 255, 255, 255), "s");
 					}
 				}
 			}

@@ -208,7 +208,7 @@ namespace MyConfigSaver
         emitter << YAML::Key << "NoSmoke" << YAML::Value << SussyAim::Cfg::Misc::NoSmoke;
         emitter << YAML::Key << "TeamCheck" << YAML::Value << SussyAim::Cfg::Menu::TeamCheck;
         emitter << YAML::Key << "AntiRecord" << YAML::Value << SussyAim::Cfg::Menu::StreamProof;
-        emitter << YAML::Key << "Jitter" << YAML::Value << SussyAim::Cfg::Misc::Jitter;
+        emitter << YAML::Key << "fakeDuck" << YAML::Value << SussyAim::Cfg::Misc::fakeDuck;
         emitter << YAML::Key << "SmokeColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -390,7 +390,7 @@ namespace MyConfigSaver
                 SussyAim::Cfg::Misc::NoSmoke = config["Misc"]["NoSmoke"].IsDefined() ? config["Misc"]["NoSmoke"].as<bool>() : false;
                 SussyAim::Cfg::Menu::TeamCheck = config["Misc"]["TeamCheck"].as<bool>();
                 SussyAim::Cfg::Menu::StreamProof = config["Misc"]["AntiRecord"].as<bool>();
-                SussyAim::Cfg::Misc::Jitter = config["Misc"]["Jitter"].IsDefined() ? config["Misc"]["Jitter"].as<bool>() : false;
+                SussyAim::Cfg::Misc::fakeDuck = config["Misc"]["fakeDuck"].IsDefined() ? config["Misc"]["fakeDuck"].as<bool>() : false;
                 SussyAim::Cfg::Misc::SmokeColored = config["Misc"]["SmokeColor"]["Enable"].IsDefined() ? config["Misc"]["SmokeColor"]["Enable"].as<bool>() : false;
                 SussyAim::Cfg::Misc::SmokeColor.Value.x = config["Misc"]["SmokeColor"]["r"].IsDefined() ? config["Misc"]["SmokeColor"]["r"].as<float>() : 255.f;
                 SussyAim::Cfg::Misc::SmokeColor.Value.y = config["Misc"]["SmokeColor"]["g"].IsDefined() ? config["Misc"]["SmokeColor"]["g"].as<float>() : 0.f;

@@ -10,8 +10,8 @@ namespace SussyAim
 	{
 		namespace misc
 		{
-			inline float FlashMin = 0.f, FlashMax = 255.f;
-			inline int FovMin = 30, FovMax = 200;
+			inline const float FlashMin = 0.f, FlashMax = 255.f;
+			inline const int FovMin = 1, FovMax = 179;
 
 			void render()
 			{
@@ -20,7 +20,7 @@ namespace SussyAim
 
 				PutSwitch("Fov changer", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::fovChanger);
 				ImGui::SameLine();
-				Gui.SliderScalarEx2("##fovChangerValue", ImGuiDataType_Float, &SussyAim::Cfg::Misc::Fov, &FovMin, &FovMax, SussyAim::Cfg::Misc::Fov == 90 ? "Normal (90)" : "%d", ImGuiSliderFlags_None);
+				ImGui::SliderInt(SussyAim::Cfg::Misc::Fov == 90 ? "Fov changer: Off (90)###fovChangerValue" : "Fov changer: %d###fovChangerValue", &SussyAim::Cfg::Misc::Fov, FovMin, FovMax);
 
 				PutSliderFloat("Max flash alpha", 10.f, &SussyAim::Cfg::Misc::FlashImmunity, &FlashMin, &FlashMax, SussyAim::Cfg::Misc::FlashImmunity == 0.f ? "Off" : "-%.f/-255");
 
