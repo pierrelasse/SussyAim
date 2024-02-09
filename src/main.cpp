@@ -1,12 +1,11 @@
 ﻿// Settings
 #define G_VERSION_MAJOR 2
 #define G_VERSION_MINOR 5
-#define G_VERSION_PATCH 0
-
-// #define G_PRINTOFFSETS
+#define G_VERSION_PATCH 4
 
 #define G_PROGRAMFILENAME "cs2.exe"
 
+//#define G_PRINTOFFSETS
 //#define G_IMGUI_DEMO
 
 // Settings End

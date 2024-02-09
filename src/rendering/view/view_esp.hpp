@@ -10,13 +10,14 @@ namespace SussyAim
 	{
 		namespace esp
 		{
-			inline const char *BoxTypes[] = {Lang::ESPtext.BoxType_Normal, Lang::ESPtext.BoxType_Edge, Lang::ESPtext.BoxType_Corner};
-			inline const char *LinePos[] = {Lang::ESPtext.LinePos_1, Lang::ESPtext.LinePos_2, Lang::ESPtext.LinePos_3};
+			inline float MinRounding = 0.f, MaxRouding = 5.f;
+			inline int MinCombo = 0, MaxCombo = 2;
 
 			void render()
 			{
-				float MinRounding = 0.f, MaxRouding = 5.f;
-				int MinCombo = 0, MaxCombo = 2;
+				static const char* BoxTypes[] = { Lang::ESPtext.BoxType_Normal, Lang::ESPtext.BoxType_Edge, Lang::ESPtext.BoxType_Corner };
+				static const char* LinePos[] = { Lang::ESPtext.LinePos_1, Lang::ESPtext.LinePos_2, Lang::ESPtext.LinePos_3 };
+
 				PutSwitch(Lang::ESPtext.Toggle, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::enabled);
 				if (SussyAim::Cfg::ESP::enabled)
 				{
