@@ -14,7 +14,8 @@ namespace SussyAim
 			inline int DurationMin = 0, DurationMax = 1000;
 			void render()
 			{
-				PutSwitch(Lang::TriggerText.Enable, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::enabled);
+				PutSwitch("Enabled", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::enabled);
+				ImGui::Spacing();
 
 				PutSwitch(Lang::TriggerText.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::always);
 				if (!SussyAim::Cfg::Triggerbot::always)

@@ -151,8 +151,8 @@
     <ClInclude Include="src\rendering\view\view_misc.hpp" />
     <ClInclude Include="src\rendering\view\view_triggerbot.hpp" />
     <ClInclude Include="src\rendering\view\view_visual.hpp" />
-    <ClInclude Include="src\resource.h" />
     <ClInclude Include="src\sacommon.hpp" />
+    <ClInclude Include="src\settings.h" />
     <ClInclude Include="src\utils\ColorConsole.hpp" />
     <ClInclude Include="src\utils\Format.h" />
     <ClInclude Include="src\utils\ProcessManager.hpp" />

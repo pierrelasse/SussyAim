@@ -78,7 +78,7 @@ namespace SussyAim
 				float offsetX;
 				float offsetY;
 			};
-			static const std::unordered_map<std::string, WeaponIconSize> weaponIconSizes = {
+			static std::unordered_map<std::string, WeaponIconSize> weaponIconSizes = {
 				{"knife", {20.f, 20.f, -8.f, 0.f}},
 				{"deagle", {20.f, 20.f, -8.f, 0.f}},
 				{"elite", {20.f, 20.f, 0.f, 0.f}},
@@ -129,17 +129,11 @@ namespace SussyAim
 				switch (BoxType)
 				{
 				case 0:
-					Rect = Render::Get2DBox(Entity);
-					break;
-				case 1:
-					Rect = Render::Get2DBoneRect(Entity);
-					break;
 				case 2:
-					Rect = Render::Get2DBox(Entity);
-					break;
 				case 3:
 					Rect = Render::Get2DBox(Entity);
 					break;
+				case 1:
 				case 4:
 					Rect = Render::Get2DBoneRect(Entity);
 					break;
@@ -156,18 +150,8 @@ namespace SussyAim
 				ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::Pawn.pClippingWeapon, ClippingWeapon);
 				ProcessMgr.ReadMemory(ClippingWeapon + 0x360, WeaponData);
 				ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.szName, WeaponNameAddress);
-				std::string weaponName = "Invalid Weapon Name";
-
-				if (!WeaponNameAddress)
-				{
-					weaponName = "NULL";
-				}
-				else
-				{
-					weaponName = Entity.Pawn.WeaponName;
-				}
-				std::string weaponIcon = GunIcon(weaponName);
-				return weaponIcon.c_str();
+				const std::string weaponName = WeaponNameAddress ? Entity.Pawn.WeaponName : "NULL";
+				return GunIcon(weaponName);
 			}
 
 			void RenderPlayerESP(const CEntity &LocalEntity, const CEntity &Entity, ImVec4 Rect, int LocalPlayerControllerIndex, int Index)

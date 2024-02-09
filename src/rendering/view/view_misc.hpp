@@ -20,7 +20,7 @@ namespace SussyAim
 
 				PutSwitch("Fov changer", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Misc::fovChanger);
 				ImGui::SameLine();
-				ImGui::SliderInt(SussyAim::Cfg::Misc::Fov == 90 ? "Fov changer: Off (90)###fovChangerValue" : "Fov changer: %d###fovChangerValue", &SussyAim::Cfg::Misc::Fov, FovMin, FovMax);
+				ImGui::SliderInt("###fovChangerValue", &SussyAim::Cfg::Misc::Fov, FovMin, FovMax, SussyAim::Cfg::Misc::Fov == 90 ? "Default (%d)" : "%d");
 
 				PutSliderFloat("Max flash alpha", 10.f, &SussyAim::Cfg::Misc::FlashImmunity, &FlashMin, &FlashMax, SussyAim::Cfg::Misc::FlashImmunity == 0.f ? "Off" : "-%.f/-255");
 

@@ -217,7 +217,7 @@ namespace Lang
 		// Aimbot
 		AimbotText.Enable = u8"Enable Aimbot";
 		AimbotText.FeatureName = u8" Aimbot";
-		AimbotText.HotKeyList = u8"Hotkey   ";
+		AimbotText.HotKeyList = u8"Hotkey";
 		AimbotText.Toggle = u8"Toggle Mode";
 		AimbotText.DrawFov = u8"Draw Fov";
 		AimbotText.VisCheck = u8"Visible Only";
