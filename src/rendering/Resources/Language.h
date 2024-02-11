@@ -140,7 +140,6 @@ namespace Lang
 		inline static const char* Bhop;
 		inline static const char* Watermark;
 		inline static const char* TeamCheck;
-		inline static const char* AntiRecord;
 		inline static const char* MoneyService;
 		inline static const char* ShowCashSpent;
 		inline static const char* EnemySensor;
@@ -282,7 +281,6 @@ namespace Lang
 		MiscText.Bhop = u8"Auto Jump";
 		MiscText.Watermark = u8"Watermark";
 		MiscText.TeamCheck = u8"Team Check";
-		MiscText.AntiRecord = u8"Anti Record";
 		MiscText.MoneyService = u8"Money Services";
 		MiscText.ShowCashSpent = u8"Show Cash Spent";
 		MiscText.EnemySensor = u8"Enemy Sensor";

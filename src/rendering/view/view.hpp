@@ -76,6 +76,10 @@ namespace SussyAim
 					static ImTextureID ImageID = (void *)AS_Logo;
 					static ImVec2 LogoSize = ImVec2(LogoW, LogoH);
 					ImGui::Image(ImageID, LogoSize);
+
+					ImGui::SameLine();
+
+					ImGui::Text("Anti Capture: %s", SussyAim::Cfg::Menu::StreamProof ? "on" : "OFF");
 				}
 				ImGui::EndGroup();
 

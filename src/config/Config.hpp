@@ -111,7 +111,7 @@ namespace SussyAim
 			inline bool drawBones = true;
 			inline ImColor BoneColor = ImColor(0, 255, 255, 255);
 
-			inline bool drawEyeRay = false;
+			inline bool drawEyeRay = true;
 			inline ImColor EyeRayColor = ImColor(255, 0, 0, 255);
 
 			inline bool drawHeadBox = true;
@@ -159,7 +159,7 @@ namespace SussyAim
 			inline bool ShowCrossHair = true;
 			inline bool drawDot = true;
 			inline bool drawCrossline = true;
-			inline bool tStyle = false;
+			inline bool tStyle = true;
 			inline bool drawCircle = false;
 			inline bool drawOutLine = true;
 			inline bool DynamicGap = false;
