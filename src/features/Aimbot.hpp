@@ -25,6 +25,7 @@ namespace SussyAim
 			inline bool AutoShot = false;
 			inline bool AimLock = false;
 			inline float AimFov = 5;
+			inline float AimFovMin = .5f;
 			inline float Smooth = 0.0f;
 			inline Vec2 RCSScale = {1.f, 1.f};
 			inline std::vector<int> HotKeyList{VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL};
@@ -97,7 +98,7 @@ namespace SussyAim
 				Vec2 ScreenPos;
 				gGame.View.WorldToScreen(Vec3(AimPos), ScreenPos);
 
-				if (Norm < AimFov)
+				if (Norm < AimFov && Norm > AimFovMin)
 				{
 					if (ScreenPos.x != ScreenCenterX)
 					{

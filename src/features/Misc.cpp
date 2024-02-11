@@ -47,7 +47,7 @@ namespace Misc
 		ImGui::End();
 	}
 
-	void Watermark(const CEntity& LocalPlayer) noexcept
+	void Watermark(const CEntity &LocalPlayer) noexcept
 	{
 		if (!SussyAim::Cfg::Misc::WaterMark)
 			return;
