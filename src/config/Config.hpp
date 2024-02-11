@@ -149,7 +149,7 @@ namespace SussyAim
 
 			inline float lineThickness = .5f;
 
-			inline int RenderDistance = 50;
+			inline int RenderDistance = 80;
 		}
 
 		namespace Crosshair

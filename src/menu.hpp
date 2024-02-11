@@ -163,14 +163,7 @@ namespace SussyAim
             if (SussyAim::Cfg::ESP::enabled)
             {
                 ImVec4 Rect = SussyAim::Features::ESP::GetBoxRect(Entity, SussyAim::Cfg::ESP::boxType);
-                SussyAim::Features::ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
-
-                if (SussyAim::Cfg::ESP::drawHealthBar)
-                {
-                    ImVec2 HealthBarPos = {Rect.x - 6.f, Rect.y};
-                    ImVec2 HealthBarSize = {4, Rect.w};
-                    Render::DrawHealthBar(EntityAddress, 100, Entity.Pawn.Health, HealthBarPos, HealthBarSize);
-                }
+                int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
 
                 if (SussyAim::Cfg::ESP::ammoBar && Entity.Pawn.Ammo != -1)
                 {
@@ -179,21 +172,42 @@ namespace SussyAim
                     Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
                 }
 
-                // It is meaningless to render a empty bar
-                if (SussyAim::Cfg::ESP::ArmorBar && Entity.Pawn.Armor > 0)
+                if (distance <= SussyAim::Cfg::ESP::RenderDistance)
                 {
-                    bool HasHelmet;
-                    ImVec2 ArmorBarPos;
-                    ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
-                    if (SussyAim::Cfg::ESP::drawHealthBar)
-                        ArmorBarPos = {Rect.x - 10.f, Rect.y};
-                    else
-                        ArmorBarPos = {Rect.x - 6.f, Rect.y};
-                    ImVec2 ArmorBarSize = {4.f, Rect.w};
-                    Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
-                }
+                    ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
+                    Render::DrawDistance(LocalEntity, Entity, Rect);
 
-                Render::DrawDistance(LocalEntity, Entity, Rect);
+                    if (SussyAim::Cfg::ESP::drawHealthBar)
+                    {
+                        ImVec2 HealthBarPos = {Rect.x - 6.f, Rect.y};
+                        ImVec2 HealthBarSize = {4, Rect.w};
+                        Render::DrawHealthBar(EntityAddress, 100, Entity.Pawn.Health, HealthBarPos, HealthBarSize);
+                    }
+
+                    // Draw Ammo
+                    // When player is using knife or nade, Ammo = -1.
+                    if (SussyAim::Cfg::ESP::ammoBar && Entity.Pawn.Ammo != -1)
+                    {
+                        ImVec2 AmmoBarPos = {Rect.x, Rect.y + Rect.w + 2};
+                        ImVec2 AmmoBarSize = {Rect.z, 4};
+                        Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
+                    }
+
+                    // Draw Armor
+                    // It is meaningless to render a empty bar
+                    if (SussyAim::Cfg::ESP::ArmorBar && Entity.Pawn.Armor > 0)
+                    {
+                        bool HasHelmet;
+                        ImVec2 ArmorBarPos;
+                        ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
+                        if (SussyAim::Cfg::ESP::drawHealthBar)
+                            ArmorBarPos = {Rect.x - 10.f, Rect.y};
+                        else
+                            ArmorBarPos = {Rect.x - 6.f, Rect.y};
+                        ImVec2 ArmorBarSize = {4.f, Rect.w};
+                        Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
+                    }
+                }
             }
             // SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);
         }

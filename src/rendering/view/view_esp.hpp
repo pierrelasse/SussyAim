@@ -12,6 +12,7 @@ namespace SussyAim
 		{
 			inline const float MinRounding = 0.f, MaxRouding = 5.f;
 			inline const int MinCombo = 0, MaxCombo = 2;
+			inline const int MinDis = 5, MaxDis = 80;
 
 			void render()
 			{
@@ -51,7 +52,7 @@ namespace SussyAim
 				ImGui::Spacing();
 
 				PutSwitch(Lang::ESPtext.EyeRay, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawEyeRay, true, "###LineCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::EyeRayColor));
-				
+
 				ImGui::Spacing();
 
 				PutSwitch(Lang::ESPtext.PlayerName, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawName);
@@ -66,6 +67,7 @@ namespace SussyAim
 				ImGui::Spacing();
 
 				PutSwitch(Lang::ESPtext.VisCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::visibleCheck, true, "###VisibleCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::VisibleColor));
+				PutSliderInt("Maximum Render Distance: ", 10.f, &SussyAim::Cfg::ESP::RenderDistance, &MinDis, &MaxDis, "%dm");
 
 				ImGui::Spacing();
 
