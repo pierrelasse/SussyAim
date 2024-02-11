@@ -57,6 +57,7 @@ namespace MyConfigSaver
         emitter << YAML::Key << "ShowScoped" << YAML::Value << SussyAim::Cfg::ESP::showScoped;
         emitter << YAML::Key << "ArmorBar" << YAML::Value << SussyAim::Cfg::ESP::ArmorBar;
         emitter << YAML::Key << "ArmorNum" << YAML::Value << SussyAim::Cfg::ESP::ShowArmorNum;
+        emitter << YAML::Key << "LineThickness" << YAML::Value << SussyAim::Cfg::ESP::lineThickness;
         emitter << YAML::Key << "BoneColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -223,7 +224,7 @@ namespace MyConfigSaver
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "Enable" << YAML::Value << SussyAim::Cfg::Aimbot::enabled;
-        emitter << YAML::Key << "AutoLock" << YAML::Value << SussyAim::Cfg::Aimbot::always;
+        emitter << YAML::Key << "AimLock" << YAML::Value << SussyAim::Features::Aimbot::AimLock;
         emitter << YAML::Key << "ToggleMode" << YAML::Value << SussyAim::Cfg::Aimbot::AimToggleMode;
         emitter << YAML::Key << "Hotkey" << YAML::Value << SussyAim::Cfg::Aimbot::AimbotHotKey;
         emitter << YAML::Key << "Fov" << YAML::Value << SussyAim::Features::Aimbot::AimFov;
@@ -298,6 +299,8 @@ namespace MyConfigSaver
                 SussyAim::Cfg::ESP::showScoped = config["ESP"]["ShowScoped"].IsDefined() ? config["ESP"]["ShowScoped"].as<bool>() : false;
                 SussyAim::Cfg::ESP::ArmorBar = config["ESP"]["ArmorBar"].IsDefined() ? config["ESP"]["ArmorBar"].as<bool>() : false;
                 SussyAim::Cfg::ESP::ShowArmorNum = config["ESP"]["ArmorNum"].IsDefined() ? config["ESP"]["ArmorNum"].as<bool>() : false;
+                if (config["ESP"]["lineThickness"].IsDefined())
+                    SussyAim::Cfg::ESP::lineThickness = config["ESP"]["lineThickness"].as<float>();
                 SussyAim::Cfg::ESP::BoneColor.Value.x = config["ESP"]["BoneColor"]["r"].as<float>();
                 SussyAim::Cfg::ESP::BoneColor.Value.y = config["ESP"]["BoneColor"]["g"].as<float>();
                 SussyAim::Cfg::ESP::BoneColor.Value.z = config["ESP"]["BoneColor"]["b"].as<float>();
@@ -399,7 +402,7 @@ namespace MyConfigSaver
             if (config["Aimbot"])
             {
                 SussyAim::Cfg::Aimbot::enabled = config["Aimbot"]["Enable"].as<bool>();
-                SussyAim::Cfg::Aimbot::always = config["Aimbot"]["AutoLock"].as<bool>();
+                SussyAim::Cfg::Aimbot::always = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
                 SussyAim::Cfg::Aimbot::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
                 SussyAim::Cfg::Aimbot::AimbotHotKey = config["Aimbot"]["Hotkey"].as<int>();
                 SussyAim::Features::Aimbot::AimFov = config["Aimbot"]["Fov"].as<float>();

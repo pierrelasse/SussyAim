@@ -55,7 +55,6 @@ namespace SussyAim
         printf("v%d.%d.%d\n    and AimStar ppl", G_VERSION_MAJOR, G_VERSION_MINOR, G_VERSION_PATCH);
         std::cout << hue::red;
         printf("    |___/\n\n");
-
         std::cout << hue::reset;
 
         printf("[ProcessMgr] Attaching to " G_PROGRAMFILENAME);

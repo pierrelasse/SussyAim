@@ -146,6 +146,10 @@ namespace SussyAim
 
 			inline bool ArmorBar = false;
 			inline bool ShowArmorNum = false;
+
+			inline float lineThickness = .5f;
+
+			inline int RenderDistance = 50;
 		}
 
 		namespace Crosshair

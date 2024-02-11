@@ -23,6 +23,7 @@ namespace SussyAim
 			inline int HotKey = VK_LMENU;
 			inline bool ScopeOnly = false;
 			inline bool AutoShot = false;
+			inline bool AimLock = false;
 			inline float AimFov = 5;
 			inline float Smooth = 0.0f;
 			inline Vec2 RCSScale = {1.f, 1.f};
@@ -40,6 +41,11 @@ namespace SussyAim
 
 			inline void run(const CEntity &Local, Vec3 LocalPos, Vec3 AimPos)
 			{
+				int isFired;
+				ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
+				if (!isFired && !AimLock)
+					return;
+
 				if (ScopeOnly)
 				{
 					bool isScoped;

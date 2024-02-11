@@ -75,6 +75,10 @@ namespace SussyAim
 				PutSwitch(Lang::ESPtext.ShowArmorBar, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::ArmorBar);
 				if (SussyAim::Cfg::ESP::ArmorBar)
 					PutSwitch(Lang::ESPtext.ArmorNum, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::ShowArmorNum);
+
+				ImGui::Spacing();
+
+				ImGui::DragFloat("Line thickness", &SussyAim::Cfg::ESP::lineThickness, 1, .01f, 50);
 			}
 
 			void renderItem()
