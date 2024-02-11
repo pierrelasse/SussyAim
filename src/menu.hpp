@@ -174,7 +174,7 @@ namespace SussyAim
 
                 if (distance <= SussyAim::Cfg::ESP::RenderDistance)
                 {
-                    ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
+                    SussyAim::Features::ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
                     Render::DrawDistance(LocalEntity, Entity, Rect);
 
                     if (SussyAim::Cfg::ESP::drawHealthBar)

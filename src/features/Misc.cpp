@@ -30,7 +30,7 @@ namespace Misc
 		CheatText("Fast Stop", SussyAim::Cfg::Misc::FastStop);
 		if (SussyAim::Cfg::Misc::FlashImmunity != 0)
 			ImGui::Text("Flash Immunity");
-		CheatText("Force Scope", MiscCFG::ForceScope);
+		CheatText("Force Scope", SussyAim::Cfg::Misc::ForceScope);
 		if (SussyAim::Cfg::Misc::Fov != 90)
 			ImGui::Text("Fov Changer");
 		CheatText("Headshot Line", SussyAim::Cfg::Menu::ShowHeadShootLine);
@@ -290,7 +290,7 @@ namespace Misc
 		// Avoid scope loop
 		static DWORD lastTick = 0;
 		DWORD currentTick = GetTickCount();
-		if (!MenuConfig::ShowMenu)
+		if (!SussyAim::Cfg::Menu::ShowMenu)
 		{
 			if ((GetAsyncKeyState(VK_RBUTTON) & 0x8000) && currentTick - lastTick >= 500)
 			{
