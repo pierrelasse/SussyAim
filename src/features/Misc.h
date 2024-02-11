@@ -77,7 +77,7 @@ namespace Misc
 		return hasFlagDucking;
 	}
 
-	void Watermark() noexcept;
+	void Watermark(const CEntity& LocalPlayer) noexcept;
 	void FlashImmunity(const CEntity &aLocalPlayer) noexcept;
 	void FastStop() noexcept;
 	void NadeManager(CGame Game) noexcept;
