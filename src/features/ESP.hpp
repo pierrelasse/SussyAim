@@ -148,7 +148,7 @@ namespace SussyAim
 			{
 				uintptr_t ClippingWeapon, WeaponData, WeaponNameAddress;
 				ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::Pawn.pClippingWeapon, ClippingWeapon);
-				ProcessMgr.ReadMemory(ClippingWeapon + 0x360, WeaponData);
+				ProcessMgr.ReadMemory(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData);
 				ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.szName, WeaponNameAddress);
 				const std::string weaponName = WeaponNameAddress ? Entity.Pawn.WeaponName : "NULL";
 				return GunIcon(weaponName);

@@ -12,7 +12,7 @@
 
 namespace Misc
 {
-	inline bool Zoom;
+	inline bool Zoom = false;
 
 	struct Vector3
 	{

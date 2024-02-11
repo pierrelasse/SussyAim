@@ -250,20 +250,54 @@ namespace Misc
 		}
 	}
 
+	std::string OldWeaponCache;
 	void ForceScope(const CEntity &aLocalPlayer) noexcept
 	{
 		if (!SussyAim::Cfg::Misc::ForceScope)
 			return;
 
-		if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
-		{
-			Zoom = true;
-			UINT Scopefov = 45;
-			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Scopefov);
-		}
-		else
+		// When player switching weapon, cancel Scope
+		const std::string PlayerWeapon = aLocalPlayer.Pawn.WeaponName;
+		if (OldWeaponCache != PlayerWeapon)
 		{
 			Zoom = false;
+			OldWeaponCache = PlayerWeapon;
+		}
+
+		// When players hold these weapons, don't Scope
+		std::vector<std::string> WeaponNames = {
+			"smokegrenade", "flashbang", "hegrenade", "molotov", "decoy", "incgrenade",
+			"awp", "ssg08", "aug", "sg556",
+			"knife", "c4"};
+		if (std::find(WeaponNames.begin(), WeaponNames.end(), PlayerWeapon) != WeaponNames.end())
+			return;
+
+		// When player reloading their weapon, cancel Scope
+		DWORD64 WeaponService;
+		bool inReload;
+		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.pClippingWeapon, WeaponService);
+		ProcessMgr.ReadMemory(WeaponService + Offset::WeaponBaseData.inReload, inReload);
+		if (inReload)
+		{
+			Zoom = false;
+		}
+
+		// Avoid scope loop
+		static DWORD lastTick = 0;
+		DWORD currentTick = GetTickCount();
+		if (!MenuConfig::ShowMenu)
+		{
+			if ((GetAsyncKeyState(VK_RBUTTON) & 0x8000) && currentTick - lastTick >= 500)
+			{
+				Zoom = !Zoom;
+				lastTick = currentTick;
+			}
+		}
+
+		if (Zoom)
+		{
+			UINT Scopefov = 45;
+			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Scopefov);
 		}
 	}
 }
