@@ -106,6 +106,7 @@
     <ClInclude Include="src\features\Misc.h" />
     <ClInclude Include="src\features\Mouse.h" />
     <ClInclude Include="src\features\RCS.h" />
+    <ClInclude Include="src\features\SkinChanger.h" />
     <ClInclude Include="src\features\SpectatorList.h" />
     <ClInclude Include="src\features\StyleChanger.h" />
     <ClInclude Include="src\features\Triggerbot.hpp" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="src\features\Misc.cpp" />
     <ClCompile Include="src\features\Mouse.cpp" />
+    <ClCompile Include="src\features\SkinChanger.cpp" />
     <ClCompile Include="src\game\Bone.cpp" />
     <ClCompile Include="src\game\Entity.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
