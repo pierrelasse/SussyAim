@@ -100,6 +100,13 @@ namespace Offset
 		DWORD WeaponType = 0x248;
 		DWORD Inaccuracy = 0xC8C; // CCSWeaponBaseVData::m_flInaccuracyMove
 		DWORD inReload = 0x1744;
+
+		DWORD WeaponSize = 0x50;
+		DWORD ActiveWeapon = 0x58;
+		DWORD AttributeManager = 0x1098; // C_AttributeContainer
+		DWORD Item = 0x50;				 // C_AttributeContainer::m_Item
+		DWORD ItemDefinitionIndex = 0x1BA;
+		DWORD m_MeshGroupMask = 0x180; // CModelState::m_MeshGroupMask
 	} WeaponBaseData;
 
 	struct
