@@ -28,7 +28,7 @@ namespace SussyAim
 
 			inline DWORD64 GetWeaponHandle(DWORD64 WeaponServices, int WeaponIndex)
 			{
-				int WeaponHandle;
+				DWORD64 WeaponHandle;
 				ProcessMgr.ReadMemory((WeaponServices + Offset::WeaponBaseData.ActiveWeapon) + 0x4 * WeaponIndex, WeaponHandle);
 
 				return WeaponHandle;
@@ -51,7 +51,7 @@ namespace SussyAim
 			inline int GetWeaponID(DWORD64 Weapons) noexcept
 			{
 				int WeaponID;
-				ProcessMgr.ReadMemory(Weapons + Offset::WeaponBaseData.AttributeManager + Offset::WeaponBaseData.Item + Offset::WeaponBaseData.ItemDefinitionIndex, WeaponID);
+				ProcessMgr.ReadMemory(Weapons + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::WeaponBaseData.ItemDefinitionIndex, WeaponID);
 
 				return WeaponID;
 			}
@@ -72,8 +72,24 @@ namespace SussyAim
 				return GroupMask;
 			}
 
-			inline void SetWeaponSkin(int weaponID, int steamID, uintptr_t weapon, uintptr_t weaponGameSceneNode, int MeshGroupMask, int itemIDHigh);
-			inline void Run(const CEntity &LocalPlayer, DWORD64 EntityList);
+			inline DWORD64 GetViewModelServices(const CEntity &LocalPlayer)
+			{
+				DWORD64 ViewModelServices;
+				ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::Pawn.ViewModelServices, ViewModelServices);
+
+				return ViewModelServices;
+			}
+
+			inline DWORD64 GetViewHandle(DWORD64 ViewModelServices)
+			{
+				DWORD64 ViewHandle;
+				ProcessMgr.ReadMemory(ViewModelServices + Offset::Pawn.ViewModel, ViewHandle);
+
+				return ViewHandle;
+			}
+
+			inline void SetWeaponSkin(int weaponID, DWORD64 weapon, DWORD64 weaponGameSceneNode, int MeshGroupMask);
+			extern void Run(const CEntity &LocalPlayer, CGame Game);
 		}
 	}
 }

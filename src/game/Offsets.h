@@ -35,12 +35,14 @@ namespace Offset
 
 	struct
 	{
-		DWORD MovementServices = 0x1140; // CPlayer_MovementServices*
-		DWORD WeaponServices = 0x1100;	 // CPlayer_WeaponServices*
-		DWORD BulletServices = 0x1718;	 // CCSPlayer_BulletServices*
-		DWORD CameraServices = 0x1138;	 // CPlayer_CameraServices*
-		DWORD pClippingWeapon = 0x1308;	 // C_CSWeaponBase*
+		DWORD MovementServices = 0x1140;  // CPlayer_MovementServices*
+		DWORD WeaponServices = 0x1100;	  // CPlayer_WeaponServices*
+		DWORD BulletServices = 0x1718;	  // CCSPlayer_BulletServices*
+		DWORD CameraServices = 0x1138;	  // CPlayer_CameraServices*
+		DWORD ViewModelServices = 0x12C8; // CPlayer_ViewModelServices*
+		DWORD pClippingWeapon = 0x1308;	  // C_CSWeaponBase*
 
+		DWORD ViewModel = 0x40; // CCSPlayer_ViewModelServices::m_hViewModel
 		DWORD StartAccount = 0x1490;
 		DWORD isScoped = 0x1400;
 		DWORD TotalHit = 0x40;
@@ -90,6 +92,19 @@ namespace Offset
 
 	struct
 	{
+		DWORD AttributeManager = 0x1098; // C_AttributeContainer
+		DWORD FallbackPaintKit = 0x1548;
+		DWORD FallbackSeed = 0x154C;
+		DWORD FallbackWear = 0x1550;
+		DWORD FallbackStatTrak = 0x1554;
+		DWORD szCustomName = 0x2D0;
+
+		DWORD EntityQuality = 0x1BC; // EconItemView::m_iEntityQuality
+		DWORD ItemIDHigh = 0x1D0;	 // EconItemView::m_iItemIDHigh
+	} EconEntity;
+
+	struct
+	{
 		DWORD ClippingWeapon = 0x1308; // WeaponBase
 		DWORD WeaponDataPTR = 0x368;
 		DWORD szName = 0xC20;
@@ -103,7 +118,6 @@ namespace Offset
 
 		DWORD WeaponSize = 0x50;
 		DWORD ActiveWeapon = 0x58;
-		DWORD AttributeManager = 0x1098; // C_AttributeContainer
 		DWORD Item = 0x50;				 // C_AttributeContainer::m_Item
 		DWORD ItemDefinitionIndex = 0x1BA;
 		DWORD m_MeshGroupMask = 0x180; // CModelState::m_MeshGroupMask
