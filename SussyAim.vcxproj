@@ -96,8 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\config\Config.hpp" />
-    <ClInclude Include="src\config\ConfigMenu.hpp" />
-    <ClInclude Include="src\config\ConfigSaver.hpp" />
+    <ClInclude Include="src\config\ConfigAnvil.hpp" />
     <ClInclude Include="src\features\Aimbot.hpp" />
     <ClInclude Include="src\features\BombTimer.hpp" />
     <ClInclude Include="src\features\ESP.hpp" />

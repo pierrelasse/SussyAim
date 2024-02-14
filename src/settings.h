@@ -1,13 +1,13 @@
 
 // === Settings ===
 #define G_VERSION_MAJOR 2
-#define G_VERSION_MINOR 7
-#define G_VERSION_PATCH 5
+#define G_VERSION_MINOR 8
+#define G_VERSION_PATCH 2
 
 #define G_PROGRAMFILENAME "cs2.exe"
 
 // #define G_PRINTOFFSETS
-// #define G_IMGUI_DEMO
+#define G_IMGUI_DEMO
 
 // === Settings End ===
 
