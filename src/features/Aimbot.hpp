@@ -23,7 +23,7 @@ namespace SussyAim
 			inline int HotKey = VK_LMENU;
 			inline bool ScopeOnly = false;
 			inline bool AutoShot = false;
-			inline bool AimLock = false;
+			inline bool AimLock = true;
 			inline float AimFov = 5;
 			inline float AimFovMin = .5f;
 			inline float Smooth = 0.0f;
@@ -42,10 +42,13 @@ namespace SussyAim
 
 			inline void run(const CEntity &Local, Vec3 LocalPos, Vec3 AimPos)
 			{
-				int isFired;
-				ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
-				if (!isFired && !AimLock)
-					return;
+				if (!AimLock)
+				{
+					int isFired;
+					ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
+					if (!isFired)
+						return;
+				}
 
 				if (ScopeOnly)
 				{
@@ -98,7 +101,7 @@ namespace SussyAim
 				Vec2 ScreenPos;
 				gGame.View.WorldToScreen(Vec3(AimPos), ScreenPos);
 
-				if (Norm < AimFov && Norm > AimFovMin)
+				if (Norm < AimFov) //  && Norm > AimFovMin
 				{
 					if (ScreenPos.x != ScreenCenterX)
 					{
