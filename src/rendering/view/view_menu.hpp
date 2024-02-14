@@ -14,10 +14,6 @@ namespace SussyAim
 
             void render()
             {
-                PutSwitch("Anti Capture", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Menu::StreamProof);
-
-                ImGui::Spacing();
-
                 PutSwitch("ImGui Demo", 5.f, ImGui::GetFrameHeight() * 1.7, &showImGuiDemo);
 
                 ImGui::Spacing();
