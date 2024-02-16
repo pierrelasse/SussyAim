@@ -13,7 +13,7 @@ namespace SussyAim
 		inline std::string dirConfigs;
 		inline std::string dirSounds;
 
-		inline int page = 0; // 0: Visual 1: Aimbot 2: Misc 3: Config
+		inline int page = 0; // TODO: remove
 		inline int theme = 0;
 
 		struct
@@ -29,10 +29,6 @@ namespace SussyAim
 			ImColor BorderColor_Yellow = ImColor(127, 18, 39, 200);
 			ImColor BorderColor_Purple = ImColor(255, 0, 238, 255);
 		} WCS; // Window Component Settings
-
-		// namespace Visual
-		// {
-		// }
 
 		namespace Aimbot
 		{
@@ -103,7 +99,7 @@ namespace SussyAim
 
 			inline bool drawBox = true;
 			inline bool drawBoxOutline = true;
-			inline float boxRounding = RandomPara<float>(0.0f, 0.0f);
+			inline float boxRounding = 0.f;
 			inline float boxAlpha = 0.35f;
 			inline ImColor FrameColor = ImColor(10, 10, 10, 80);
 			inline int boxType = 1; // 0: normal 1: dynamic 2: Flat

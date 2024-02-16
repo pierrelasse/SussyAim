@@ -4,8 +4,7 @@
 #include "../../config/Config.hpp"
 #include "../../features/Aimbot.hpp"
 #include "../../features/Triggerbot.hpp"
-#include "../../config/ConfigMenu.hpp"
-#include "../../config/ConfigSaver.hpp"
+#include "../../config/ConfigAnvil.hpp"
 #include "../../features/StyleChanger.h"
 #include "../Resources/Images.h"
 
@@ -50,55 +49,67 @@ namespace SussyAim
 
 		static void renderMainMenu()
 		{
+			if (SussyAim::Cfg::Menu::ShowMenu)
+			{
 #ifdef G_IMGUI_DEMO
-			if (SussyAim::view::menu::showImGuiDemo)
-				ImGui::ShowDemoWindow();
+				if (SussyAim::view::menu::showImGuiDemo)
+					ImGui::ShowDemoWindow();
 #endif
 
-			if (AS_Logo == NULL)
-			{
-				std::cout << "[GUI] Loading logo image" << std::endl;
-				Gui.LoadTextureFromMemory(Images::Logo, sizeof Images::Logo, &AS_Logo, &LogoW, &LogoH);
+				if (AS_Logo == NULL)
+				{
+					std::cout << "[GUI] Loading logo image" << std::endl;
+					Gui.LoadTextureFromMemory(Images::Logo, sizeof Images::Logo, &AS_Logo, &LogoW, &LogoH);
+				}
+
+				static bool needOnce = true;
+				if (needOnce)
+				{
+					needOnce = false;
+					ImGui::SetNextWindowPos({(ImGui::GetIO().DisplaySize.x - 851.0f) / 2.0f, (ImGui::GetIO().DisplaySize.y - 514.0f) / 2.0f});
+					ImGui::SetNextWindowSize({851, 514});
+				}
 			}
-
-			ImColor BorderColor = SussyAim::Cfg::Menu::ButtonBorderColor;
-
-			char TempText[256];
-			ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse;
-			ImGui::SetNextWindowPos({(ImGui::GetIO().DisplaySize.x - 851.0f) / 2.0f, (ImGui::GetIO().DisplaySize.y - 514.0f) / 2.0f}, ImGuiCond_Once);
-			ImGui::SetNextWindowSize({851, 514}, ImGuiCond_Once);
+			static ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
 
 			static const char *windowTitle = format("SussyAim v%d.%d.%d###main", G_VERSION_MAJOR, G_VERSION_MINOR, G_VERSION_PATCH);
-			ImGui::Begin(windowTitle, nullptr, Flags);
+			if (SussyAim::Cfg::Menu::ShowMenu)
 			{
-				ImGui::BeginGroup();
+				if (ImGui::Begin(windowTitle, nullptr, windowFlags))
 				{
-					static ImTextureID ImageID = (void *)AS_Logo;
-					static ImVec2 LogoSize = ImVec2(LogoW, LogoH);
-					ImGui::Image(ImageID, LogoSize);
+					ImGui::BeginGroup();
+					{
+						static ImTextureID ImageID = (void *)AS_Logo;
+						static ImVec2 LogoSize = ImVec2(LogoW, LogoH);
+						ImGui::Image(ImageID, LogoSize);
 
-					ImGui::SameLine();
+						ImGui::SameLine();
 
-					ImGui::Text("Anti Capture: %s", SussyAim::Cfg::Menu::StreamProof ? "on" : "OFF");
+						ImGui::TextDisabled("Anti Capture: %s", SussyAim::Cfg::Menu::StreamProof ? "on" : "OFF");
+						if (ImGui::IsItemClicked())
+							SussyAim::Cfg::Menu::StreamProof = !SussyAim::Cfg::Menu::StreamProof;
+						if (ImGui::IsItemHovered())
+							ImGui::SetTooltip("When enabled, it prevents other programs from capturing SussyAim.\nDisables Geforce's Instant Replay for some dumb reason");
+					}
+					ImGui::EndGroup();
+
+					ImGui::BeginGroup();
+					if (ImGui::BeginTabBar("main_a"))
+					{
+						SussyAim::view::aimbot::renderItem();
+						SussyAim::view::triggerbot::renderItem();
+						SussyAim::view::esp::renderItem();
+						SussyAim::view::crosshair::renderItem();
+						SussyAim::view::misc::renderItem();
+						SussyAim::view::fun::renderItem();
+						SussyAim::view::config::renderItem();
+						SussyAim::view::menu::renderItem();
+						ImGui::EndTabBar();
+					}
+					ImGui::EndGroup();
 				}
-				ImGui::EndGroup();
-
-				ImGui::BeginGroup();
-				ImGui::BeginTabBar("main_a");
-				{
-					SussyAim::view::aimbot::renderItem();
-					SussyAim::view::triggerbot::renderItem();
-					SussyAim::view::esp::renderItem();
-					SussyAim::view::crosshair::renderItem();
-					SussyAim::view::misc::renderItem();
-					SussyAim::view::fun::renderItem();
-					SussyAim::view::config::renderItem();
-					SussyAim::view::menu::renderItem();
-				}
-				ImGui::EndTabBar();
-				ImGui::EndGroup();
+				ImGui::End();
 			}
-			ImGui::End();
 		}
 	}
 }

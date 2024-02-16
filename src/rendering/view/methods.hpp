@@ -84,6 +84,7 @@ namespace SussyAim
 
 		inline void PutSliderInt(const char *string, float CursorX, int *v, const void *p_min, const void *p_max, const char *format)
 		{
+			if (format == nullptr) return;
 			ImGui::PushID(string);
 			float CurrentCursorX = ImGui::GetCursorPosX();
 			float SliderWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x - CursorX;

@@ -15,16 +15,14 @@ namespace SussyAim
     inline DWORD currentTick;
     inline DWORD lastTick = 0;
 
-    bool updateShowMenu()
+    void updateShowMenu()
     {
         currentTick = GetTickCount();
-
-        if ((GetAsyncKeyState(VK_INSERT) & 0x8000) && currentTick - lastTick >= 150)
+        if (currentTick - lastTick >= 150 && (GetAsyncKeyState(VK_INSERT) & 0x8000))
         {
             SussyAim::Cfg::Menu::ShowMenu = !SussyAim::Cfg::Menu::ShowMenu;
             lastTick = currentTick;
         }
-        return SussyAim::Cfg::Menu::ShowMenu;
     }
 
     void RenderCrossHair(ImDrawList *drawList) noexcept
@@ -40,8 +38,8 @@ namespace SussyAim
 
     void tick()
     {
-        if (updateShowMenu())
-            SussyAim::view::renderMainMenu();
+        updateShowMenu();
+        SussyAim::view::renderMainMenu();
 
         // Update matrix
         if (!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix, 64))
@@ -62,7 +60,7 @@ namespace SussyAim
         static int LocalPlayerControllerIndex = 1;
         if (!LocalEntity.UpdateController(LocalControllerAddress))
             return;
-        if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !SussyAim::Cfg::Misc::WorkInSpec)
+        if (!LocalEntity.UpdatePawn(LocalPawnAddress)) // && !SussyAim::Cfg::Misc::WorkInSpec
             return;
 
         // HealthBar Map

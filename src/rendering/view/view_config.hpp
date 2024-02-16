@@ -1,7 +1,7 @@
 #pragma once
 
 #include "methods.hpp"
-#include "../../config/ConfigSaver.hpp"
+#include "../../config/ConfigAnvil.hpp"
 
 using namespace SussyAim::view;
 
@@ -67,7 +67,7 @@ namespace SussyAim
 					if (ImGui::Button("Load"))
 					{
 						std::string selectedConfigFile = configFiles[selectedConfig];
-						MyConfigSaver::LoadConfig(selectedConfigFile);
+						SussyAim::Cfg::Loader::loadFromFile(selectedConfigFile);
 					}
 
 					ImGui::SameLine();
@@ -75,7 +75,7 @@ namespace SussyAim
 					if (ImGui::Button("Save"))
 					{
 						std::string selectedConfigFile = configFiles[selectedConfig];
-						MyConfigSaver::SaveConfig(selectedConfigFile);
+						SussyAim::Cfg::Saver::saveToFile(selectedConfigFile);
 					}
 
 					ImGui::SameLine();
@@ -129,7 +129,7 @@ namespace SussyAim
 				if (ImGui::Button("Create"))
 				{
 					std::string configFileName = std::string(configNameBuffer) + ".yml";
-					MyConfigSaver::SaveConfig(configFileName);
+					SussyAim::Cfg::Saver::saveToFile(configFileName);
 				}
 			}
 

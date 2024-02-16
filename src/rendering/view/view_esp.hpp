@@ -14,10 +14,11 @@ namespace SussyAim
 			inline const int MinCombo = 0, MaxCombo = 2;
 			inline const int MinDis = 5, MaxDis = 80;
 
+			inline const char *boxTypes[] = {"Normal", "Dynamic", "Corner"};
+			inline const char *tracersPos[] = {"Top", "Center", "Bottom"};
+
 			void render()
 			{
-				static const char *BoxTypes[] = {Lang::ESPtext.BoxType_Normal, Lang::ESPtext.BoxType_Edge, Lang::ESPtext.BoxType_Corner};
-				static const char *LinePos[] = {Lang::ESPtext.LinePos_1, Lang::ESPtext.LinePos_2, Lang::ESPtext.LinePos_3};
 
 				PutSwitch("Enabled", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::enabled);
 				ImGui::Spacing();
@@ -26,7 +27,7 @@ namespace SussyAim
 				if (SussyAim::Cfg::ESP::drawBox)
 				{
 					PutSwitch(Lang::ESPtext.Outline, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawBoxOutline);
-					PutSliderInt(Lang::ESPtext.BoxType, 10.f, &SussyAim::Cfg::ESP::boxType, &MinCombo, &MaxCombo, BoxTypes[SussyAim::Cfg::ESP::boxType]);
+					PutSliderInt(Lang::ESPtext.BoxType, 10.f, &SussyAim::Cfg::ESP::boxType, &MinCombo, &MaxCombo, boxTypes[SussyAim::Cfg::ESP::boxType]);
 					PutSliderFloat(Lang::ESPtext.BoxRounding, 10.f, &SussyAim::Cfg::ESP::boxRounding, &MinRounding, &MaxRouding, "%.1f");
 				}
 
@@ -47,7 +48,7 @@ namespace SussyAim
 
 				PutSwitch("Tracers", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::drawTracers, true, "###LineCol", reinterpret_cast<float *>(&SussyAim::Cfg::ESP::tracerColor));
 				if (SussyAim::Cfg::ESP::drawTracers)
-					PutSliderInt(Lang::ESPtext.LinePosList, 10.f, &SussyAim::Cfg::ESP::tracerPos, &MinCombo, &MaxCombo, LinePos[SussyAim::Cfg::ESP::tracerPos]);
+					PutSliderInt(Lang::ESPtext.LinePosList, 10.f, &SussyAim::Cfg::ESP::tracerPos, &MinCombo, &MaxCombo, tracersPos[SussyAim::Cfg::ESP::tracerPos]);
 
 				ImGui::Spacing();
 
