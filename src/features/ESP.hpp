@@ -22,8 +22,8 @@ namespace SussyAim
 					{"famas", "H"},
 					{"ump45", "b"},
 					{"glock", "g"},
-					{"knife", "]"},
-					{"knife_t", "["},
+					{"ct_knife", "]"},
+					{"t_knife", "["},
 					{"elite", "B"},
 					{"fiveseven", "C"},
 					{"revolver", "J"},
@@ -76,7 +76,8 @@ namespace SussyAim
 				float offsetY;
 			};
 			static std::unordered_map<std::string, WeaponIconSize> weaponIconSizes = {
-				{"knife", {20.f, 20.f, -8.f, 0.f}},
+				{"t_knife", {20.0f, 20.0f, -8.0f, 0.0f}},
+				{"ct_knife", {20.0f, 20.0f, -8.0f, 0.0f}},
 				{"deagle", {20.f, 20.f, -8.f, 0.f}},
 				{"elite", {20.f, 20.f, 0.f, 0.f}},
 				{"fiveseven", {20.f, 20.f, 0.f, 0.f}},

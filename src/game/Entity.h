@@ -90,12 +90,13 @@ class CEntity
 public:
 	PlayerController Controller;
 	PlayerPawn Pawn;
+	static std::map<int, std::string> weaponNames;
 
 public:
 	bool UpdateController(const DWORD64 &PlayerControllerAddress);
 	bool UpdatePawn(const DWORD64 &PlayerPawnAddress);
-	bool UpdateServerPawn(const DWORD64 &PlayerPawnAddress);
 	bool IsAlive();
 	bool IsInScreen();
 	CBone GetBone() const;
+	static std::string GetWeaponName(int weaponID);
 };
