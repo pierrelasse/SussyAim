@@ -11,7 +11,7 @@ namespace SussyAim
 		namespace aimbot
 		{
 			inline const float FovMin = 0.f, FovMax = 50.f;
-			inline const float SmoothMin = 0.f, SmoothMax = 5.f;
+			inline const float SmoothMin = 0.4f, SmoothMax = 5.f;
 
 			void render()
 			{
