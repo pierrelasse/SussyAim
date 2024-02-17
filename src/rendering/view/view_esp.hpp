@@ -12,7 +12,7 @@ namespace SussyAim
 		{
 			inline const float MinRounding = 0.f, MaxRouding = 5.f;
 			inline const int MinCombo = 0, MaxCombo = 2;
-			inline const int MinDis = 5, MaxDis = 80;
+			inline const int MinDis = 0, MaxDis = 250;
 
 			inline const char *boxTypes[] = {"Normal", "Dynamic", "Corner"};
 			inline const char *tracersPos[] = {"Top", "Center", "Bottom"};
