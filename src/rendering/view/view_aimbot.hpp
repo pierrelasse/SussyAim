@@ -12,6 +12,7 @@ namespace SussyAim
 		{
 			inline const float FovMin = 0.f, FovMax = 50.f;
 			inline const float SmoothMin = 0.4f, SmoothMax = 5.f;
+			inline const float recoilMin = 0.f, recoilMax = 2.f;
 
 			void render()
 			{
@@ -65,6 +66,8 @@ namespace SussyAim
 				ImGui::Spacing();
 
 				PutSwitch("Predict recoil", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::RCS, false, 0, 0, "Very op");
+				PutSliderFloat(" -  Yaw: ", 5.f, &RCS::RCSScale.x, &recoilMin, &recoilMax, "%.2f");
+				PutSliderFloat(" -  Pitch: ", 5.f, &RCS::RCSScale.y, &recoilMin, &recoilMax, "%.2f");
 			}
 
 			void renderItem()
