@@ -271,7 +271,7 @@ namespace SussyAim
             }
         }
 
-        if (!SussyAim::Cfg::Aimbot::enabled || AimPos == Vec3(0, 0, 0))
+        if (SussyAim::Features::Aimbot::HasTarget == false || !SussyAim::Cfg::Aimbot::enabled || AimPos == Vec3(0, 0, 0))
             RCS::RecoilControl(LocalEntity);
     }
 }

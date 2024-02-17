@@ -2,7 +2,7 @@
 // === Settings ===
 #define G_VERSION_MAJOR 2
 #define G_VERSION_MINOR 9
-#define G_VERSION_PATCH 7
+#define G_VERSION_PATCH 8
 
 #define G_PROGRAMFILENAME "cs2.exe"
 

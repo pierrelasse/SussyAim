@@ -29,6 +29,8 @@ namespace SussyAim
 			inline float Smooth = 0.0f;
 			inline std::vector<int> HotKeyList{VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL};
 
+			inline bool HasTarget = false;
+
 			inline void SetHotKey(int Index)
 			{
 				HotKey = HotKeyList.at(Index);
@@ -41,12 +43,18 @@ namespace SussyAim
 
 			inline void run(const CEntity &Local, Vec3 LocalPos, Vec3 AimPos)
 			{
-				if (!AimLock)
+				// if (!AimLock)
+				// {
+				// 	int isFired;
+				// 	ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
+				// 	if (!isFired)
+				// 		return;
+				// }
+
+				if (!AimLock && Local.Pawn.ShotsFired < AimBullet)
 				{
-					int isFired;
-					ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
-					if (!isFired)
-						return;
+					HasTarget = false;
+					return;
 				}
 
 				if (ScopeOnly)
@@ -54,7 +62,10 @@ namespace SussyAim
 					bool isScoped;
 					ProcessMgr.ReadMemory<bool>(Local.Pawn.Address + Offset::Pawn.isScoped, isScoped);
 					if (!isScoped)
+					{
+						HasTarget = false;
 						return;
+					}
 				}
 
 				float Yaw, Pitch;
@@ -102,6 +113,7 @@ namespace SussyAim
 
 				if (Norm < AimFov)
 				{
+					HasTarget = true;
 					if (ScreenPos.x != ScreenCenterX)
 					{
 						TargetX = (ScreenPos.x > ScreenCenterX) ? -(ScreenCenterX - ScreenPos.x) : ScreenPos.x - ScreenCenterX;
@@ -158,8 +170,8 @@ namespace SussyAim
 						mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 						mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 					}
-					else if (SussyAim::Cfg::Aimbot::RCS)
-						RCS::RecoilControl(Local);
+					else
+						HasTarget = false;
 				}
 			}
 		}
