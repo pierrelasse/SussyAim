@@ -152,6 +152,7 @@ namespace SussyAim
                     emitter << YAML::Key << "Thickness" << YAML::Value << SussyAim::Cfg::Crosshair::Thickness;
                     emitter << YAML::Key << "DotSize" << YAML::Value << SussyAim::Cfg::Crosshair::DotSize;
                     emitter << YAML::Key << "CircleRadius" << YAML::Value << SussyAim::Cfg::Crosshair::CircleRadius;
+                    emitter << YAML::Key << "TargetCheck" << YAML::Value << SussyAim::Cfg::Menu::TargetingCrosshairs;
                     emitter << YAML::Key << "CrosshairsColor";
                     emitter << YAML::Value;
                     emitter << YAML::BeginMap;
@@ -396,6 +397,7 @@ namespace SussyAim
                         SussyAim::Cfg::Crosshair::Thickness = config["Crosshairs"]["Thickness"].as<int>();
                         SussyAim::Cfg::Crosshair::DotSize = config["Crosshairs"]["DotSize"].as<float>();
                         SussyAim::Cfg::Crosshair::CircleRadius = config["Crosshairs"]["CircleRadius"].as<float>();
+                        loadValue(currentNode, "TargetCheck", false, SussyAim::Cfg::Menu::TargetingCrosshairs);
                         SussyAim::Cfg::Crosshair::CrossHairColor.Value.x = config["Crosshairs"]["CrosshairsColor"]["r"].as<float>();
                         SussyAim::Cfg::Crosshair::CrossHairColor.Value.y = config["Crosshairs"]["CrosshairsColor"]["g"].as<float>();
                         SussyAim::Cfg::Crosshair::CrossHairColor.Value.z = config["Crosshairs"]["CrosshairsColor"]["b"].as<float>();
