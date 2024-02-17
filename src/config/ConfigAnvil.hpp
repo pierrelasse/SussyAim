@@ -491,6 +491,7 @@ namespace SussyAim
                     }
 
                     SussyAim::Features::Aimbot::SetHotKey(SussyAim::Cfg::Aimbot::AimbotHotKey);
+                    SussyAim::Features::Triggerbot::SetHotKey(SussyAim::Cfg::Triggerbot::hotkey);
                     // StyleChanger::UpdateSkin(SussyAim::Cfg::theme);
 
                     std::cout << "[Config] Loaded successfully from " << filename << std::endl;
