@@ -24,4 +24,5 @@
 using namespace std::chrono_literals;
 
 namespace SussyAim {
+    inline bool allowWriteMemory = true;
 }

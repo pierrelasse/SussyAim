@@ -259,22 +259,30 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType &Value, int Size)
 	{
+		if (!SussyAim::allowWriteMemory)
+			return false;
+
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
-		printf("Mem write 1 [%lld]\r", std::chrono::duration_cast<std::chrono::nanoseconds>(
-										   std::chrono::high_resolution_clock::now().time_since_epoch())
-										   .count());
+
+		const auto nsTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+		printf("[ProcessManager] Writing memory (1) [%lld]\r", nsTime);
+
 		return WriteProcessMemory(hProcess, reinterpret_cast<LPCVOID>(Address), &Value, Size, 0);
 	}
 
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType &Value)
 	{
+		if (!SussyAim::allowWriteMemory)
+			return false;
+
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
-		printf("Mem write 2 [%lld]\r", std::chrono::duration_cast<std::chrono::nanoseconds>(
-										   std::chrono::high_resolution_clock::now().time_since_epoch())
-										   .count());
+
+		const auto nsTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+		printf("[ProcessManager] Writing memory (2) [%lld]\r", nsTime);
+
 		return WriteProcessMemory(hProcess, reinterpret_cast<LPVOID>(Address), &Value, sizeof(ReadType), 0);
 	}
 

@@ -15,6 +15,7 @@ namespace SussyAim
             void render()
             {
                 PutSwitch("ImGui Demo", 5.f, ImGui::GetFrameHeight() * 1.7, &showImGuiDemo);
+                PutSwitch("Allow memory modification", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::allowWriteMemory);
 
                 ImGui::Spacing();
 
