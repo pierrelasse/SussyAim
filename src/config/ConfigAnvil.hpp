@@ -251,6 +251,16 @@ namespace SussyAim
                 }
 
                 {
+                    emitter << YAML::Key << "RCS";
+                    emitter << YAML::Value;
+                    emitter << YAML::BeginMap;
+                    emitter << YAML::Key << "Enable" << YAML::Value << SussyAim::Cfg::Aimbot::RCS;
+                    emitter << YAML::Key << "Yaw" << YAML::Value << RCS::RCSScale.x;
+                    emitter << YAML::Key << "Pitch" << YAML::Value << RCS::RCSScale.y;
+                    emitter << YAML::EndMap;
+                }
+
+                {
                     emitter << YAML::Key << "Triggerbot";
                     emitter << YAML::Value;
                     emitter << YAML::BeginMap;
@@ -458,6 +468,12 @@ namespace SussyAim
                         SussyAim::Cfg::Aimbot::AimPosition = config["Aimbot"]["AimPos"].as<int>();
                         SussyAim::Cfg::Aimbot::VisibleCheck = config["Aimbot"]["VisibleCheck"].as<bool>();
                         SussyAim::Features::Aimbot::AutoShot = config["Aimbot"]["AutoShot"].IsDefined() ? config["Aimbot"]["AutoShot"].as<bool>() : false;
+                    }
+                    if (currentNode = config["RC"])
+                    {
+                        loadValue(currentNode, "Enable", false, SussyAim::Cfg::Aimbot::RCS);
+                        loadValue(currentNode, "Yaw", 1.f, RCS::RCSScale.x);
+                        loadValue(currentNode, "Pitch", 1.f, RCS::RCSScale.y);
                     }
                     if (currentNode = config["Triggerbot"])
                     {

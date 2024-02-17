@@ -58,6 +58,7 @@ namespace SussyAim
         // LocalEntity
         CEntity LocalEntity, ServerEntity;
         static int LocalPlayerControllerIndex = 1;
+        LocalEntity.UpdateClientData();
         if (!LocalEntity.UpdateController(LocalControllerAddress))
             return;
         if (!LocalEntity.UpdatePawn(LocalPawnAddress)) // && !SussyAim::Cfg::Misc::WorkInSpec
@@ -238,6 +239,8 @@ namespace SussyAim
         RenderCrossHair(ImGui::GetBackgroundDrawList());
 
         SussyAim::Features::BombTimer::render();
+
+        RCS::RecoilControl(LocalEntity);
 
         {
             if (!SussyAim::Cfg::Aimbot::enabled)
