@@ -18,6 +18,7 @@ namespace SussyAim
 				ImGui::Spacing();
 
 				PutSwitch(Lang::TriggerText.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::always);
+				PutSwitch("Scope only", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::scopeOnly);
 				if (!SussyAim::Cfg::Triggerbot::always)
 				{
 					ImGui::TextDisabled(Lang::TriggerText.HotKeyList);

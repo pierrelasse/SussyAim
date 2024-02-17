@@ -46,6 +46,7 @@ namespace SussyAim
 		{
 			inline bool enabled = false;
 			inline bool always = false;
+			inline bool scopeOnly = false;
 			inline int hotkey = 0;
 		}
 
