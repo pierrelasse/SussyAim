@@ -21,6 +21,7 @@ namespace SussyAim
 		namespace Aimbot
 		{
 			inline int HotKey = VK_LMENU;
+			inline int AimBullet = 1;
 			inline bool ScopeOnly = false;
 			inline bool AutoShot = false;
 			inline bool AimLock = true;
@@ -157,6 +158,8 @@ namespace SussyAim
 						mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 						mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 					}
+					else if (SussyAim::Cfg::Aimbot::RCS)
+						RCS::RecoilControl(Local);
 				}
 			}
 		}

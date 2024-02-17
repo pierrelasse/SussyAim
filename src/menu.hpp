@@ -240,8 +240,6 @@ namespace SussyAim
 
         SussyAim::Features::BombTimer::render();
 
-        RCS::RecoilControl(LocalEntity);
-
         {
             if (!SussyAim::Cfg::Aimbot::enabled)
                 return;
@@ -272,5 +270,8 @@ namespace SussyAim
                 lastTick = currentTick;
             }
         }
+
+        if (!SussyAim::Cfg::Aimbot::enabled || AimPos == Vec3(0, 0, 0))
+            RCS::RecoilControl(LocalEntity);
     }
 }

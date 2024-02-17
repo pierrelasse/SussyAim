@@ -231,7 +231,8 @@ namespace SussyAim
                     emitter << YAML::Key << "Enable" << YAML::Value << SussyAim::Cfg::Aimbot::enabled;
                     emitter << YAML::Key << "AimLock" << YAML::Value << SussyAim::Features::Aimbot::AimLock;
                     emitter << YAML::Key << "ToggleMode" << YAML::Value << SussyAim::Cfg::Aimbot::AimToggleMode;
-                    emitter << YAML::Key << "Hotkey" << YAML::Value << SussyAim::Cfg::Aimbot::AimbotHotKey;
+                    emitter << YAML::Key << "Hotkey" << YAML::Value << SussyAim::Features::Aimbot::HotKey;
+                    emitter << YAML::Key << "AimBullet" << YAML::Value << SussyAim::Features::Aimbot::AimBullet;
                     emitter << YAML::Key << "Fov" << YAML::Value << SussyAim::Features::Aimbot::AimFov;
                     emitter << YAML::Key << "FovCircle" << YAML::Value << SussyAim::Cfg::ESP::DrawFov;
                     emitter << YAML::Key << "CircleColor";
@@ -458,6 +459,7 @@ namespace SussyAim
                         SussyAim::Cfg::Aimbot::always = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
                         SussyAim::Cfg::Aimbot::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
                         SussyAim::Cfg::Aimbot::AimbotHotKey = config["Aimbot"]["Hotkey"].as<int>();
+                        SussyAim::Features::Aimbot::AimBullet = config["Aimbot"]["AimBullet"].as<int>();
                         SussyAim::Features::Aimbot::AimFov = config["Aimbot"]["Fov"].as<float>();
                         SussyAim::Cfg::ESP::DrawFov = config["Aimbot"]["FovCircle"].as<bool>();
                         SussyAim::Cfg::Menu::FovCircleColor.Value.x = config["Aimbot"]["CircleColor"]["r"].as<float>();

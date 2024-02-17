@@ -13,6 +13,7 @@ namespace SussyAim
 			inline const float FovMin = 0.f, FovMax = 50.f;
 			inline const float SmoothMin = 0.4f, SmoothMax = 5.f;
 			inline const float recoilMin = 0.f, recoilMax = 2.f;
+			inline const int BulletMin = 0, BulletMax = 5;
 
 			void render()
 			{
@@ -26,6 +27,7 @@ namespace SussyAim
 				{
 					SussyAim::Features::Aimbot::SetHotKey(SussyAim::Cfg::Aimbot::AimbotHotKey);
 				}
+				PutSliderInt("Start Bullet", 10.f, &SussyAim::Features::Aimbot::AimBullet, &BulletMin, &BulletMax, "%d");
 				PutSwitch(Lang::AimbotText.Toggle, 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Aimbot::AimToggleMode);
 
 				ImGui::Spacing();

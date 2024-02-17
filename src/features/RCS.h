@@ -65,7 +65,7 @@ namespace RCS
 
 	inline void RecoilControl(CEntity LocalPlayer)
 	{
-		if (!SussyAim::Cfg::Aimbot::RCS || SussyAim::Cfg::Aimbot::enabled)
+		if (!SussyAim::Cfg::Aimbot::RCS)
 			return;
 
 		static Vec2 OldPunch;
