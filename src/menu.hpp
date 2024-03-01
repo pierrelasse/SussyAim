@@ -39,7 +39,8 @@ namespace SussyAim
     void tick()
     {
         updateShowMenu();
-        SussyAim::view::renderMainMenu();
+        if (GetForegroundWindow() == ProcessMgr.hProcess) // TODO: Check if worke
+            SussyAim::view::renderMainMenu();
 
         // Update matrix
         if (!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix, 64))
@@ -128,21 +129,10 @@ namespace SussyAim
 
             if (!Entity.IsAlive())
                 continue;
-            //		if (SussyAim::Cfg::Menu::VisibleCheck && (!Entity.Pawn.bSpottedByMask > 0))
-            //			continue;
 
             if (!Entity.IsInScreen())
                 continue;
 
-            // Bone Debug
-            /*	for (int BoneIndex = 0; BoneIndex < Entity.BoneData.BonePosList.size(); BoneIndex++)
-                {
-                    Vec2 ScreenPos{};
-                    if (gGame.View.WorldToScreen(Entity.BoneData.BonePosList[BoneIndex].Pos, ScreenPos))
-                    {
-                        Gui.Text(std::to_string(BoneIndex), ScreenPos, ImColor(255, 255, 255, 255));
-                    }
-                }*/
             DistanceToSight = Entity.GetBone().BonePosList[BONEINDEX::head].ScreenPos.DistanceTo({Gui.Window.Size.x / 2, Gui.Window.Size.y / 2});
 
             if (DistanceToSight < MaxAimDistance)

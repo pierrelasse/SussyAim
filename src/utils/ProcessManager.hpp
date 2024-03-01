@@ -4,13 +4,15 @@
 
 #include <Tlhelp32.h>
 #include <atlconv.h>
+
+#define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
+
 #define _is_invalid(v) \
 	if (v == NULL)     \
 	return false
 #define _is_invalid(v, n) \
 	if (v == NULL)        \
 	return n
-#define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
 typedef struct _CLIENT_ID
 {
@@ -50,14 +52,12 @@ typedef struct _SYSTEM_HANDLE_INFORMATION
 	ULONG HandleCount;
 	SYSTEM_HANDLE_TABLE_ENTRY_INFO Handles[1];
 } SYSTEM_HANDLE_INFORMATION, *PSYSTEM_HANDLE_INFORMATION;
+
 typedef NTSYSAPI NTSTATUS(NTAPI *FUNC_NtOpenProcess)(PHANDLE ProcessHandle, ACCESS_MASK DesiredAccess, OBJECT_ATTRIBUTES_Ptr ObjectAttributes, PCLIENT_ID ClientId);
 typedef NTSTATUS(NTAPI *FUNC_NtQuerySystemInformation)(ULONG SystemInformationClass, PVOID SystemInformation, ULONG SystemInformationLength, PULONG ReturnLength);
 typedef NTSTATUS(NTAPI *FUNC_RtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
 typedef NTSTATUS(NTAPI *FUNC_NtDuplicateObject)(HANDLE SourceProcessHandle, HANDLE SourceHandle, HANDLE TargetProcessHandle, PHANDLE TargetHandle, ACCESS_MASK DesiredAccess, ULONG Attributes, ULONG Options);
 
-/// <summary>
-/// ����״̬��
-/// </summary>
 enum StatusCode
 {
 	SUCCEED,
@@ -66,9 +66,6 @@ enum StatusCode
 	FAILE_MODULE,
 };
 
-/// <summary>
-/// ���̹���
-/// </summary>
 class ProcessManager
 {
 private:
@@ -80,20 +77,13 @@ public:
 	DWORD64 ModuleAddress = 0;
 
 public:
-	~ProcessManager()
-	{
-		// if (hProcess)
-		// CloseHandle(hProcess);
-	}
+	~ProcessManager() {}
+
 	SYSTEM_HANDLE_INFORMATION *t_SYSTEM_HANDLE_INFORMATION;
 	HANDLE Source_Process = NULL;
 	HANDLE target_handle = NULL;
-	/// <summary>
-	/// ����
-	/// </summary>
-	/// <param name="ProcessName">������</param>
-	/// <returns>����״̬��</returns>
-	StatusCode Attach(std::string ProcessName)
+
+	StatusCode Attach(const char *ProcessName)
 	{
 		ProcessID = this->GetProcessID(ProcessName);
 		_is_invalid(ProcessID, FAILE_PROCESSID);
@@ -192,9 +182,6 @@ public:
 		return SUCCEED;
 	}
 
-	/// <summary>
-	/// ȡ������
-	/// </summary>
 	void Detach()
 	{
 		if (hProcess)
@@ -205,10 +192,6 @@ public:
 		Attached = false;
 	}
 
-	/// <summary>
-	/// �жϽ����Ƿ񼤻�״̬
-	/// </summary>
-	/// <returns>�Ƿ񼤻�״̬</returns>
 	bool IsActive()
 	{
 		if (!Attached)
@@ -218,14 +201,6 @@ public:
 		return ExitCode == STILL_ACTIVE;
 	}
 
-	/// <summary>
-	/// ��ȡ�����ڴ�
-	/// </summary>
-	/// <typeparam name="ReadType">��ȡ����</typeparam>
-	/// <param name="Address">��ȡ��ַ</param>
-	/// <param name="Value">��������</param>
-	/// <param name="Size">��ȡ��С</param>
-	/// <returns>�Ƿ��ȡ�ɹ�</returns>
 	template <typename ReadType>
 	bool ReadMemory(DWORD64 Address, ReadType &Value, int Size)
 	{
@@ -248,14 +223,6 @@ public:
 		return false;
 	}
 
-	/// <summary>
-	/// д������ڴ�
-	/// </summary>
-	/// <typeparam name="ReadType">д������</typeparam>
-	/// <param name="Address">д���ַ</param>
-	/// <param name="Value">д������</param>
-	/// <param name="Size">д���С</param>
-	/// <returns>�Ƿ�д��ɹ�</returns>
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType &Value, int Size)
 	{
@@ -286,13 +253,6 @@ public:
 		return WriteProcessMemory(hProcess, reinterpret_cast<LPVOID>(Address), &Value, sizeof(ReadType), 0);
 	}
 
-	/// <summary>
-	/// ����������
-	/// </summary>
-	/// <param name="Signature">������</param>
-	/// <param name="StartAddress">��ʼ��ַ</param>
-	/// <param name="EndAddress">������ַ</param>
-	/// <returns>ƥ���������</returns>
 	std::vector<DWORD64> SearchMemory(const std::string &Signature, DWORD64 StartAddress, DWORD64 EndAddress, int SearchNum = 1);
 
 	DWORD64 TraceAddress(DWORD64 BaseAddress, std::vector<DWORD> Offsets)
