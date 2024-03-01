@@ -13,7 +13,6 @@ namespace SussyAim
 		inline std::string dirConfigs;
 		inline std::string dirSounds;
 
-		inline int page = 0; // TODO: remove
 		inline int theme = 0;
 
 		struct
@@ -49,12 +48,6 @@ namespace SussyAim
 			inline bool scopeOnly = false;
 			inline int hotkey = 0;
 		}
-
-		// namespace Misc {
-		// }
-
-		// namespace Config {
-		// }
 
 		namespace Menu
 		{

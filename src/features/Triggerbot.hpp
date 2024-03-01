@@ -49,6 +49,14 @@ namespace SussyAim
                 if (!Entity.UpdatePawn(PawnAddress))
                     return;
 
+                if (SussyAim::Cfg::Triggerbot::scopeOnly)
+                {
+                    bool isScoped;
+                    ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+                    if (!isScoped)
+                        return;
+                }
+
                 if (SussyAim::Cfg::Menu::TeamCheck)
                     AllowShoot = LocalEntity.Pawn.TeamID != Entity.Pawn.TeamID && Entity.Pawn.Health > 0;
                 else
