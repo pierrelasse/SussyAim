@@ -481,10 +481,10 @@ namespace SussyAim
                     {
                         std::cout << "Triggerbot" << std::endl;
                         SussyAim::Cfg::Triggerbot::enabled = config["Triggerbot"]["Enable"].as<bool>();
+                        SussyAim::Cfg::Triggerbot::always = config["Triggerbot"]["AutoMode"].as<bool>();
                         SussyAim::Cfg::Triggerbot::hotkey = config["Triggerbot"]["Hotkey"].as<int>();
                         SussyAim::Features::Triggerbot::TriggerDelay = config["Triggerbot"]["Delay"].as<float>();
                         SussyAim::Features::Triggerbot::FakeShotDelay = config["Triggerbot"]["FakeShot"].as<float>();
-                        SussyAim::Cfg::Triggerbot::always = config["Triggerbot"]["AutoMode"].as<bool>();
                     }
                     if (currentNode = config["Menu"])
                     {

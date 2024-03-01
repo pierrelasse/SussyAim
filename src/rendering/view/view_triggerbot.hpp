@@ -17,8 +17,7 @@ namespace SussyAim
 				PutSwitch("Enabled", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::enabled);
 				ImGui::Spacing();
 
-				PutSwitch(Lang::TriggerText.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::always);
-				PutSwitch("Scope only", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::scopeOnly);
+				PutSwitch("Always", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::always);
 				if (!SussyAim::Cfg::Triggerbot::always)
 				{
 					ImGui::TextDisabled(Lang::TriggerText.HotKeyList);
@@ -28,6 +27,8 @@ namespace SussyAim
 						SussyAim::Features::Triggerbot::SetHotKey(SussyAim::Cfg::Triggerbot::hotkey);
 					}
 				}
+
+				PutSwitch("Scope only", 5.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::Triggerbot::scopeOnly);
 
 				PutSliderInt(Lang::TriggerText.DelaySlider, 5.f, &SussyAim::Features::Triggerbot::TriggerDelay, &DelayMin, &DelayMax, "%d ms");
 				PutSliderInt(Lang::TriggerText.FakeShotSlider, 5.f, &SussyAim::Features::Triggerbot::FakeShotDelay, &DurationMin, &DurationMax, "%d ms");

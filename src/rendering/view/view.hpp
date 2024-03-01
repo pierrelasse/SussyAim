@@ -89,20 +89,20 @@ namespace SussyAim
 						if (ImGui::IsItemClicked())
 							SussyAim::Cfg::Menu::StreamProof = !SussyAim::Cfg::Menu::StreamProof;
 						if (ImGui::IsItemHovered())
-							ImGui::SetTooltip("When enabled, it prevents other programs from capturing SussyAim.\nDisables Geforce's Instant Replay for some dumb reason");
+							ImGui::SetTooltip("Prevents other programs from capturing SussyAim (Discord, OBS, etc.)");
 					}
 					ImGui::EndGroup();
 
 					ImGui::BeginGroup();
 					if (ImGui::BeginTabBar("main_a"))
 					{
+						SussyAim::view::config::renderItem();
 						SussyAim::view::aimbot::renderItem();
 						SussyAim::view::triggerbot::renderItem();
 						SussyAim::view::esp::renderItem();
 						SussyAim::view::crosshair::renderItem();
 						SussyAim::view::misc::renderItem();
 						SussyAim::view::fun::renderItem();
-						SussyAim::view::config::renderItem();
 						SussyAim::view::menu::renderItem();
 						ImGui::EndTabBar();
 					}
