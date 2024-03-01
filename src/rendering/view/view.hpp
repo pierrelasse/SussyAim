@@ -21,21 +21,8 @@ namespace SussyAim
 {
 	namespace view
 	{
-
-		// void renderQuitButton()
-		// {
-		// 	static const ImVec4 nothingColor = ImVec4(0, 0, 0, 0);
-		// 	ImGui::PushStyleColor(ImGuiCol_Button, nothingColor);
-		// 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, nothingColor);
-		// 	ImGui::PushStyleColor(ImGuiCol_ButtonActive, nothingColor);
-		// 	ImGui::PushStyleColor(ImGuiCol_Border, nothingColor);
-		// 	if (ImGui::Button("[Quit]"))
-		// 	{
-		// 		std::cout << "[YourMom] Quitting..." << std::endl;
-		// 		Gui.Quit();
-		// 	}
-		// 	ImGui::PopStyleColor(4);
-		// }
+		inline ID3D11ShaderResourceView *logo = NULL;
+		inline int logoW, logoH;
 
 		const char *format(const char *s, ...)
 		{
@@ -56,10 +43,10 @@ namespace SussyAim
 					ImGui::ShowDemoWindow();
 #endif
 
-				if (AS_Logo == NULL)
+				if (logo == NULL)
 				{
 					std::cout << "[GUI] Loading logo image" << std::endl;
-					Gui.LoadTextureFromMemory(Images::Logo, sizeof Images::Logo, &AS_Logo, &LogoW, &LogoH);
+					Gui.LoadTextureFromMemory(Images::Logo, sizeof(Images::Logo), &logo, &logoW, &logoH);
 				}
 
 				static bool needOnce = true;
@@ -79,8 +66,8 @@ namespace SussyAim
 				{
 					ImGui::BeginGroup();
 					{
-						static ImTextureID ImageID = (void *)AS_Logo;
-						static ImVec2 LogoSize = ImVec2(LogoW, LogoH);
+						static ImTextureID ImageID = (void *)logo;
+						static ImVec2 LogoSize = ImVec2(logoW, logoH);
 						ImGui::Image(ImageID, LogoSize);
 
 						ImGui::SameLine();

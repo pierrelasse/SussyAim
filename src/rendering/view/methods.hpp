@@ -8,15 +8,6 @@ namespace SussyAim
 {
 	namespace view
 	{
-		inline ID3D11ShaderResourceView *AS_Logo = NULL;
-		inline ID3D11ShaderResourceView *MenuButton1 = NULL;
-		inline ID3D11ShaderResourceView *MenuButton2 = NULL;
-		inline ID3D11ShaderResourceView *MenuButton3 = NULL;
-		inline ID3D11ShaderResourceView *MenuButton4 = NULL;
-		inline int LogoW = 0, LogoH = 0;
-		inline int LogoW2 = 0, LogoH2 = 0;
-		inline int buttonW = 0, buttonH = 0;
-
 		inline void AlignRight(float ContentWidth)
 		{
 			float ColumnContentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x;
