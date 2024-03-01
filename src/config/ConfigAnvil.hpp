@@ -246,6 +246,7 @@ namespace SussyAim
                     emitter << YAML::Key << "Smooth" << YAML::Value << SussyAim::Features::Aimbot::Smooth;
                     emitter << YAML::Key << "AimPos" << YAML::Value << SussyAim::Cfg::Aimbot::AimPosition;
                     emitter << YAML::Key << "VisibleCheck" << YAML::Value << SussyAim::Cfg::Aimbot::VisibleCheck;
+                    emitter << YAML::Key << "IgnoreFlash" << YAML::Value << SussyAim::Cfg::Aimbot::ignoreFlash;
                     emitter << YAML::Key << "ScopeOnly" << YAML::Value << SussyAim::Features::Aimbot::ScopeOnly;
                     emitter << YAML::Key << "AutoShot" << YAML::Value << SussyAim::Features::Aimbot::AutoShot;
                     emitter << YAML::EndMap;
@@ -466,9 +467,10 @@ namespace SussyAim
                         SussyAim::Cfg::Menu::FovCircleColor.Value.y = config["Aimbot"]["CircleColor"]["g"].as<float>();
                         SussyAim::Cfg::Menu::FovCircleColor.Value.z = config["Aimbot"]["CircleColor"]["b"].as<float>();
                         SussyAim::Cfg::Menu::FovCircleColor.Value.w = config["Aimbot"]["CircleColor"]["a"].as<float>();
-                        SussyAim::Features::Aimbot::Smooth = config["Aimbot"]["Smooth"].as<float>();
-                        SussyAim::Cfg::Aimbot::AimPosition = config["Aimbot"]["AimPos"].as<int>();
-                        SussyAim::Cfg::Aimbot::VisibleCheck = config["Aimbot"]["VisibleCheck"].as<bool>();
+                        loadValue(currentNode, "Smooth", 0.5f, SussyAim::Features::Aimbot::Smooth);
+                        loadValue(currentNode, "AimPos", 1, SussyAim::Cfg::Aimbot::AimPosition);
+                        loadValue(currentNode, "VisibleCheck", false, SussyAim::Cfg::Aimbot::VisibleCheck);
+                        loadValue(currentNode, "IgnoreFlash", false, SussyAim::Cfg::Aimbot::ignoreFlash);
                         SussyAim::Features::Aimbot::AutoShot = config["Aimbot"]["AutoShot"].IsDefined() ? config["Aimbot"]["AutoShot"].as<bool>() : false;
                     }
                     if (currentNode = config["RC"])

@@ -21,6 +21,7 @@ namespace SussyAim::Features::Aimbot
 	inline bool ScopeOnly = false;
 	inline bool AutoShot = false;
 	inline bool AimLock = true;
+	inline bool IgnoreFlash = false;
 	inline float AimFov = 5;
 	inline float Smooth = 0.0f;
 	inline std::vector<int> HotKeyList{VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL};
@@ -39,15 +40,7 @@ namespace SussyAim::Features::Aimbot
 
 	inline void run(const CEntity &Local, Vec3 LocalPos, Vec3 AimPos)
 	{
-		// if (!AimLock)
-		// {
-		// 	int isFired;
-		// 	ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
-		// 	if (!isFired)
-		// 		return;
-		// }
-
-		if (!AimLock && Local.Pawn.ShotsFired < AimBullet)
+		if (!AimLock && Local.Pawn.ShotsFired <= AimBullet)
 		{
 			HasTarget = false;
 			return;
@@ -63,6 +56,9 @@ namespace SussyAim::Features::Aimbot
 				return;
 			}
 		}
+
+		if (!IgnoreFlash && Local.Pawn.FlashDuration > 0.f)
+			return;
 
 		float Yaw, Pitch;
 		float Distance, Norm, Length;

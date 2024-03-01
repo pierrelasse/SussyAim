@@ -38,6 +38,7 @@ namespace SussyAim
 			inline int AimPosition = 0; // 0: head 1: neck 3: spine
 			inline DWORD AimPositionIndex = BONEINDEX::head;
 			inline bool VisibleCheck = true;
+			inline bool ignoreFlash = false;
 			inline bool RCS = true;
 		}
 
