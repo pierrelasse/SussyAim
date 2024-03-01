@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include "..\Font\IconsFontAwesome5.h"
+
+#include "../Font/IconsFontAwesome5.h"
 
 namespace Lang
 {

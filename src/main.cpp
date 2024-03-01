@@ -1,4 +1,5 @@
-﻿#include "settings.h"
+﻿
+#include "settings.h"
 #include "config/Config.hpp"
 #include "game/Offsets.h"
 #include "menu.hpp"
