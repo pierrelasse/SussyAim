@@ -8,7 +8,7 @@ namespace fs = std::filesystem;
 
 #define _printProcessMgrAttachFail(message)                          \
     {                                                                \
-        std::cout << hue::red << " FAIL" << std::endl                \
+        std::cerr << hue::red << " FAIL" << std::endl                \
                   << hue::light_red << "  " << message << std::endl; \
     }
 
@@ -19,16 +19,12 @@ static bool ensureDir(std::string &dir, const char *name)
         std::cout << "[Files] Folder '" << name << "': " << dir << std::endl;
         return false;
     }
-
     if (fs::create_directory(dir))
     {
-        std::cout << hue::light_green;
-        std::cout << "[Files] Created folder '" << name << "': " << dir << std::endl;
+        std::cout << hue::light_green << "[Files] Created folder '" << name << "': " << dir << std::endl;
         return false;
     }
-
-    std::cout << hue::light_red;
-    std::cerr << "[Files] Error: Couldn't create folder '" << name << "' at: " << dir << std::endl;
+    std::cerr << hue::light_red << "[Files] Error: Couldn't create folder '" << name << "' at: " << dir << std::endl;
     return true;
 }
 
@@ -93,13 +89,13 @@ static void run()
 
     if (!Offset::UpdateOffsets())
     {
-        std::cout << hue::light_red << "[Offsets] Error: Failed to update offsets" << std::endl;
+        std::cerr << hue::light_red << "[Offsets] Error: Failed to update offsets" << std::endl;
         return;
     }
 
     if (!gGame.InitAddress())
     {
-        std::cout << hue::light_red << "[gGame] Failed initializing addresses" << std::endl;
+        std::cerr << hue::light_red << "[gGame] Error: Failed initializing addresses" << std::endl;
         return;
     }
 
