@@ -43,30 +43,26 @@ namespace SussyAim
 				if (!SussyAim::Cfg::Misc::bombTimer)
 					return;
 
-				auto plantedAddress = gGame.GetClientDLLAddress() + Offset::PlantedC4 - 0x8;
-
+				const unsigned long long plantedAddress = gGame.GetClientDLLAddress() + Offset::PlantedC4 - 0x8;
 				bool isBombPlanted;
 				ProcessMgr.ReadMemory(plantedAddress, isBombPlanted);
-
 				if (!isBombPlanted)
 					return;
 
-				bool IsBeingDefused;
-				float DefuseTime;
+				static const float windowWidth = 200.f;
 
-				static float windowWidth = 200.0f;
-				ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize;
 				ImGui::SetNextWindowPos({(ImGui::GetIO().DisplaySize.x - 200.0f) / 2.0f, 80.0f}, ImGuiCond_Once);
 				ImGui::SetNextWindowSize({windowWidth, 0}, ImGuiCond_Once);
-				if (!SussyAim::Cfg::Menu::ShowMenu) // TODO: ???
-					ImGui::SetNextWindowBgAlpha(0.3f);
+
+				static const ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize;
 				ImGui::Begin("Bomb Timer", nullptr, flags);
 
+				bool IsBeingDefused;
 				ProcessMgr.ReadMemory(Offset::PlantedC4 + Offset::C4.m_bBeingDefused, IsBeingDefused);
+				float DefuseTime;
 				ProcessMgr.ReadMemory(Offset::PlantedC4 + Offset::C4.m_flDefuseCountDown, DefuseTime);
-				//		std::cout << IsBeingDefused << ", " << DefuseTime << std::endl;
 
-				auto time = currentTimeMillis();
+				const auto time = currentTimeMillis();
 
 				if (isBombPlanted && !isPlanted && (plantTime == NULL || time - plantTime > 60000))
 				{
@@ -76,22 +72,9 @@ namespace SussyAim
 
 				float remaining = (40000 - (int64_t)time + plantTime) / (float)1000;
 
-				/*
-				if (remaining > 10 || remaining < 0 || !isPlanted)
-				{
-					ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 196, 0, 255));
-				}
-				else if (remaining > 5)
-				{
-					ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 155, 0, 255));
-				}
-				else {
-					ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(242, 93, 93, 255));
-				}*/
-
 				ImGui::SetCursorPosX((ImGui::GetWindowSize().x - 180) * 0.5f);
-				float barLength = remaining <= 0.0f ? 0.0f : remaining >= 40 ? 1.0f
-																			 : (remaining / 40.0f);
+				float barLength = remaining <= 0.f ? 0.f : remaining >= 40 ? 1.f
+																		   : (remaining / 40.f);
 
 				if (isPlanted && remaining >= 0)
 				{
@@ -108,9 +91,8 @@ namespace SussyAim
 				Gui.MyProgressBar(barLength, {180, 15}, "", SussyAim::Cfg::Misc::BombTimerCol);
 
 				if (isPlanted && !isBombPlanted)
-				{
 					isPlanted = false;
-				}
+
 				ImGui::PopStyleColor();
 				ImGui::End();
 			}

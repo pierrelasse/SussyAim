@@ -106,7 +106,6 @@
     <ClInclude Include="src\features\Mouse.h" />
     <ClInclude Include="src\features\RCS.h" />
     <ClInclude Include="src\features\SkinChanger.h" />
-    <ClInclude Include="src\features\SpectatorList.h" />
     <ClInclude Include="src\features\StyleChanger.h" />
     <ClInclude Include="src\features\Triggerbot.hpp" />
     <ClInclude Include="src\features\View.hpp" />

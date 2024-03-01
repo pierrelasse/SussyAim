@@ -135,32 +135,13 @@ namespace Misc
 			if (SussyAim::Cfg::Misc::SmokeColored || SussyAim::Cfg::Misc::FireColored)
 			{
 				char toread[32];
-				std::string classname;
 				Vector3 COLOR = {SussyAim::Cfg::Misc::SmokeColor.Value.x, SussyAim::Cfg::Misc::SmokeColor.Value.y, SussyAim::Cfg::Misc::SmokeColor.Value.z};
 				ProcessMgr.ReadMemory<uintptr_t>(ent_base + 0x10, addr);
 				ProcessMgr.ReadMemory<uintptr_t>(addr + 0x20, addr);
 				ProcessMgr.ReadMemory<char[32]>(addr, toread);
-				classname = toread;
-
-				/*
-				* Filter id to find id
-				if (std::find(EntityNames.begin(), EntityNames.end(), classname) == EntityNames.end())
-					std::cout << classname << std::endl;
-				*/
-
-				if (classname == "smokegrenade_projectile")
-				{
-					if (SussyAim::Cfg::Misc::SmokeColored)
-						ProcessMgr.WriteMemory<Vector3>(ent_base + Offset::SmokeGrenadeProjectile.vSmokeColor, COLOR);
-				}
-				/* Disabled
-				if (classname == "molotov_projectile")
-				{
-					Vector3 FireColor = { 0,0,0 };
-					ProcessMgr.ReadMemory<Vector3>(ent_base + 0x112C, FireColor);
-					std::cout << FireColor.x << ", " << FireColor.y << ", " << FireColor.z << std::endl;
-
-				}*/
+				const std::string classname = toread;
+				if (classname == "smokegrenade_projectile" && SussyAim::Cfg::Misc::SmokeColored)
+					ProcessMgr.WriteMemory<Vector3>(ent_base + Offset::SmokeGrenadeProjectile.vSmokeColor, COLOR);
 			}
 		}
 	}
