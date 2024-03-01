@@ -12,14 +12,13 @@ namespace SussyAim
 		{
 			inline const float MinRounding = 0.f, MaxRouding = 5.f;
 			inline const int MinCombo = 0, MaxCombo = 2;
-			inline const int MinDis = 0, MaxDis = 250;
+			inline const int MinDis = 0, MaxDis = 128;
 
 			inline const char *boxTypes[] = {"Normal", "Dynamic", "Corner"};
 			inline const char *tracersPos[] = {"Top", "Center", "Bottom"};
 
 			void render()
 			{
-
 				PutSwitch("Enabled", 10.f, ImGui::GetFrameHeight() * 1.7, &SussyAim::Cfg::ESP::enabled);
 				ImGui::Spacing();
 
