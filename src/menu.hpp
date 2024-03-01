@@ -171,7 +171,7 @@ namespace SussyAim
                     Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
                 }
 
-                if (distance == 0 || (distance <= SussyAim::Cfg::ESP::RenderDistance && distance > 0))
+                if (SussyAim::Cfg::ESP::RenderDistance == 0 || (distance <= SussyAim::Cfg::ESP::RenderDistance && SussyAim::Cfg::ESP::RenderDistance > 0))
                 {
                     SussyAim::Features::ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
                     Render::DrawDistance(LocalEntity, Entity, Rect);
